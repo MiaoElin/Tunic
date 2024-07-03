@@ -9,9 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4cdc67b75802274dbf4b64ba4f7f105, type: 3}
-  m_Name: TM_Role_Owner_100
+  m_Script: {fileID: 11500000, guid: 3a189bb168d8d90478a09ea08c2f3d72, type: 3}
+  m_Name: DefaultObject
   m_EditorClassIdentifier: 
-  typeID: 100
-  moveSpeed: 6
-  mod: {fileID: 6382181650639032207, guid: d63e536315aedf34ebfbdb3ab8f5af85, type: 3}
+  m_AddressableAssetSettingsGuid: 2247f8f2b334ebd45bcef15756791be7
