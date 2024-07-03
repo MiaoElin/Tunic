@@ -10,8 +10,7 @@ public class ClienMain : MonoBehaviour {
     void Start() {
         // Load
         Load();
-        var role = RoleDomain.Spawn(ctx, 100, new Vector3(60, 0, 10), Vector3.zero, Vector3.one, Ally.Player);
-        ctx.game.ownerID = role.id;
+        GameBusiness_Normal.EnterStage(ctx, 0);
     }
 
     public void Load() {
@@ -35,10 +34,13 @@ public class ClienMain : MonoBehaviour {
     }
 
     void Update() {
-
+        var dt = Time.deltaTime;
         ctx.input.Process();
+        var status = ctx.game.fsm.status;
+        if (status == GameStatus.Login) {
 
-        var owner = ctx.GetOwner();
-        RoleDomain.Owner_Move(ctx, owner);
+        } else if (status == GameStatus.Normal) {
+            GameBusiness_Normal.Tick(ctx, dt);
+        }
     }
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GameContext {
 
+    public float resetTime;
+
     // === Service ===
     public IDService iDService;
 
