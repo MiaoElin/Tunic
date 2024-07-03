@@ -33,9 +33,9 @@ public static class GameBusiness_Normal {
 
     }
     public static void FixedTick(GameContext ctx, float dt) {
-        
+
         var owner = ctx.GetOwner();
-        RoleDomain.Owner_Move(ctx, owner);
+        RoleDomain.Owner_Move(ctx, owner, dt);
 
         Physics.Simulate(dt);
     }

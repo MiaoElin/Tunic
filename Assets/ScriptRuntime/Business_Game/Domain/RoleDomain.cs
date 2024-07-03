@@ -12,8 +12,8 @@ public static class RoleDomain {
 
     }
 
-    public static void Owner_Move(GameContext ctx, RoleEntity role) {
-        role.Move(ctx.input.moveAxis);
+    public static void Owner_Move(GameContext ctx, RoleEntity role, float dt) {
+        role.Move(ctx.input.moveAxis, dt);
         role.Anim_SetSpeed();
     }
 }

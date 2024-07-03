@@ -6,12 +6,14 @@ public class RoleEntity : MonoBehaviour {
     public int typeID;
     public int id;
     public float moveSpeed;
+    public float rotationSpeed;
     public Ally ally;
     public GameObject body;
     [SerializeField] Rigidbody rb;
     public Animator anim;
 
     public void Ctor(GameObject mod) {
+        rotationSpeed = 10;
         // Body 生成
         body = GameObject.Instantiate(mod, transform);
         this.anim = body.GetComponentInChildren<Animator>();
@@ -40,11 +42,20 @@ public class RoleEntity : MonoBehaviour {
     #endregion
 
     #region  Move
-    public void Move(Vector3 moveAxis) {
+    public void Move(Vector3 moveAxis, float dt) {
         var velocity = rb.velocity;
         velocity = moveAxis.normalized * moveSpeed;
         velocity.y = rb.velocity.y;
         rb.velocity = velocity;
+        if (moveAxis != Vector3.zero) {
+            SetForward(moveAxis, dt);
+        }
+    }
+    #endregion
+
+    #region ForWard
+    public void SetForward(Vector3 dir, float dt) {
+        body.transform.forward = Vector3.Lerp(body.transform.forward, dir, dt * rotationSpeed);
     }
     #endregion
 
