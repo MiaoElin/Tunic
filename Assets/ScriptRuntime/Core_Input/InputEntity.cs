@@ -8,7 +8,7 @@ public class InputEnitty {
 
     }
 
-    public void Process() {
+    public void Process(Vector3 cameraForward, Vector3 cameraRight) {
         moveAxis = Vector3.zero;
         if (Input.GetKey(KeyCode.A)) {
             moveAxis.x = -1;
@@ -21,5 +21,9 @@ public class InputEnitty {
         } else if (Input.GetKey(KeyCode.S)) {
             moveAxis.z = -1;
         }
+        cameraForward.y = 0;
+        cameraRight.y = 0;
+        moveAxis = cameraForward * moveAxis.z + cameraRight * moveAxis.x;
+        Vector3.Normalize(moveAxis);
     }
 }
