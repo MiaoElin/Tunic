@@ -10,7 +10,8 @@ public class ClienMain : MonoBehaviour {
     void Start() {
         // Load
         Load();
-        RoleDomain.Spawn(ctx, 100, new Vector3(60, 0, 60), Vector3.zero, Vector3.one, Ally.Player);
+        var role = RoleDomain.Spawn(ctx, 100, new Vector3(60, 0, 10), Vector3.zero, Vector3.one, Ally.Player);
+        ctx.game.ownerID = role.id;
     }
 
     public void Load() {
@@ -35,5 +36,9 @@ public class ClienMain : MonoBehaviour {
 
     void Update() {
 
+        ctx.input.Process();
+
+        var owner = ctx.GetOwner();
+        RoleDomain.Owner_Move(ctx, owner);
     }
 }

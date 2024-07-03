@@ -9,6 +9,11 @@ public static class RoleDomain {
     }
 
     public static void UnSpawn(GameContext ctx) {
-        
+
+    }
+
+    public static void Owner_Move(GameContext ctx, RoleEntity role) {
+        role.Move(ctx.input.moveAxis);
+        role.Anim_SetSpeed();
     }
 }

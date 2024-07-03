@@ -10,6 +10,7 @@ public class GameContext {
 
     // === Entity ===
     public GameEntity game;
+    public InputEnitty input;
 
     // === Core === 
     public Asset_Core asset;
@@ -21,6 +22,7 @@ public class GameContext {
         roleRepo = new RoleRepo();
         // Entity
         game = new GameEntity();
+        input = new InputEnitty();
         // Core
         asset = new Asset_Core();
     }

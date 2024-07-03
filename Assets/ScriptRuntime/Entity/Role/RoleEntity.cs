@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class RoleEntity : MonoBehaviour {
@@ -35,6 +36,15 @@ public class RoleEntity : MonoBehaviour {
 
     public void SetLocalScale(Vector3 localScale) {
         transform.localScale = localScale;
+    }
+    #endregion
+
+    #region  Move
+    public void Move(Vector3 moveAxis) {
+        var velocity = rb.velocity;
+        velocity = moveAxis.normalized * moveSpeed;
+        velocity.y = rb.velocity.y;
+        rb.velocity = velocity;
     }
     #endregion
 

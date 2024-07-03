@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: TM_Role_Owner_100
   m_EditorClassIdentifier: 
   typeID: 100
-  moveSpeed: 6
+  moveSpeed: 3
   mod: {fileID: 6382181650639032207, guid: d63e536315aedf34ebfbdb3ab8f5af85, type: 3}
