@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeID: 10
   baseSlotType: 3
-  mod: {fileID: 0}
+  mod: {fileID: 2271157286676635200, guid: 9ee469976d425d84b93511e0eb77bfeb, type: 3}

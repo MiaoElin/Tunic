@@ -34,6 +34,30 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 63b486fe3ae054d41a67b32981bb3ad1
+    m_Address: Assets/ResourceRuntime/Entity/BaseSlot/Grass/TM_BaseSlot_Grass_11.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_BaseSlot
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d3b8c4391186c9e4eb86bd693858ed23
+    m_Address: Assets/ResourceRuntime/Entity/BaseSlot/Tree/TM_BaseSlot_Tree20.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_BaseSlot
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27ecaf6620611764a8ecf75944896675
+    m_Address: Assets/ResourceRuntime/Entity/BaseSlot/Tree/TM_BaseSlot_Tree22.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_BaseSlot
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3cdef9e62d36c5141a6b79dd3235668f
+    m_Address: Assets/ResourceRuntime/Entity/BaseSlot/Stone/TM_BaseSlot_Stone_50.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_BaseSlot
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2247f8f2b334ebd45bcef15756791be7, type: 2}
   m_SchemaSet:
