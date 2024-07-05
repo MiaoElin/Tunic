@@ -5,6 +5,7 @@ public static class GameBusiness_Normal {
     public static void EnterStage(GameContext ctx, int stageID) {
         var owner = RoleDomain.Spawn(ctx, 100, new Vector3(60, 0, 10), Vector3.zero, Vector3.one, Ally.Player);
         ctx.game.ownerID = owner.id;
+        owner.weaponType = WeaponType.Sword;
 
         ctx.camera.SetFollow(owner.transform);
         ctx.camera.SetLookAt(owner.transform);
@@ -34,13 +35,15 @@ public static class GameBusiness_Normal {
 
     public static void PreTick(GameContext ctx, float dt) {
         var input = ctx.input;
-        ctx.GetOwner().UpdateInputKey(
+        var owner = ctx.GetOwner();
+        owner.UpdateInputKey(
         input.isSwordKeyDown,
         input.isShieldKeyDown,
         input.isRangedKeyDown,
         input.isJumpKeyDown,
         input.isInteractKeyDown);
     }
+
     public static void FixedTick(GameContext ctx, float dt) {
 
         var owner = ctx.GetOwner();

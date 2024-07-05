@@ -58,6 +58,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - TM_BaseSlot
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5d070835e10c498448c58af897a1ec60
+    m_Address: Assets/ResourceRuntime/Entity/Role/Role_Owner_100/TM_Skill_10.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Skill
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: af7d16ee031d7d44c9dede2e92b62ad0
+    m_Address: Assets/ResourceRuntime/Entity/Role/Role_Owner_100/TM_Skill_20.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Skill
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2247f8f2b334ebd45bcef15756791be7, type: 2}
   m_SchemaSet:

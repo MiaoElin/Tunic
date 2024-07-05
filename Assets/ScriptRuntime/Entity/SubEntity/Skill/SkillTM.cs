@@ -4,8 +4,15 @@ using UnityEngine;
 public class SkillTM : ScriptableObject {
 
     public int typeID;
-    public SkillType skillType;
+    public InputKeyEnum inputKeyEnum;
     public string anim_Name;
-    public bool isUseSword;
+    public float cdMax;
+
+    public float precastCDMax;
+
+    public float castingMaintainSec;
+    public float castingIntervalSec;
+
+    public float endCastSec;
 
 }

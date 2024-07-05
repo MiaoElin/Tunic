@@ -18,6 +18,20 @@ public static class Factory {
         role.Ctor(tm.mod);
         role.id = ctx.iDService.roleIDRecord++;
         role.moveSpeed = tm.moveSpeed;
+
+        foreach (var skilltm in tm.skillTMs) {
+            SkillSubEntity skill = new SkillSubEntity();
+            skill.typeID = skilltm.typeID;
+            skill.keyEnum = skilltm.inputKeyEnum;
+            skill.anim_Name = skilltm.anim_Name;
+            skill.cd = skilltm.cdMax;
+            skill.cdMax = skilltm.cdMax;
+            skill.precastCDMax = skilltm.precastCDMax;
+            skill.castingMaintainSec = skilltm.castingMaintainSec;
+            skill.castingIntervalSec = skilltm.castingIntervalSec;
+            skill.endCastSec = skilltm.endCastSec;
+            role.skillCom.Add_Skill(skill);
+        }
         return role;
     }
 }

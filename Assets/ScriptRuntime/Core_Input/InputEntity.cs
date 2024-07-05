@@ -32,13 +32,24 @@ public class InputEnitty {
         moveAxis = cameraForward * moveAxis.z + cameraRight * moveAxis.x;
         Vector3.Normalize(moveAxis);
 
+        // 攻击的优先级在盾之前
+        // 用剑
         if (Input.GetMouseButtonDown(0)) {
             isSwordKeyDown = true;
         } else {
             isSwordKeyDown = false;
         }
+        // 1.与剑只能二选一发射、不能同时发射
+        // 2.远距离丢东西/有锁定目标朝目标方向丢，没有的朝角色前方
+        if (Input.GetKeyDown(KeyCode.F)) {
+            isRangedKeyDown = true;
+        } else {
+            isRangedKeyDown = false;
+        }
 
-        if (Input.GetMouseButtonDown(1)) {
+        // 盾
+        if (Input.GetMouseButton(1)) {
+            // 可以长按 
             isShieldKeyDown = true;
         } else {
             isShieldKeyDown = false;
@@ -48,12 +59,6 @@ public class InputEnitty {
             isInteractKeyDown = true;
         } else {
             isInteractKeyDown = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.F)) {
-            isRangedKeyDown = true;
-        } else {
-            isRangedKeyDown = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) {

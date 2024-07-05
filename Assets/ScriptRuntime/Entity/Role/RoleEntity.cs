@@ -15,6 +15,9 @@ public class RoleEntity : MonoBehaviour {
     // Skill
     public SkillComponent skillCom;
 
+    // 
+    public WeaponType weaponType;
+
     // Input
     public bool isSwordKeyDown;
     public bool isShieldKeyDown;
