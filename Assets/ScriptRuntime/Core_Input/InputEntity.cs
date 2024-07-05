@@ -3,6 +3,12 @@ using UnityEngine;
 public class InputEnitty {
 
     public Vector3 moveAxis;
+    public bool isSwordKeyDown;
+    public bool isShieldKeyDown;
+    public bool isRangedKeyDown;
+    public bool isJumpKeyDown;
+    // public bool isRollingKeyDown;
+    public bool isInteractKeyDown;
 
     public InputEnitty() {
 
@@ -25,5 +31,35 @@ public class InputEnitty {
         cameraRight.y = 0;
         moveAxis = cameraForward * moveAxis.z + cameraRight * moveAxis.x;
         Vector3.Normalize(moveAxis);
+
+        if (Input.GetMouseButtonDown(0)) {
+            isSwordKeyDown = true;
+        } else {
+            isSwordKeyDown = false;
+        }
+
+        if (Input.GetMouseButtonDown(1)) {
+            isShieldKeyDown = true;
+        } else {
+            isShieldKeyDown = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            isInteractKeyDown = true;
+        } else {
+            isInteractKeyDown = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F)) {
+            isRangedKeyDown = true;
+        } else {
+            isRangedKeyDown = false;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            isJumpKeyDown = true;
+        } else {
+            isJumpKeyDown = false;
+        }
     }
 }

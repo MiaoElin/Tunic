@@ -12,7 +12,23 @@ public class RoleEntity : MonoBehaviour {
     [SerializeField] Rigidbody rb;
     public Animator anim;
 
+    // Skill
+    public SkillComponent skillCom;
+
+    // Input
+    public bool isSwordKeyDown;
+    public bool isShieldKeyDown;
+    public bool isRangedKeyDown;
+    public bool isJumpKeyDown;
+    public bool isInteractKeyDown;
+
+    // fsm
+    public RoleFSMComponent fsm;
+
     public void Ctor(GameObject mod) {
+        skillCom = new SkillComponent();
+        fsm = new RoleFSMComponent();
+
         rotationSpeed = 10;
         // Body 生成
         body = GameObject.Instantiate(mod, transform);
@@ -67,7 +83,15 @@ public class RoleEntity : MonoBehaviour {
     public void Anim_Attack() {
 
     }
-
     #endregion
 
+    #region Input
+    public void UpdateInputKey(bool isSwordKeyDown, bool isShieldKeyDown, bool isRangedKeyDown, bool isJumpKeyDown, bool isInteractKeyDown) {
+        this.isSwordKeyDown = isSwordKeyDown;
+        this.isShieldKeyDown = isShieldKeyDown;
+        this.isRangedKeyDown = isRangedKeyDown;
+        this.isJumpKeyDown = isJumpKeyDown;
+        this.isInteractKeyDown = isInteractKeyDown;
+    }
+    #endregion
 }

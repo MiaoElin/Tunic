@@ -8,7 +8,7 @@ public static class GameBusiness_Normal {
 
         ctx.camera.SetFollow(owner.transform);
         ctx.camera.SetLookAt(owner.transform);
-        
+
         ctx.game.fsm.EnterNormal();
     }
 
@@ -33,12 +33,18 @@ public static class GameBusiness_Normal {
     }
 
     public static void PreTick(GameContext ctx, float dt) {
-
+        var input = ctx.input;
+        ctx.GetOwner().UpdateInputKey(
+        input.isSwordKeyDown,
+        input.isShieldKeyDown,
+        input.isRangedKeyDown,
+        input.isJumpKeyDown,
+        input.isInteractKeyDown);
     }
     public static void FixedTick(GameContext ctx, float dt) {
 
         var owner = ctx.GetOwner();
-        RoleDomain.Owner_Move(ctx, owner, dt);
+        RoleFSMController.ApllyFSM(ctx, owner, dt);
 
         Physics.Simulate(dt);
     }
