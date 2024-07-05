@@ -23,11 +23,12 @@ public static class RoleFSMController {
         var fsm = role.fsm;
         if (fsm.isEnterNormal) {
             fsm.isEnterNormal = false;
-            role.anim.CrossFade("Idle", 0);
+            role.Anim_Idle();
+            return;
         }
         // Logic
         RoleDomain.Owner_Move(ctx, role, dt);
-
+        RoleDomain.Defend(role);
         // Exit
         bool has = RoleDomain.HasOwnerCastSkill(role);
         if (has) {

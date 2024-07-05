@@ -2503,16 +2503,48 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: b96201848d117da4ca7dc3ade4bd59de, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: 421140039854e8c42938a8cb73d3480c, type: 2}
+      objectReference: {fileID: 2100000, guid: bda84b21c96ea0043a22ce5225cdaae4, type: 2}
     - target: {fileID: 3300000, guid: b96201848d117da4ca7dc3ade4bd59de, type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4300002, guid: b96201848d117da4ca7dc3ade4bd59de, type: 3}
+      objectReference: {fileID: 4300002, guid: b5a2ef9b212587043b60f6f7c3a6a7e2, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 100000, guid: b96201848d117da4ca7dc3ade4bd59de,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6576111952493608771}
   m_SourcePrefab: {fileID: 100100000, guid: b96201848d117da4ca7dc3ade4bd59de, type: 3}
+--- !u!1 &3413912248259741319 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: b96201848d117da4ca7dc3ade4bd59de,
+    type: 3}
+  m_PrefabInstance: {fileID: 3413912248259772455}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &6576111952493608771
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3413912248259741319}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300002, guid: b5a2ef9b212587043b60f6f7c3a6a7e2, type: 3}
 --- !u!4 &3413912248260172455 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b96201848d117da4ca7dc3ade4bd59de,

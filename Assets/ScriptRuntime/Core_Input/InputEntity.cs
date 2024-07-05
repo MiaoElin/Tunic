@@ -4,7 +4,7 @@ public class InputEnitty {
 
     public Vector3 moveAxis;
     public bool isSwordKeyDown;
-    public bool isShieldKeyDown;
+    public bool isShieldKeyPress;
     public bool isRangedKeyDown;
     public bool isJumpKeyDown;
     // public bool isRollingKeyDown;
@@ -50,9 +50,9 @@ public class InputEnitty {
         // 盾
         if (Input.GetMouseButton(1)) {
             // 可以长按 
-            isShieldKeyDown = true;
+            isShieldKeyPress = true;
         } else {
-            isShieldKeyDown = false;
+            isShieldKeyPress = false;
         }
 
         if (Input.GetKeyDown(KeyCode.E)) {

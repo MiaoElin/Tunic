@@ -21,7 +21,7 @@ public class RoleEntity : MonoBehaviour {
 
     // Input
     public bool isSwordKeyDown;
-    public bool isShieldKeyDown;
+    public bool isShieldKeyPress;
     public bool isRangedKeyDown;
     public bool isJumpKeyDown;
     public bool isInteractKeyDown;
@@ -38,6 +38,7 @@ public class RoleEntity : MonoBehaviour {
         body = GameObject.Instantiate(mod, transform);
         this.anim = body.GetComponentInChildren<Animator>();
     }
+
 
     public void Reuse() {
 
@@ -87,12 +88,21 @@ public class RoleEntity : MonoBehaviour {
     public void Anim_Attack(string anim_Name) {
         anim.CrossFade(anim_Name, 0);
     }
+
+    internal void Anim_Defend() {
+        anim.SetTrigger("T_Defend");
+    }
+
+    internal void Anim_Idle() {
+        anim.ResetTrigger("T_Defend");
+        anim.CrossFade("Idle", 0);
+    }
     #endregion
 
     #region Input
-    public void UpdateInputKey(bool isSwordKeyDown, bool isShieldKeyDown, bool isRangedKeyDown, bool isJumpKeyDown, bool isInteractKeyDown) {
+    public void UpdateInputKey(bool isSwordKeyDown, bool isShieldKeyPress, bool isRangedKeyDown, bool isJumpKeyDown, bool isInteractKeyDown) {
         this.isSwordKeyDown = isSwordKeyDown;
-        this.isShieldKeyDown = isShieldKeyDown;
+        this.isShieldKeyPress = isShieldKeyPress;
         this.isRangedKeyDown = isRangedKeyDown;
         this.isJumpKeyDown = isJumpKeyDown;
         this.isInteractKeyDown = isInteractKeyDown;

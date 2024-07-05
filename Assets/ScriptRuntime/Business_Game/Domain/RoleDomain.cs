@@ -21,6 +21,14 @@ public static class RoleDomain {
 
     #endregion
 
+    public static void Defend(RoleEntity role) {
+        if (role.isShieldKeyPress) {
+            role.Anim_Defend();
+        } else {
+            role.anim.ResetTrigger("T_Defend");
+        }
+    }
+
     #region SKill
     public static void SkillCD_Tick(RoleEntity role, float dt) {
         var skilCom = role.skillCom;
