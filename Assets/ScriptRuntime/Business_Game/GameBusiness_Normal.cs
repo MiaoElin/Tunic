@@ -6,6 +6,7 @@ public static class GameBusiness_Normal {
         var owner = RoleDomain.Spawn(ctx, 100, new Vector3(60, 0, 10), Vector3.zero, Vector3.one, Ally.Player);
         ctx.game.ownerID = owner.id;
         owner.weaponType = WeaponType.Sword;
+        owner.isOwner = true;
 
         ctx.camera.SetFollow(owner.transform);
         ctx.camera.SetLookAt(owner.transform);

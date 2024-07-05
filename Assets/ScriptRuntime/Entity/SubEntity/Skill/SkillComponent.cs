@@ -32,8 +32,12 @@ public class SkillComponent {
     }
 
     public void SetCurrentSkill(InputKeyEnum inputKeyEnum) {
-        all.TryGetValue(inputKeyEnum, out var skill);
-        currentSkill = skill;
+        bool has = all.TryGetValue(inputKeyEnum, out var skill);
+        if (has) {
+            currentSkill = skill;
+        } else {
+            currentSkill = null;
+        }
     }
 
     public SkillSubEntity GetCurrentSkill() {

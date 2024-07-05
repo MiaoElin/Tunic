@@ -32,7 +32,7 @@ public static class RoleDomain {
         });
     }
 
-    public static void UsableSkill(RoleEntity role) {
+    public static bool HasUsableSkill(RoleEntity role) {
         var skillCom = role.skillCom;
         var usableKeys = skillCom.usableKeys;
         usableKeys.Clear();
@@ -45,15 +45,21 @@ public static class RoleDomain {
                 }
             }
         });
+        if (usableKeys.Count > 0) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public static bool HasCastSkill(RoleEntity role) {
+    // owner 是否按下了发射键
+    public static bool HasOwnerCastSkill(RoleEntity role) {
         var skillCom = role.skillCom;
         var currentSkill = skillCom.GetCurrentSkill();
+        // 当前有cd<=0的技能
+        bool has = HasUsableSkill(role);
 
-        UsableSkill(role);
-
-        if (skillCom.usableKeys.Count == 0) {
+        if (!has) {
             return false;
         }
 
@@ -87,6 +93,47 @@ public static class RoleDomain {
             }
         }
         return true;
+    }
+
+    public static void Casting(RoleEntity role, float dt) {
+        var skilCom = role.skillCom;
+        var skill = skilCom.GetCurrentSkill();
+        var fsm = role.fsm;
+        ref var skillCastStage = ref fsm.skillCastStage;
+
+        if (fsm.isResetCastSkill) {
+            fsm.isResetCastSkill = false;
+            fsm.ResetCastSkill(skill);
+        }
+
+        if (skillCastStage == SkillCastStage.PreCast) {
+            role.Anim_Attack(skill.anim_Name);
+            fsm.precastTimer -= dt;
+            if (fsm.precastTimer <= 0) {
+                skillCastStage = SkillCastStage.Casting;
+                // 重置cd
+                skill.cd = skill.cdMax;
+            }
+        } else if (skillCastStage == SkillCastStage.Casting) {
+            fsm.castingMaintainTimer -= dt;
+            fsm.castingIntervalTimer -= dt;
+            if (fsm.castingIntervalTimer <= 0) {
+                fsm.castingIntervalTimer = skill.castingIntervalSec;
+            }
+
+            if (fsm.castingMaintainTimer <= 0) {
+                skillCastStage = SkillCastStage.endCast;
+            }
+        } else if (skillCastStage == SkillCastStage.endCast) {
+            fsm.endCastTimer -= dt;
+            if (fsm.endCastTimer <= 0) {
+                fsm.isResetCastSkill = true;
+                if (role.isOwner) {
+                    skilCom.SetCurrentSkill(InputKeyEnum.None);
+                }
+            }
+        }
+
     }
     #endregion
 }

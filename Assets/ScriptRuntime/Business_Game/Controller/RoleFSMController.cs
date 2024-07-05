@@ -23,12 +23,13 @@ public static class RoleFSMController {
         var fsm = role.fsm;
         if (fsm.isEnterNormal) {
             fsm.isEnterNormal = false;
+            role.anim.CrossFade("Idle", 0);
         }
         // Logic
         RoleDomain.Owner_Move(ctx, role, dt);
-        
+
         // Exit
-        bool has = RoleDomain.HasCastSkill(role);
+        bool has = RoleDomain.HasOwnerCastSkill(role);
         if (has) {
             fsm.EnterCasting();
         }
@@ -40,6 +41,8 @@ public static class RoleFSMController {
         if (fsm.isEnterCasting) {
             fsm.isEnterCasting = false;
         }
+
+        RoleDomain.Casting(role, dt);
 
         // Exit
         if (role.skillCom.GetCurrentSkill() == null) {

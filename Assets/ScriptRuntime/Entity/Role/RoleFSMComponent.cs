@@ -7,6 +7,8 @@ public class RoleFSMComponent {
     // Casting
     public bool isEnterCasting;
     public SkillCastStage skillCastStage;
+    public bool isResetCastSkill;
+
     public float precastTimer;
     public float castingMaintainTimer;
     public float castingIntervalTimer;
@@ -27,6 +29,15 @@ public class RoleFSMComponent {
     public void EnterCasting() {
         status = RoleStatus.Casting;
         isEnterCasting = true;
+        isResetCastSkill = true;
+    }
+
+    public void ResetCastSkill(SkillSubEntity skill) {
+        skillCastStage = SkillCastStage.PreCast;
+        precastTimer = skill.precastCDMax;
+        castingMaintainTimer = skill.castingMaintainSec;
+        castingIntervalTimer = skill.castingIntervalSec;
+        endCastTimer = skill.endCastSec;
     }
 
     public void EnterSuffering() {

@@ -5,6 +5,7 @@ public class RoleEntity : MonoBehaviour {
 
     public int typeID;
     public int id;
+    public bool isOwner;
     public float moveSpeed;
     public float rotationSpeed;
     public Ally ally;
@@ -83,8 +84,8 @@ public class RoleEntity : MonoBehaviour {
         anim.SetFloat("F_MoveSpeed", rb.velocity.magnitude);
     }
 
-    public void Anim_Attack() {
-
+    public void Anim_Attack(string anim_Name) {
+        anim.CrossFade(anim_Name, 0);
     }
     #endregion
 
