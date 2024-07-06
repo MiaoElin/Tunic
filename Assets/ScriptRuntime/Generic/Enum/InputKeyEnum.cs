@@ -1,8 +1,8 @@
 public enum InputKeyEnum {
 
     None,
-    Sword, // 剑
-    Ranged,
+    MeleeWeapon, // 剑、木棍、枪
+    RangedWeapon,
     // 固定技能
     Shield,
     Rolling,

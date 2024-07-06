@@ -5,5 +5,7 @@
 - 盾的动画过渡问题
 
 === Onwer === 
+- 攻击
+在SkillCastStage.Casting阶段内，如果再按下这个技能，会砍两次(不同挥剑方向)
 
 === Monster ===

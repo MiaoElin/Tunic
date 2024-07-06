@@ -41,10 +41,9 @@ public static class RoleFSMController {
         var fsm = role.fsm;
         if (fsm.isEnterCasting) {
             fsm.isEnterCasting = false;
+            role.Move_Stop();
         }
-
         RoleDomain.Casting(role, dt);
-
         // Exit
         if (role.skillCom.GetCurrentSkill() == null) {
             fsm.EnterNormal();

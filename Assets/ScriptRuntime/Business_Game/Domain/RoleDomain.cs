@@ -46,9 +46,9 @@ public static class RoleDomain {
         usableKeys.Clear();
         skillCom.Foreach(skill => {
             if (skill.cd <= 0) {
-                if (skill.keyEnum == InputKeyEnum.Sword) {
+                if (skill.keyEnum == InputKeyEnum.MeleeWeapon) {
                     usableKeys.Add(skill.keyEnum);
-                } else if (skill.keyEnum == InputKeyEnum.Ranged) {
+                } else if (skill.keyEnum == InputKeyEnum.RangedWeapon) {
                     usableKeys.Add(skill.keyEnum);
                 }
             }
@@ -83,21 +83,21 @@ public static class RoleDomain {
         if (role.weaponType == WeaponType.None) {
             // 手里没武器
             return false;
-        } else if (role.weaponType == WeaponType.Sword) {
+        } else if (role.weaponType == WeaponType.Melee) {
             if (role.isSwordKeyDown) {
-                skillCom.SetCurrentSkill(InputKeyEnum.Sword);
-                role.weaponType = WeaponType.Sword;
+                skillCom.SetCurrentSkill(InputKeyEnum.MeleeWeapon);
+                role.weaponType = WeaponType.Melee;
             } else if (role.isRangedKeyDown) {
-                skillCom.SetCurrentSkill(InputKeyEnum.Ranged);
+                skillCom.SetCurrentSkill(InputKeyEnum.RangedWeapon);
                 role.weaponType = WeaponType.Ranged;
             }
         } else if (role.weaponType == WeaponType.Ranged) {
             if (role.isRangedKeyDown) {
-                skillCom.SetCurrentSkill(InputKeyEnum.Ranged);
+                skillCom.SetCurrentSkill(InputKeyEnum.RangedWeapon);
                 role.weaponType = WeaponType.Ranged;
             } else if (role.isSwordKeyDown) {
-                skillCom.SetCurrentSkill(InputKeyEnum.Sword);
-                role.weaponType = WeaponType.Sword;
+                skillCom.SetCurrentSkill(InputKeyEnum.MeleeWeapon);
+                role.weaponType = WeaponType.Melee;
             }
         }
         return true;

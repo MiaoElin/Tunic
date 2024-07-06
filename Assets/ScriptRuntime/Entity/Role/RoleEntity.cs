@@ -72,6 +72,14 @@ public class RoleEntity : MonoBehaviour {
             SetForward(moveAxis, dt);
         }
     }
+
+    public void Move_Stop() {
+        var velocity = rb.velocity;
+        velocity = Vector3.zero;
+        velocity.y = rb.velocity.y;
+        rb.velocity = velocity;
+        Anim_SetSpeed();
+    }
     #endregion
 
     #region ForWard

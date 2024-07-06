@@ -1,5 +1,5 @@
 public enum WeaponType {
     None,
-    Sword,
+    Melee,
     Ranged,
 }
