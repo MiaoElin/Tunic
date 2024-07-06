@@ -89,12 +89,12 @@ public static class RoleDomain {
                 role.weaponType = WeaponType.Melee;
             } else if (role.isRangedKeyDown) {
                 skillCom.SetCurrentSkill(InputKeyEnum.RangedWeapon);
-                role.weaponType = WeaponType.Ranged;
+                role.weaponType = WeaponType.Shooter;
             }
-        } else if (role.weaponType == WeaponType.Ranged) {
+        } else if (role.weaponType == WeaponType.Shooter) {
             if (role.isRangedKeyDown) {
                 skillCom.SetCurrentSkill(InputKeyEnum.RangedWeapon);
-                role.weaponType = WeaponType.Ranged;
+                role.weaponType = WeaponType.Shooter;
             } else if (role.isSwordKeyDown) {
                 skillCom.SetCurrentSkill(InputKeyEnum.MeleeWeapon);
                 role.weaponType = WeaponType.Melee;

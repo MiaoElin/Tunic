@@ -10,6 +10,8 @@ public class ClienMain : MonoBehaviour {
     bool isTearDown;
     GameContext ctx = new GameContext();
     void Start() {
+        // PoolService
+        ctx.poolService.Init(() => Factory.Role_Create(ctx), () => Factory.Weapon_Create(ctx));
 
         // Inject
         ctx.Inject(mainCamera);

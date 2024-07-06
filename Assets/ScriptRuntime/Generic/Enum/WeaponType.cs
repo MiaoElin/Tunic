@@ -1,5 +1,6 @@
 public enum WeaponType {
     None,
     Melee,
-    Ranged,
+    Shield,
+    Shooter,
 }

@@ -5,5 +5,7 @@ public class WeaponTM : ScriptableObject {
     public int typeID;
     public WeaponType weaponType;
     public GameObject mod;
+
+    // public bool is
     public int bulletTypeID;//炸弹和子弹都是bullet
 }

@@ -7,6 +7,7 @@ public class GameContext {
 
     // === Service ===
     public IDService iDService;
+    public PoolService poolService;
 
     // === Repo ===
     public RoleRepo roleRepo;
@@ -22,6 +23,7 @@ public class GameContext {
     public GameContext() {
         // Service
         iDService = new IDService();
+        poolService = new PoolService();
         // Repo
         roleRepo = new RoleRepo();
         // Entity

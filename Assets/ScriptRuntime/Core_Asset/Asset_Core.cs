@@ -12,9 +12,13 @@ public class Asset_Core {
     Dictionary<int, RoleTM> roleTMs;
     AsyncOperationHandle rolePtr;
 
+    Dictionary<int, WeaponTM> weaponTMs;
+    AsyncOperationHandle weaponPtr;
+
     public Asset_Core() {
         entity_Prefab = new Dictionary<string, GameObject>();
         roleTMs = new Dictionary<int, RoleTM>();
+        weaponTMs = new Dictionary<int, WeaponTM>();
     }
 
     public void LoadAll() {
@@ -34,11 +38,20 @@ public class Asset_Core {
                 roleTMs.Add(tm.typeID, tm);
             }
         }
+        {
+            var ptr = Addressables.LoadAssetsAsync<WeaponTM>("TM_Weapon", null);
+            weaponPtr = ptr;
+            var list = ptr.WaitForCompletion();
+            foreach (var tm in list) {
+                weaponTMs.Add(tm.typeID, tm);
+            }
+        }
     }
 
     public void Unload() {
         Release(entityPtr);
         Release(rolePtr);
+        Release(weaponPtr);
     }
 
     public void Release(AsyncOperationHandle ptr) {
@@ -47,21 +60,15 @@ public class Asset_Core {
         }
     }
 
-    // public GameObject TryGet_Entity_Prefab<T>() where T : MonoBehaviour {
-    //     string name = typeof(T).Name;
-    //     bool has = entity_Prefab.TryGetValue(name, out var value);
-    //     if (has) {
-    //         return value;
-    //     } else {
-    //         return null;
-    //     }
-    // }
-
     public bool TryGet_Entity_Prefab(string name, out GameObject prefab) {
         return entity_Prefab.TryGetValue(name, out prefab);
     }
 
     public bool TryGet_RoleTM(int typeID, out RoleTM tm) {
         return roleTMs.TryGetValue(typeID, out tm);
+    }
+
+    public bool TryGet_WeaponTM(int typeID, out WeaponTM tm) {
+        return weaponTMs.TryGetValue(typeID, out tm);
     }
 }
