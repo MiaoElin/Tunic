@@ -55,7 +55,7 @@ public static class Factory {
         if (!tm) {
             Debug.LogError($"WeaponEntity.Weapon_Spawn {typeID} was not Found");
         }
-        
+
         WeaponEntity weapon = ctx.poolService.Get_Weapon();
         weapon.typeID = tm.typeID;
         weapon.id = ctx.iDService.weaponRecord++;

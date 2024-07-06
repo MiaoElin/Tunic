@@ -10,14 +10,16 @@ public class ClienMain : MonoBehaviour {
     bool isTearDown;
     GameContext ctx = new GameContext();
     void Start() {
-        // PoolService
-        ctx.poolService.Init(() => Factory.Role_Create(ctx), () => Factory.Weapon_Create(ctx));
+
+        // Load
+        Load();
 
         // Inject
         ctx.Inject(mainCamera);
 
-        // Load
-        Load();
+        // PoolService
+        ctx.poolService.Init(() => Factory.Role_Create(ctx), () => Factory.Weapon_Create(ctx));
+
         GameBusiness_Normal.EnterStage(ctx, 0);
     }
 
