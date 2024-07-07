@@ -112,6 +112,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - Entity
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0deac572a04ccac43ab6f4b18c10f50a
+    m_Address: Assets/ResourceRuntime/Entity/Loot/Loot_Weapon_Sword_10/TM_Loot_10.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Loot
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8c6a0e3d0060efc458536d05bbbb0399
+    m_Address: Assets/ResourceRuntime/Entity/Loot/Loot_Weapon_Shield_0/TM_Loot_0.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Loot
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce5699aff1e1e5e4f8e15239891e050b
+    m_Address: Assets/ResourceRuntime/Entity/Map/TM_Map_0.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Map
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2247f8f2b334ebd45bcef15756791be7, type: 2}
   m_SchemaSet:

@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 013d7aa862fad174182982c45d44c7cc, type: 3}
+  m_Name: TM_Map_0
+  m_EditorClassIdentifier: 
+  stageID: 0
+  terrains: []
+  lootSpawnerTMs:
+  - lootTypeID: 20
+    pos: {x: 60.56253, y: 0, z: 8.918484}
+    rotation: {x: -0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
+  - lootTypeID: 10
+    pos: {x: 62.09053, y: 0, z: 8.709484}
+    rotation: {x: 82.439995, y: 0, z: 90}
+    localScale: {x: 1, y: 1, z: 1}
+  - lootTypeID: 0
+    pos: {x: 60.67853, y: 0, z: 8.319484}
+    rotation: {x: -0, y: 90, z: 270}
+    localScale: {x: 1, y: 1, z: 1}

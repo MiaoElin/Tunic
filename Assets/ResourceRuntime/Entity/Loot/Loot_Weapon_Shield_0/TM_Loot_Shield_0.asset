@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81484a9b8488bbe48ae9924da7f37e5e, type: 3}
-  m_Name: TM_Weapon_10
+  m_Script: {fileID: 11500000, guid: 77c6fcc6c8e0f3d4f8da8ed30c8ea014, type: 3}
+  m_Name: TM_Loot_Shield_0
   m_EditorClassIdentifier: 
-  typeID: 10
-  weaponType: 1
-  mod: {fileID: 1673041863318348607, guid: a017ab4ad1be8c54b964ae0e4b77f906, type: 3}
-  skillTM: {fileID: 11400000, guid: 5d070835e10c498448c58af897a1ec60, type: 2}
+  typeID: 0
+  mod: {fileID: 6984963989440461214, guid: 1d6ef9944bcb4df4cb229c722ae125a2, type: 3}
