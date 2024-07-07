@@ -48,7 +48,7 @@ public static class Factory {
     public static WeaponEntity Weapon_Spawn(GameContext ctx, int typeID, Transform weaponTrans) {
         ctx.asset.TryGet_WeaponTM(typeID, out var tm);
         if (!tm) {
-            Debug.LogError($"WeaponEntity.Weapon_Spawn {typeID} was not Found");
+            Debug.LogError($"Factory.Weapon_Spawn {typeID} was not Found");
         }
 
         WeaponEntity weapon = ctx.poolService.Get_Weapon();
@@ -72,5 +72,29 @@ public static class Factory {
             weapon.SetSkill(skill);
         }
         return weapon;
+    }
+
+    public static LootEntity Loot_Create(GameContext ctx) {
+        ctx.asset.TryGet_Entity_Prefab(typeof(LootEntity).Name, out var prefab);
+        LootEntity loot = GameObject.Instantiate(prefab, ctx.poolService.LootGroup).GetComponent<LootEntity>();
+        loot.gameObject.SetActive(false);
+        return loot;
+    }
+
+    public static LootEntity Loot_Spawn(GameContext ctx, int typeID, Vector3 pos, Vector3 rotation, Vector3 localScale) {
+        ctx.asset.TryGet_LootTM(typeID, out var tm);
+        if (!tm) {
+            Debug.LogError($"Factory.Loot_Spawn {typeID} was not found");
+        }
+
+        LootEntity loot = ctx.poolService.Get_Loot();
+
+        loot.typeID = typeID;
+        loot.SetPo(pos);
+        loot.SetRotaion(rotation);
+        loot.SetLocalScale(localScale);
+        loot.Ctor(tm.mod);
+        loot.id = ctx.iDService.lootIDRecord++;
+        return loot;
     }
 }

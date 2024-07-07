@@ -100,6 +100,18 @@ MonoBehaviour:
     m_SerializedLabels:
     - TM_Skill
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 64cc4501d7f576249a3ec03421dfcc1f
+    m_Address: Assets/ResourceRuntime/Entity/Loot/Loot_Weapon_Branch_20/TM_Loot_20.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Loot
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 03bd33399494e9d47a966608fc4a0cbb
+    m_Address: Assets/ResourceRuntime/Entity/Loot/LootEntity.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Entity
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2247f8f2b334ebd45bcef15756791be7, type: 2}
   m_SchemaSet:

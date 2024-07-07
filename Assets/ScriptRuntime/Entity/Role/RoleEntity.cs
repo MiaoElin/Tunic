@@ -38,7 +38,10 @@ public class RoleEntity : MonoBehaviour {
 
 
     public void Reuse() {
-
+        weaponCom.Foreach(weapon => {
+            weaponCom.Remove(weapon);
+            Destroy(weapon.gameObject);
+        });
     }
 
     #region Pos

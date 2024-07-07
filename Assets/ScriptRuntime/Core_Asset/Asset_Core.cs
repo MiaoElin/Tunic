@@ -15,10 +15,14 @@ public class Asset_Core {
     Dictionary<int, WeaponTM> weaponTMs;
     AsyncOperationHandle weaponPtr;
 
+    Dictionary<int, LootTM> lootTMs;
+    AsyncOperationHandle lootPtr;
+
     public Asset_Core() {
         entity_Prefab = new Dictionary<string, GameObject>();
         roleTMs = new Dictionary<int, RoleTM>();
         weaponTMs = new Dictionary<int, WeaponTM>();
+        lootTMs = new Dictionary<int, LootTM>();
     }
 
     public void LoadAll() {
@@ -46,12 +50,21 @@ public class Asset_Core {
                 weaponTMs.Add(tm.typeID, tm);
             }
         }
+        {
+            var ptr = Addressables.LoadAssetsAsync<LootTM>("TM_Loot", null);
+            lootPtr = ptr;
+            var list = ptr.WaitForCompletion();
+            foreach (var tm in list) {
+                lootTMs.Add(tm.typeID, tm);
+            }
+        }
     }
 
     public void Unload() {
         Release(entityPtr);
         Release(rolePtr);
         Release(weaponPtr);
+        Release(lootPtr);
     }
 
     public void Release(AsyncOperationHandle ptr) {
@@ -70,5 +83,9 @@ public class Asset_Core {
 
     public bool TryGet_WeaponTM(int typeID, out WeaponTM tm) {
         return weaponTMs.TryGetValue(typeID, out tm);
+    }
+
+    public bool TryGet_LootTM(int typeID, out LootTM tm) {
+        return lootTMs.TryGetValue(typeID, out tm);
     }
 }

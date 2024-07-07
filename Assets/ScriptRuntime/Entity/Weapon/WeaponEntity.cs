@@ -14,6 +14,10 @@ public class WeaponEntity : MonoBehaviour {
         this.mod = GameObject.Instantiate(mod, transform);
     }
 
+    public void Reuse() {
+        Destroy(mod.gameObject);
+    }
+
     internal SkillSubEntity GetSKill() {
         return skill;
     }

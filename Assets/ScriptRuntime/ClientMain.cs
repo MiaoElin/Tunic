@@ -18,7 +18,7 @@ public class ClienMain : MonoBehaviour {
         ctx.Inject(mainCamera);
 
         // PoolService
-        ctx.poolService.Init(() => Factory.Role_Create(ctx), () => Factory.Weapon_Create(ctx));
+        ctx.poolService.Init(() => Factory.Role_Create(ctx), () => Factory.Weapon_Create(ctx), () => Factory.Loot_Create(ctx));
 
         GameBusiness_Normal.EnterStage(ctx, 0);
     }
