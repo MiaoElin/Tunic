@@ -16,6 +16,8 @@ public class RoleEntity : MonoBehaviour {
     // 
     public WeaponComponent weaponCom;
 
+    public float searchRange;
+
     // Input
     public bool isMeleeKeyDown;
     public bool isShieldKeyPress;

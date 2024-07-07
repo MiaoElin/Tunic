@@ -59,6 +59,9 @@ public static class GameBusiness_Normal {
         var owner = ctx.GetOwner();
         RoleFSMController.ApllyFSM(ctx, owner, dt);
 
+        ctx.lootRepo.Foreach(loot => {
+            LootDomain.HUD_Hints_SHow_Tick(ctx, loot);
+        });
         Physics.Simulate(dt);
     }
 }

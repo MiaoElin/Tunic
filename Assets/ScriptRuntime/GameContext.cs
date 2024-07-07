@@ -20,6 +20,7 @@ public class GameContext {
 
     // === Core === 
     public Asset_Core asset;
+    public UIApp uIApp;
 
     public GameContext() {
         // Service
@@ -34,10 +35,12 @@ public class GameContext {
         input = new InputEnitty();
         // Core
         asset = new Asset_Core();
+        uIApp = new UIApp();
     }
 
-    public void Inject(CinemachineFreeLook mainCamera) {
+    public void Inject(CinemachineFreeLook mainCamera, Canvas hudCanvas, Canvas screenCanvas) {
         camera.Inject(mainCamera);
+        uIApp.Inject(hudCanvas, screenCanvas, asset);
     }
 
     public RoleEntity GetOwner() {

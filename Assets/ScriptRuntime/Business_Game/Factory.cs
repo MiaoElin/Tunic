@@ -94,7 +94,7 @@ public static class Factory {
         LootEntity loot = ctx.poolService.Get_Loot();
 
         loot.typeID = typeID;
-        loot.SetPo(pos);
+        loot.SetPos(pos);
         loot.SetRotaion(rotation);
         loot.SetLocalScale(localScale);
         loot.Ctor(tm.mod);

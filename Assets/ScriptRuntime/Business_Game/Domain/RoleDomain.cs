@@ -93,27 +93,6 @@ public static class RoleDomain {
             }
         }
         return false;
-        // if (weaponType == WeaponType.None) {
-        //     // 手里没武器
-        //     return false;
-        // } else if (weaponType == WeaponType.Melee) {
-        //     if (role.isSwordKeyDown) {
-        //         skillCom.SetCurrentSkill(InputKeyEnum.MeleeWeapon);
-        //         // weaponCom.SetCurrentWeapon()
-        //         weaponType = WeaponType.Melee;
-        //     } else if (role.isRangedKeyDown) {
-        //         skillCom.SetCurrentSkill(InputKeyEnum.RangedWeapon);
-        //         weaponType = WeaponType.Shooter;
-        //     }
-        // } else if (weaponType == WeaponType.Shooter) {
-        //     if (role.isRangedKeyDown) {
-        //         skillCom.SetCurrentSkill(InputKeyEnum.RangedWeapon);
-        //         weaponType = WeaponType.Shooter;
-        //     } else if (role.isSwordKeyDown) {
-        //         skillCom.SetCurrentSkill(InputKeyEnum.MeleeWeapon);
-        //         weaponType = WeaponType.Melee;
-        //     }
-        // }
     }
 
     public static void Casting(RoleEntity role, float dt) {
@@ -158,5 +137,8 @@ public static class RoleDomain {
         }
 
     }
+    #endregion
+
+    #region PickLoot
     #endregion
 }

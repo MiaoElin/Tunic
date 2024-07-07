@@ -10,6 +10,10 @@ public class CameraEntity {
         this.mainCamera = mainCamera;
     }
 
+    public Vector3 Pos() {
+        return mainCamera.transform.position;
+    }
+
     internal void SetFollow(Transform transform) {
         mainCamera.Follow = transform;
     }

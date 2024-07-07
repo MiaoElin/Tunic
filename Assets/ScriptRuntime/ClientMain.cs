@@ -7,6 +7,8 @@ using Cinemachine;
 public class ClienMain : MonoBehaviour {
     [SerializeField] Transform realCamera;
     [SerializeField] CinemachineFreeLook mainCamera;
+    [SerializeField] Canvas hudCanvas;
+    [SerializeField] Canvas screenCanvas;
     bool isTearDown;
     GameContext ctx = new GameContext();
     void Start() {
@@ -15,7 +17,7 @@ public class ClienMain : MonoBehaviour {
         Load();
 
         // Inject
-        ctx.Inject(mainCamera);
+        ctx.Inject(mainCamera, hudCanvas, screenCanvas);
 
         // PoolService
         ctx.poolService.Init(() => Factory.Role_Create(ctx), () => Factory.Weapon_Create(ctx), () => Factory.Loot_Create(ctx));

@@ -15,8 +15,12 @@ public class LootEntity : MonoBehaviour {
 
     }
 
-    internal void SetPo(Vector3 pos) {
+    internal void SetPos(Vector3 pos) {
         transform.position = pos;
+    }
+
+    public Vector3 Pos() {
+        return transform.position;
     }
 
     internal void SetRotaion(Vector3 rotation) {
