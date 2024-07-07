@@ -11,6 +11,7 @@ public class GameContext {
 
     // === Repo ===
     public RoleRepo roleRepo;
+    public LootRepo lootRepo;
 
     // === Entity ===
     public GameEntity game;
@@ -26,6 +27,7 @@ public class GameContext {
         poolService = new PoolService();
         // Repo
         roleRepo = new RoleRepo();
+        lootRepo = new LootRepo();
         // Entity
         game = new GameEntity();
         camera = new CameraEntity();

@@ -130,6 +130,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - TM_Map
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9990f7115ea37a045951f57777305d31
+    m_Address: Assets/ResourceRuntime/Entity/Map/MapEntity.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Entity
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2247f8f2b334ebd45bcef15756791be7, type: 2}
   m_SchemaSet:

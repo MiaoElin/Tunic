@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: TM_Map_0
   m_EditorClassIdentifier: 
   stageID: 0
-  terrains: []
+  terrains:
+  - {fileID: 3802794967628822130, guid: 17a0efa62f500b041ac5270b4d0f44a3, type: 3}
   lootSpawnerTMs:
   - lootTypeID: 20
     pos: {x: 60.56253, y: 0, z: 8.918484}
-    rotation: {x: -0, y: 0, z: 0}
+    rotation: {x: 90, y: 270, z: 0}
     localScale: {x: 1, y: 1, z: 1}
   - lootTypeID: 10
     pos: {x: 62.09053, y: 0, z: 8.709484}

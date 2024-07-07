@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public static class Factory {
-
+    #region Role
     public static RoleEntity Role_Create(GameContext ctx) {
         ctx.asset.TryGet_Entity_Prefab(typeof(RoleEntity).Name, out var prefab);
         RoleEntity role = GameObject.Instantiate(prefab, ctx.poolService.roleGroup).GetComponent<RoleEntity>();
@@ -37,7 +37,9 @@ public static class Factory {
         role.gameObject.SetActive(true);
         return role;
     }
+    #endregion
 
+    #region Weapon
     public static WeaponEntity Weapon_Create(GameContext ctx) {
         ctx.asset.TryGet_Entity_Prefab(typeof(WeaponEntity).Name, out var prefab);
         WeaponEntity weapon = GameObject.Instantiate(prefab, ctx.poolService.roleGroup).GetComponent<WeaponEntity>();
@@ -56,7 +58,6 @@ public static class Factory {
         weapon.Ctor(tm.mod);
         weapon.typeID = tm.typeID;
         weapon.id = ctx.iDService.weaponRecord++;
-        weapon.gameObject.SetActive(true);
         {
             SkillSubEntity skill = new SkillSubEntity();
             var skilltm = tm.skillTM;
@@ -71,9 +72,12 @@ public static class Factory {
             skill.endCastSec = skilltm.endCastSec;
             weapon.SetSkill(skill);
         }
+        weapon.gameObject.SetActive(true);
         return weapon;
     }
+    #endregion
 
+    #region Loot
     public static LootEntity Loot_Create(GameContext ctx) {
         ctx.asset.TryGet_Entity_Prefab(typeof(LootEntity).Name, out var prefab);
         LootEntity loot = GameObject.Instantiate(prefab, ctx.poolService.LootGroup).GetComponent<LootEntity>();
@@ -95,6 +99,30 @@ public static class Factory {
         loot.SetLocalScale(localScale);
         loot.Ctor(tm.mod);
         loot.id = ctx.iDService.lootIDRecord++;
+        loot.gameObject.SetActive(true);
         return loot;
     }
+    #endregion
+
+    #region Map
+    public static MapEntity Map_Create(GameContext ctx, int stageID) {
+        ctx.asset.TryGet_MapTM(stageID, out var tm);
+        ctx.asset.TryGet_Entity_Prefab(typeof(MapEntity).Name, out var prefab);
+        MapEntity map = GameObject.Instantiate(prefab).GetComponent<MapEntity>();
+
+        map.stageID = stageID;
+        // 后面补terrain
+        // map.terrains = new Terrain[tm.terrains.Length];
+        // for (int i = 0; i < tm.terrains.Length; i++) {
+        //     var terrain = map.terrains[i];
+        //     terrain = GameObject.Instantiate(tm.terrains[i], map.transform).GetComponent<Terrain>();
+        //     // terrain.transform.position= girdpos*terrainSize;
+        //     map.terrains[i]=terrain;
+        // }
+        map.lootSpawnerTMs = tm.lootSpawnerTMs;
+        map.bassSlotSpawners = tm.bassSlotSpawners;
+        map.roleSpawnerTMs = tm.roleSpawnerTMs;
+        return map;
+    }
+    #endregion
 }

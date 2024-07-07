@@ -3,6 +3,16 @@ using UnityEngine;
 public static class GameBusiness_Normal {
 
     public static void EnterStage(GameContext ctx, int stageID) {
+        // 生成地图
+        var map = MapDomain.Spawn(ctx, stageID);
+        // 生成loot
+        {
+            var lootSpawnerTMs = map.lootSpawnerTMs;
+            foreach (var tm in lootSpawnerTMs) {
+                LootDomain.Spawn(ctx, tm.lootTypeID, tm.pos, tm.rotation, tm.localScale);
+            }
+        }
+
         var owner = RoleDomain.Spawn(ctx, 100, new Vector3(60, 0, 10), Vector3.zero, Vector3.one, Ally.Player);
         ctx.game.ownerID = owner.id;
         owner.isOwner = true;
