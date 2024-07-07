@@ -140,5 +140,36 @@ public static class RoleDomain {
     #endregion
 
     #region PickLoot
+    public static bool FindNearlyLoot(GameContext ctx, RoleEntity owner, out LootEntity loot) {
+        float nearlyDistance = Mathf.Pow(CommonConst.OWNER_LOOT_SEARCHRANGE, 2);
+        LootEntity nearlyloot = null;
+        ctx.lootRepo.Foreach(loot => {
+            float distance = Vector3.SqrMagnitude(loot.Pos() - owner.Pos());
+            if (distance <= nearlyDistance) {
+                nearlyDistance = distance;
+                nearlyloot = loot;
+            }
+        });
+        loot = nearlyloot;
+        if (nearlyloot = null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public static void PickLoot(GameContext ctx, RoleEntity owner) {
+        bool has = FindNearlyLoot(ctx, owner, out var nearlyLoot);
+        if (has) {
+            if (owner.isInteractKeyDown) {
+                owner.isInteractKeyDown = false; // 这里不设false为什么会执行两次
+                Debug.Log(Time.frameCount + "pick" + nearlyLoot.id);
+                // 生成stuff添加进背包里
+                // 销毁loot/HUD_Close
+            }
+        }
+    }
+
+
     #endregion
 }

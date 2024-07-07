@@ -29,6 +29,7 @@ public static class RoleFSMController {
         // Logic
         RoleDomain.Owner_Move(ctx, role, dt);
         RoleDomain.Defend(role);
+        RoleDomain.PickLoot(ctx, role);
         // Exit
         bool has = RoleDomain.HasOwnerCastSkill(role);
         if (has) {
