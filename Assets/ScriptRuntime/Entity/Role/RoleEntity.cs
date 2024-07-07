@@ -13,14 +13,11 @@ public class RoleEntity : MonoBehaviour {
     [SerializeField] Rigidbody rb;
     public Animator anim;
 
-    // Skill
-    public SkillComponent skillCom;
-
     // 
-    public WeaponType weaponType;
+    public WeaponComponent weaponCom;
 
     // Input
-    public bool isSwordKeyDown;
+    public bool isMeleeKeyDown;
     public bool isShieldKeyPress;
     public bool isRangedKeyDown;
     public bool isJumpKeyDown;
@@ -30,8 +27,8 @@ public class RoleEntity : MonoBehaviour {
     public RoleFSMComponent fsm;
 
     public void Ctor(GameObject mod) {
-        skillCom = new SkillComponent();
         fsm = new RoleFSMComponent();
+        weaponCom = new WeaponComponent();
 
         rotationSpeed = 10;
         // Body 生成
@@ -59,6 +56,32 @@ public class RoleEntity : MonoBehaviour {
 
     public void SetLocalScale(Vector3 localScale) {
         transform.localScale = localScale;
+    }
+
+    public Transform GetWeaponTrans(WeaponType weaponType) {
+        if (weaponType == WeaponType.Melee || weaponType == WeaponType.Shooter) {
+            return GetTransform("Weapon", body.transform);
+        }
+        if (weaponType == WeaponType.Shield) {
+            return GetTransform("Shield", body.transform);
+        }
+        return null;
+    }
+
+    public Transform GetTransform(String name, Transform trans) {
+
+        var target = trans.Find(name);
+        if (target != null) {
+            return target;
+        }
+        for (int i = 0; i < trans.childCount; i++) {
+            var child = trans.GetChild(i);
+            target = GetTransform(name, child);
+            if (target != null) {
+                return target;
+            }
+        }
+        return null;
     }
     #endregion
 
@@ -108,8 +131,8 @@ public class RoleEntity : MonoBehaviour {
     #endregion
 
     #region Input
-    public void UpdateInputKey(bool isSwordKeyDown, bool isShieldKeyPress, bool isRangedKeyDown, bool isJumpKeyDown, bool isInteractKeyDown) {
-        this.isSwordKeyDown = isSwordKeyDown;
+    public void UpdateInputKey(bool isMeleeKeyDown, bool isShieldKeyPress, bool isRangedKeyDown, bool isJumpKeyDown, bool isInteractKeyDown) {
+        this.isMeleeKeyDown = isMeleeKeyDown;
         this.isShieldKeyPress = isShieldKeyPress;
         this.isRangedKeyDown = isRangedKeyDown;
         this.isJumpKeyDown = isJumpKeyDown;

@@ -31,8 +31,9 @@ public static class RoleDomain {
 
     #region SKill
     public static void SkillCD_Tick(RoleEntity role, float dt) {
-        var skilCom = role.skillCom;
-        skilCom.Foreach(skill => {
+        var weaponCom = role.weaponCom;
+        weaponCom.Foreach(weapon => {
+            var skill = weapon.GetSKill();
             skill.cd -= dt;
             if (skill.cd <= 0) {
                 skill.cd = 0;
@@ -40,20 +41,17 @@ public static class RoleDomain {
         });
     }
 
-    public static bool HasUsableSkill(RoleEntity role) {
-        var skillCom = role.skillCom;
-        var usableKeys = skillCom.usableKeys;
-        usableKeys.Clear();
-        skillCom.Foreach(skill => {
+    public static bool HasUsableWeapon(RoleEntity role) {
+        var weaponCom = role.weaponCom;
+        var usableWeapons = weaponCom.usableWeapons;
+        usableWeapons.Clear();
+        weaponCom.Foreach(weapon => {
+            var skill = weapon.GetSKill();
             if (skill.cd <= 0) {
-                if (skill.keyEnum == InputKeyEnum.MeleeWeapon) {
-                    usableKeys.Add(skill.keyEnum);
-                } else if (skill.keyEnum == InputKeyEnum.RangedWeapon) {
-                    usableKeys.Add(skill.keyEnum);
-                }
+                usableWeapons.Add(weapon.weaponType, weapon);
             }
         });
-        if (usableKeys.Count > 0) {
+        if (usableWeapons.Count > 0) {
             return true;
         } else {
             return false;
@@ -62,50 +60,65 @@ public static class RoleDomain {
 
     // owner 是否按下了发射键
     public static bool HasOwnerCastSkill(RoleEntity role) {
-        var skillCom = role.skillCom;
-        var currentSkill = skillCom.GetCurrentSkill();
         // 当前有cd<=0的技能
-        bool has = HasUsableSkill(role);
+        bool has = HasUsableWeapon(role);
 
         if (!has) {
             return false;
         }
 
-        if (!role.isRangedKeyDown && !role.isSwordKeyDown) {
-            // 没按任何技能键
-            return false;
-        }
-
         // 判断现在手里的武器
-        // 同时按下剑和远攻的时候 如果是剑，那剑优先，如果是远攻，那远攻优先
-        // 只按下一个，将当前的武器替换成这个
-
-        if (role.weaponType == WeaponType.None) {
-            // 手里没武器
-            return false;
-        } else if (role.weaponType == WeaponType.Melee) {
-            if (role.isSwordKeyDown) {
-                skillCom.SetCurrentSkill(InputKeyEnum.MeleeWeapon);
-                role.weaponType = WeaponType.Melee;
-            } else if (role.isRangedKeyDown) {
-                skillCom.SetCurrentSkill(InputKeyEnum.RangedWeapon);
-                role.weaponType = WeaponType.Shooter;
-            }
-        } else if (role.weaponType == WeaponType.Shooter) {
-            if (role.isRangedKeyDown) {
-                skillCom.SetCurrentSkill(InputKeyEnum.RangedWeapon);
-                role.weaponType = WeaponType.Shooter;
-            } else if (role.isSwordKeyDown) {
-                skillCom.SetCurrentSkill(InputKeyEnum.MeleeWeapon);
-                role.weaponType = WeaponType.Melee;
+        // 1.按类型优先级/2.类型一样的看手里的是什么、跟手里有一样的就用手里的、否则替换
+        var weaponCom = role.weaponCom;
+        var usableWeapons = weaponCom.usableWeapons;
+        if (role.isMeleeKeyDown) {
+            bool hasThis = usableWeapons.TryGetValue(WeaponType.Melee, out var weapon);
+            if (hasThis) {
+                weaponCom.SetCurrentWeapon(weapon);
+                return true;
             }
         }
-        return true;
+        if (role.isRangedKeyDown) {
+            bool hasThis = usableWeapons.TryGetValue(WeaponType.Shooter, out var weapon);
+            if (hasThis) {
+                weaponCom.SetCurrentWeapon(weapon);
+                return true;
+            }
+        }
+        if (role.isShieldKeyPress) {
+            bool hasThis = usableWeapons.TryGetValue(WeaponType.Shield, out var weapon);
+            if (hasThis) {
+                weaponCom.SetCurrentWeapon(weapon);
+                return true;
+            }
+        }
+        return false;
+        // if (weaponType == WeaponType.None) {
+        //     // 手里没武器
+        //     return false;
+        // } else if (weaponType == WeaponType.Melee) {
+        //     if (role.isSwordKeyDown) {
+        //         skillCom.SetCurrentSkill(InputKeyEnum.MeleeWeapon);
+        //         // weaponCom.SetCurrentWeapon()
+        //         weaponType = WeaponType.Melee;
+        //     } else if (role.isRangedKeyDown) {
+        //         skillCom.SetCurrentSkill(InputKeyEnum.RangedWeapon);
+        //         weaponType = WeaponType.Shooter;
+        //     }
+        // } else if (weaponType == WeaponType.Shooter) {
+        //     if (role.isRangedKeyDown) {
+        //         skillCom.SetCurrentSkill(InputKeyEnum.RangedWeapon);
+        //         weaponType = WeaponType.Shooter;
+        //     } else if (role.isSwordKeyDown) {
+        //         skillCom.SetCurrentSkill(InputKeyEnum.MeleeWeapon);
+        //         weaponType = WeaponType.Melee;
+        //     }
+        // }
     }
 
     public static void Casting(RoleEntity role, float dt) {
-        var skilCom = role.skillCom;
-        var skill = skilCom.GetCurrentSkill();
+        var weapon = role.weaponCom.GetCurrentWeapon();
+        var skill = weapon.GetSKill();
         var fsm = role.fsm;
         ref var skillCastStage = ref fsm.skillCastStage;
 
@@ -127,6 +140,8 @@ public static class RoleDomain {
             fsm.castingIntervalTimer -= dt;
             if (fsm.castingIntervalTimer <= 0) {
                 fsm.castingIntervalTimer = skill.castingIntervalSec;
+                // 远程武器发射子弹
+
             }
 
             if (fsm.castingMaintainTimer <= 0) {
@@ -137,7 +152,7 @@ public static class RoleDomain {
             if (fsm.endCastTimer <= 0) {
                 fsm.isResetCastSkill = true;
                 if (role.isOwner) {
-                    skilCom.SetCurrentSkill(InputKeyEnum.None);
+                    role.weaponCom.SetCurrentWeapon(null);
                 }
             }
         }

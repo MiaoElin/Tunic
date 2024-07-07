@@ -5,7 +5,6 @@ public static class GameBusiness_Normal {
     public static void EnterStage(GameContext ctx, int stageID) {
         var owner = RoleDomain.Spawn(ctx, 100, new Vector3(60, 0, 10), Vector3.zero, Vector3.one, Ally.Player);
         ctx.game.ownerID = owner.id;
-        owner.weaponType = WeaponType.Melee;
         owner.isOwner = true;
 
         ctx.camera.SetFollow(owner.transform);
@@ -38,7 +37,7 @@ public static class GameBusiness_Normal {
         var input = ctx.input;
         var owner = ctx.GetOwner();
         owner.UpdateInputKey(
-        input.isSwordKeyDown,
+        input.isMeleeKeyDown,
         input.isShieldKeyPress,
         input.isRangedKeyDown,
         input.isJumpKeyDown,

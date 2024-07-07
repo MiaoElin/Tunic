@@ -15,6 +15,5 @@ MonoBehaviour:
   typeID: 100
   moveSpeed: 4
   mod: {fileID: 6382181650639032207, guid: d63e536315aedf34ebfbdb3ab8f5af85, type: 3}
-  skillTMs:
-  - {fileID: 11400000, guid: 5d070835e10c498448c58af897a1ec60, type: 2}
-  - {fileID: 11400000, guid: af7d16ee031d7d44c9dede2e92b62ad0, type: 2}
+  weaponTMs:
+  - {fileID: 11400000, guid: 163a6ec37d8474843bd84865f03c5d34, type: 2}

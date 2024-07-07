@@ -9,10 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81484a9b8488bbe48ae9924da7f37e5e, type: 3}
-  m_Name: TM_Weapon_0
+  m_Script: {fileID: 11500000, guid: 414981f9e3f5b6b4ebdd7ce071009944, type: 3}
+  m_Name: TM_Skill_20
   m_EditorClassIdentifier: 
-  typeID: 0
-  weaponType: 2
-  mod: {fileID: 6984963989440461214, guid: 801ef2615391f7e4cba1f9a0b2091ade, type: 3}
-  skillTM: {fileID: 11400000, guid: af7d16ee031d7d44c9dede2e92b62ad0, type: 2}
+  typeID: 20
+  inputKeyEnum: 1
+  anim_Name: Attack_Pre
+  cdMax: 0
+  precastCDMax: 0.3
+  castingMaintainSec: 0.3
+  castingIntervalSec: 0.3
+  endCastSec: 0.25

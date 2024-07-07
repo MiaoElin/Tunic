@@ -3,7 +3,7 @@ using UnityEngine;
 public class InputEnitty {
 
     public Vector3 moveAxis;
-    public bool isSwordKeyDown;
+    public bool isMeleeKeyDown;
     public bool isShieldKeyPress;
     public bool isRangedKeyDown;
     public bool isJumpKeyDown;
@@ -35,9 +35,9 @@ public class InputEnitty {
         // 攻击的优先级在盾之前
         // 用剑
         if (Input.GetMouseButtonDown(0)) {
-            isSwordKeyDown = true;
+            isMeleeKeyDown = true;
         } else {
-            isSwordKeyDown = false;
+            isMeleeKeyDown = false;
         }
         // 1.与剑只能二选一发射、不能同时发射
         // 2.远距离丢东西/有锁定目标朝目标方向丢，没有的朝角色前方

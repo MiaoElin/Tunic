@@ -82,6 +82,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - Entity
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 134f2017dfa1de6448871d40eaa70e26
+    m_Address: Assets/ResourceRuntime/Entity/Weapon/Sword_10/TM_Weapon_10.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Weapon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 163a6ec37d8474843bd84865f03c5d34
+    m_Address: Assets/ResourceRuntime/Entity/Weapon/Branch_20/TM_Weapon_20.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Weapon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 52a9c20d7ad168747ba5f7e96ee27f11
+    m_Address: Assets/ResourceRuntime/Entity/Weapon/Branch_20/TM_Skill_20.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Skill
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2247f8f2b334ebd45bcef15756791be7, type: 2}
   m_SchemaSet:

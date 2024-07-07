@@ -45,7 +45,7 @@ public static class RoleFSMController {
         }
         RoleDomain.Casting(role, dt);
         // Exit
-        if (role.skillCom.GetCurrentSkill() == null) {
+        if (role.weaponCom.GetCurrentWeapon() == null) {
             fsm.EnterNormal();
         }
     }

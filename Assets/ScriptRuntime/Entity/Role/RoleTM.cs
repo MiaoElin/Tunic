@@ -6,6 +6,6 @@ public class RoleTM : ScriptableObject {
     public int typeID;
     public float moveSpeed;
     public GameObject mod;
-    public List<SkillTM> skillTMs;
+    public List<WeaponTM> weaponTMs;
 
 }

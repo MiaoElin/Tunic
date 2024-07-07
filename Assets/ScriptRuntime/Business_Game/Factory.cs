@@ -25,19 +25,14 @@ public static class Factory {
         role.Ctor(tm.mod);
         role.id = ctx.iDService.roleIDRecord++;
         role.moveSpeed = tm.moveSpeed;
-
-        foreach (var skilltm in tm.skillTMs) {
-            SkillSubEntity skill = new SkillSubEntity();
-            skill.typeID = skilltm.typeID;
-            skill.keyEnum = skilltm.inputKeyEnum;
-            skill.anim_Name = skilltm.anim_Name;
-            skill.cd = skilltm.cdMax;
-            skill.cdMax = skilltm.cdMax;
-            skill.precastCDMax = skilltm.precastCDMax;
-            skill.castingMaintainSec = skilltm.castingMaintainSec;
-            skill.castingIntervalSec = skilltm.castingIntervalSec;
-            skill.endCastSec = skilltm.endCastSec;
-            role.skillCom.Add_Skill(skill);
+        if (tm.weaponTMs != null) {
+            foreach (var weaponTM in tm.weaponTMs) {
+                WeaponEntity weapon = Weapon_Spawn(ctx, weaponTM.typeID, role.GetWeaponTrans(weaponTM.weaponType));
+                weapon.transform.localPosition = Vector3.zero;
+                weapon.transform.localEulerAngles = Vector3.zero;
+                weapon.transform.localScale = Vector3.one;
+                role.weaponCom.Add(weapon);
+            }
         }
         role.gameObject.SetActive(true);
         return role;
@@ -50,16 +45,32 @@ public static class Factory {
         return weapon;
     }
 
-    public static WeaponEntity Weapon_Spawn(GameContext ctx, int typeID, Vector3 pos) {
+    public static WeaponEntity Weapon_Spawn(GameContext ctx, int typeID, Transform weaponTrans) {
         ctx.asset.TryGet_WeaponTM(typeID, out var tm);
         if (!tm) {
             Debug.LogError($"WeaponEntity.Weapon_Spawn {typeID} was not Found");
         }
 
         WeaponEntity weapon = ctx.poolService.Get_Weapon();
+        weapon.transform.SetParent(weaponTrans);
+        weapon.Ctor(tm.mod);
         weapon.typeID = tm.typeID;
         weapon.id = ctx.iDService.weaponRecord++;
         weapon.gameObject.SetActive(true);
+        {
+            SkillSubEntity skill = new SkillSubEntity();
+            var skilltm = tm.skillTM;
+            skill.typeID = skilltm.typeID;
+            skill.keyEnum = skilltm.inputKeyEnum;
+            skill.anim_Name = skilltm.anim_Name;
+            skill.cd = skilltm.cdMax;
+            skill.cdMax = skilltm.cdMax;
+            skill.precastCDMax = skilltm.precastCDMax;
+            skill.castingMaintainSec = skilltm.castingMaintainSec;
+            skill.castingIntervalSec = skilltm.castingIntervalSec;
+            skill.endCastSec = skilltm.endCastSec;
+            weapon.SetSkill(skill);
+        }
         return weapon;
     }
 }
