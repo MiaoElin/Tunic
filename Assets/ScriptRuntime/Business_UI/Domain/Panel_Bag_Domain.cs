@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public static class Panel_Bag_Domain {
 
@@ -10,6 +11,9 @@ public static class Panel_Bag_Domain {
             panel = GameObject.Instantiate(prefab, ctx.screenCanvas).GetComponent<Panel_Bag>();
             panel.Ctor();
             ctx.uIRepo.Add(name, panel.gameObject);
+            var sword_Btn = panel.GetSword_Btn();
+            EventSystem.current.SetSelectedGameObject(sword_Btn.gameObject);
+            panel.SetCurrentBtn(sword_Btn);
         }
         panel.gameObject.SetActive(true);
     }

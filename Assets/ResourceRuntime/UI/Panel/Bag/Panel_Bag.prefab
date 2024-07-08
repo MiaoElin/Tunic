@@ -167,7 +167,7 @@ GameObject:
   - component: {fileID: 5041519497945527573}
   - component: {fileID: 3708072740736744366}
   m_Layer: 0
-  m_Name: Shooter_Btn
+  m_Name: shooter_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 1094252462315418931}
   - component: {fileID: 4450144800119814530}
   m_Layer: 0
-  m_Name: Eating_Btn
+  m_Name: eating_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -797,7 +797,7 @@ GameObject:
   - component: {fileID: 4785489598235844004}
   - component: {fileID: 6855846089229001066}
   m_Layer: 0
-  m_Name: Sword_Btn
+  m_Name: sword_Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

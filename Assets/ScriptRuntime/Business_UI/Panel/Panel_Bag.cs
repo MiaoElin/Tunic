@@ -36,14 +36,31 @@ public class Panel_Bag : MonoBehaviour {
 
     }
 
+    public Button GetSword_Btn() {
+        return sword_Btn;
+    }
+
     public void SetCurrentBtn(Button btn) {
 
         // 将所有按钮颜色设为透明
         shooter_Btn.image.color = new Color(1, 1, 1, (float)80 / 255);
         sword_Btn.image.color = new Color(1, 1, 1, (float)80 / 255);
         eating_Btn.image.color = new Color(1, 1, 1, (float)80 / 255);
+
+        shooter_Group.gameObject.SetActive(false);
+        sword_Group.gameObject.SetActive(false);
+        eating_Group.gameObject.SetActive(false);
         // 将选中的按钮设为不透明
         btn.image.color = new Color(1, 1, 1, 1);
+        if (btn.name == "shooter_Btn") {
+            shooter_Group.gameObject.SetActive(true);
+        }
+        if (btn.name == "sword_Btn") {
+            sword_Group.gameObject.SetActive(true);
+        }
+        if (btn.name == "eating_Btn") {
+            eating_Group.gameObject.SetActive(true);
+        }
     }
 
 
