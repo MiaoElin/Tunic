@@ -164,7 +164,20 @@ public static class RoleDomain {
             if (owner.isInteractKeyDown) {
                 owner.isInteractKeyDown = false; // 这里不设false为什么会执行两次
                 // 生成stuff添加进背包里
+
+                var typeCount = nearlyLoot.stufftypeIDs.Length;
+                var stufftypeIDs = nearlyLoot.stufftypeIDs;
+                var stuffCounts = nearlyLoot.stuffCounts;
+                for (int i = 0; i < typeCount; i++) {
+                    var typeID = stufftypeIDs[i];
+                    var count = stuffCounts[i];
+                    var stuff = Factory.Stuff_Create(ctx, typeID, count);
+                    owner.stuffCom.Add(stuff, out var leaveCount);
+                }
+
                 // 销毁loot/HUD_Close
+                LootDomain.Unspawn(ctx, nearlyLoot);
+                UIDomain.HUD_Hints_Close(ctx, nearlyLoot.id);
             }
         }
     }

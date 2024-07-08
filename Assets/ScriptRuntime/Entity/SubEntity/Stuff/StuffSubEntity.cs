@@ -1,9 +1,10 @@
 using UnityEngine;
 
 public class StuffSubEntity {
-    public int id;
+    public int index;
     public int typeID;
-    public Sprite icon;
+    public StuffType stuffType;
+    public Sprite sprite;
     public int count;
-    
+    public int countMax;
 }

@@ -13,4 +13,6 @@ MonoBehaviour:
   m_Name: TM_Stuff_10
   m_EditorClassIdentifier: 
   typeID: 10
-  icon: {fileID: 21300000, guid: e6508507b38d73748adc2b719c2ea7a4, type: 3}
+  stuffType: 2
+  sprite: {fileID: 21300000, guid: e6508507b38d73748adc2b719c2ea7a4, type: 3}
+  countMax: 0

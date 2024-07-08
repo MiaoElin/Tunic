@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public static class LootDomain {
@@ -16,5 +17,12 @@ public static class LootDomain {
         } else {
             UIDomain.HUD_Hints_Hide(ctx, loot.id);
         }
+    }
+
+    internal static void Unspawn(GameContext ctx, LootEntity loot) {
+        ctx.lootRepo.Remove(loot);
+        loot.Reuse();
+        ctx.poolService.Return_Loot(loot);
+        loot.gameObject.SetActive(false);
     }
 }

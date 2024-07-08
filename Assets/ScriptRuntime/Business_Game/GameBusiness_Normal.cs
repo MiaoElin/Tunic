@@ -78,8 +78,7 @@ public static class GameBusiness_Normal {
                 ctx.player.isBagOpen = true;
             }
         }
-
+        UIDomain.Panel_Bag_UpdateTick(ctx);
     }
-
 }
 

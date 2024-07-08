@@ -28,8 +28,12 @@ public class UIApp {
         HUD_Hints_Domain.Tick(ctx, pos);
     }
 
-    public void Panel_Bag_Open(StuffComponent stuffCom) {
-        Panel_Bag_Domain.Open(ctx, stuffCom);
+    public void Panel_Bag_Open() {
+        Panel_Bag_Domain.Open(ctx);
+    }
+
+    public void Panel_Bag_UpdateTick(StuffComponent stuffCom) {
+        Panel_Bag_Domain.Update_Tick(ctx, stuffCom);
     }
 
     public void Panel_Bag_Hide() {

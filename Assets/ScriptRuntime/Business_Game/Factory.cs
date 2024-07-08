@@ -100,7 +100,7 @@ public static class Factory {
         loot.Ctor(tm.mod);
         loot.id = ctx.iDService.lootIDRecord++;
         loot.stufftypeIDs = tm.stufftypeIDs;
-        loot.stuffCount = tm.stuffCount;
+        loot.stuffCounts = tm.stuffCount;
         loot.gameObject.SetActive(true);
         return loot;
     }
@@ -129,8 +129,17 @@ public static class Factory {
     #endregion
 
     #region Stuff
-    // public static StuffSubEntity Stuff_Create(GameContext ctx, int typeID) {
-    //     ctx.asset.
-    // }
+    public static StuffSubEntity Stuff_Create(GameContext ctx, int typeID, int stuffCount) {
+        bool has = ctx.asset.TryGet_StuffTM(typeID, out var tm);
+        if (!has) {
+            Debug.Log($"Factory.Stuff_Create {typeID} was not found");
+        }
+        StuffSubEntity stuff = new StuffSubEntity();
+        stuff.typeID = typeID;
+        stuff.count = stuffCount;
+        stuff.stuffType = tm.stuffType;
+        stuff.sprite = tm.sprite;
+        return stuff;
+    }
     #endregion
 }

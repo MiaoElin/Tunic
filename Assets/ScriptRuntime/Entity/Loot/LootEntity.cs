@@ -7,7 +7,7 @@ public class LootEntity : MonoBehaviour {
     public int typeID;
     public GameObject mod;
     public int[] stufftypeIDs;
-    public int[] stuffCount;
+    public int[] stuffCounts;
 
 
     public void Ctor(GameObject mod) {
@@ -15,7 +15,7 @@ public class LootEntity : MonoBehaviour {
     }
 
     public void Reuse() {
-
+        Destroy(mod.gameObject);
     }
 
     internal void SetPos(Vector3 pos) {

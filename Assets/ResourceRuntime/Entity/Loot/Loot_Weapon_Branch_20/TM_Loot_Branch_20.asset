@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeID: 20
   mod: {fileID: 2119938309797417062, guid: ca3ec191411e94044baa0d94f68b1117, type: 3}
+  stufftypeIDs: 14000000
+  stuffCount: 01000000

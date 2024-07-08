@@ -16,11 +16,14 @@ public class Panel_Bag : MonoBehaviour {
     public Transform sword_Group;
     public Transform eating_Group;
 
-    public int groupCount;
+    public int gridCountPerGroup;
     Panel_BagElement[] elements;
     [SerializeField] Panel_BagElement prefab;
 
+
     public void Ctor() {
+        elements = new Panel_BagElement[60];
+        gridCountPerGroup = CommonConst.BAG_GRIDCOUNT_PERGROUP;
 
         shooter_Btn.onClick.AddListener(() => {
             SetCurrentBtn(shooter_Btn);
@@ -34,17 +37,18 @@ public class Panel_Bag : MonoBehaviour {
             SetCurrentBtn(eating_Btn);
         });
 
-        for (int i = 0; i < groupCount * 3; i++) {
+        for (int i = 0; i < gridCountPerGroup * 3; i++) {
             Transform trans;
-            if (i >= groupCount * 2) {
+            if (i >= gridCountPerGroup * 2) {
                 trans = eating_Group;
-            } else if (i >= groupCount) {
+            } else if (i >= gridCountPerGroup) {
                 trans = sword_Group;
             } else {
                 trans = shooter_Group;
             }
             Panel_BagElement ele = GameObject.Instantiate(prefab, trans);
-            ele.Ctor(0);
+            ele.Ctor(0, null);
+            elements[i] = ele;
         }
 
     }
@@ -77,6 +81,19 @@ public class Panel_Bag : MonoBehaviour {
         }
     }
 
+    public void ElementsCtor() {
+        foreach (var ele in elements) {
+            if (ele.count == 0) {
+                return;
+            }
+            ele.Ctor(0, null);
+        }
+    }
 
-
+    public void Init(int index, int count, Sprite sprite) {
+        if (index == -1) {
+            return;
+        }
+        elements[index].Ctor(count, sprite);
+    }
 }

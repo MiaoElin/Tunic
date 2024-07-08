@@ -19,8 +19,12 @@ public static class UIDomain {
     }
 
     public static void Panel_Bag_Open(GameContext ctx) {
+        ctx.uIApp.Panel_Bag_Open();
+    }
+
+    public static void Panel_Bag_UpdateTick(GameContext ctx) {
         var stuffCom = ctx.GetOwner().stuffCom;
-        ctx.uIApp.Panel_Bag_Open(stuffCom);
+        ctx.uIApp.Panel_Bag_UpdateTick(stuffCom);
     }
 
     public static void Panel_Bag_Hide(GameContext ctx) {
