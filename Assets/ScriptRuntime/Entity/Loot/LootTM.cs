@@ -5,4 +5,7 @@ public class LootTM : ScriptableObject {
 
     public int typeID;
     public GameObject mod;
+    public int[] stufftypeIDs;
+    public int[] stuffCount;
+
 }

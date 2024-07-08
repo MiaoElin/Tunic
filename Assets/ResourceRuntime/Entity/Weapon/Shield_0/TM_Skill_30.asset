@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 414981f9e3f5b6b4ebdd7ce071009944, type: 3}
+  m_Name: TM_Skill_30
+  m_EditorClassIdentifier: 
+  typeID: 0
+  inputKeyEnum: 3
+  anim_Name: T_Defend
+  cdMax: 0
+  precastCDMax: 0.2
+  castingMaintainSec: 0.5
+  castingIntervalSec: 0.5
+  endCastSec: 0.3

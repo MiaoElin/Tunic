@@ -99,6 +99,8 @@ public static class Factory {
         loot.SetLocalScale(localScale);
         loot.Ctor(tm.mod);
         loot.id = ctx.iDService.lootIDRecord++;
+        loot.stufftypeIDs = tm.stufftypeIDs;
+        loot.stuffCount = tm.stuffCount;
         loot.gameObject.SetActive(true);
         return loot;
     }
@@ -124,5 +126,11 @@ public static class Factory {
         map.roleSpawnerTMs = tm.roleSpawnerTMs;
         return map;
     }
+    #endregion
+
+    #region Stuff
+    // public static StuffSubEntity Stuff_Create(GameContext ctx, int typeID) {
+    //     ctx.asset.
+    // }
     #endregion
 }

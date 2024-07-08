@@ -3,9 +3,12 @@ using UnityEngine;
 
 public class LootEntity : MonoBehaviour {
 
-    public int typeID;
     public int id;
+    public int typeID;
     public GameObject mod;
+    public int[] stufftypeIDs;
+    public int[] stuffCount;
+
 
     public void Ctor(GameObject mod) {
         this.mod = GameObject.Instantiate(mod, transform);

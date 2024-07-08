@@ -142,6 +142,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - UI
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 108b2b863fff72f4297e01bbcb84f2c6
+    m_Address: Assets/ResourceRuntime/Entity/Stuff/TM_Stuff_0.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Stuff
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 30f092152f9eb3149ad70f6f16225e58
+    m_Address: Assets/ResourceRuntime/Entity/Stuff/TM_Stuff_10.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Stuff
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 50d03ae4c48babf46bd75670f1f66a33
+    m_Address: Assets/ResourceRuntime/Entity/Stuff/TM_Stuff_20.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Stuff
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2247f8f2b334ebd45bcef15756791be7, type: 2}
   m_SchemaSet:

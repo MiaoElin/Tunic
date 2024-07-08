@@ -163,7 +163,6 @@ public static class RoleDomain {
         if (has) {
             if (owner.isInteractKeyDown) {
                 owner.isInteractKeyDown = false; // 这里不设false为什么会执行两次
-                Debug.Log(Time.frameCount + "pick" + nearlyLoot.id);
                 // 生成stuff添加进背包里
                 // 销毁loot/HUD_Close
             }
