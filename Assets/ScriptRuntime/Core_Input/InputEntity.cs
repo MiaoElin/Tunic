@@ -9,6 +9,7 @@ public class InputEnitty {
     public bool isJumpKeyDown;
     // public bool isRollingKeyDown;
     public bool isInteractKeyDown;
+    public bool isBagKeyDown;
 
     public InputEnitty() {
 
@@ -55,16 +56,21 @@ public class InputEnitty {
             isShieldKeyPress = false;
         }
 
+        // Interact
         if (Input.GetKeyDown(KeyCode.E)) {
             isInteractKeyDown = true;
         } else {
             isInteractKeyDown = false;
         }
 
+        // Jump
         if (Input.GetKeyDown(KeyCode.Space)) {
             isJumpKeyDown = true;
         } else {
             isJumpKeyDown = false;
         }
+
+        // Bag
+        isBagKeyDown = Input.GetKeyDown(KeyCode.Tab);
     }
 }

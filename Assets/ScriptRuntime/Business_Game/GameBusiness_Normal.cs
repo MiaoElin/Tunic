@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public static class GameBusiness_Normal {
@@ -41,6 +42,7 @@ public static class GameBusiness_Normal {
             }
         }
 
+        LateTick(ctx, dt);
     }
 
     public static void PreTick(GameContext ctx, float dt) {
@@ -64,4 +66,20 @@ public static class GameBusiness_Normal {
         });
         Physics.Simulate(dt);
     }
+
+    private static void LateTick(GameContext ctx, float dt) {
+        if (ctx.input.isBagKeyDown) {
+            ctx.input.isBagKeyDown = false;
+            if (ctx.player.isBagOpen) {
+                UIDomain.Panel_Bag_Hide(ctx);
+                ctx.player.isBagOpen = false;
+            } else {
+                UIDomain.Panel_Bag_Open(ctx);
+                ctx.player.isBagOpen = true;
+            }
+        }
+
+    }
+
 }
+

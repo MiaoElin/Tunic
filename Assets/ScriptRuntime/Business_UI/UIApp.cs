@@ -12,8 +12,8 @@ public class UIApp {
         ctx.Inject(hudCanvas, screenCanvas, asset);
     }
 
-    public void HUD_Hints_Open(int id, Vector3 pos,Vector3 target) {
-        HUD_Hints_Domain.Open(ctx, id, pos,target);
+    public void HUD_Hints_Open(int id, Vector3 pos, Vector3 target) {
+        HUD_Hints_Domain.Open(ctx, id, pos, target);
     }
 
     public void HUD_Hints_Hide(int id) {
@@ -27,4 +27,17 @@ public class UIApp {
     internal void HUD_Hints_Tick(Vector3 pos) {
         HUD_Hints_Domain.Tick(ctx, pos);
     }
+
+    public void Panel_Bag_Open(StuffComponent stuffCom) {
+        Panel_Bag_Domain.Open(ctx, stuffCom);
+    }
+
+    public void Panel_Bag_Hide() {
+        Panel_Bag_Domain.Hide(ctx);
+    }
+
+    public void Panel_Bag_Close() {
+        Panel_Bag_Domain.Close(ctx);
+    }
+
 }

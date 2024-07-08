@@ -13,8 +13,9 @@ public class RoleEntity : MonoBehaviour {
     [SerializeField] Rigidbody rb;
     public Animator anim;
 
-    // 
+    // Com
     public WeaponComponent weaponCom;
+    public StuffComponent stuffCom;
 
     public float searchRange;
 
@@ -31,6 +32,7 @@ public class RoleEntity : MonoBehaviour {
     public void Ctor(GameObject mod) {
         fsm = new RoleFSMComponent();
         weaponCom = new WeaponComponent();
+        stuffCom = new StuffComponent();
 
         rotationSpeed = 10;
         // Body 生成

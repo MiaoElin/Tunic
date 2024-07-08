@@ -18,4 +18,16 @@ public static class UIDomain {
         ctx.uIApp.HUD_Hints_Tick(ctx.camera.Pos());
     }
 
+    public static void Panel_Bag_Open(GameContext ctx) {
+        var stuffCom = ctx.GetOwner().stuffCom;
+        ctx.uIApp.Panel_Bag_Open(stuffCom);
+    }
+
+    public static void Panel_Bag_Hide(GameContext ctx) {
+        ctx.uIApp.Panel_Bag_Hide();
+    }
+
+    public static void Panel_Bag_Close(GameContext ctx) {
+        ctx.uIApp.Panel_Bag_Close();
+    }
 }

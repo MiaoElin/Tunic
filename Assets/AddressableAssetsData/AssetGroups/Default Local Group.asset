@@ -160,6 +160,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - TM_Stuff
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49245791c04da2c458c5da8c57c487cc
+    m_Address: Assets/ResourceRuntime/UI/Panel/Bag/Panel_Bag.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2247f8f2b334ebd45bcef15756791be7, type: 2}
   m_SchemaSet:
