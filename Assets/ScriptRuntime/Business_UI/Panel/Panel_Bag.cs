@@ -21,6 +21,19 @@ public class Panel_Bag : MonoBehaviour {
     [SerializeField] Panel_BagElement prefab;
 
     public void Ctor() {
+
+        shooter_Btn.onClick.AddListener(() => {
+            SetCurrentBtn(shooter_Btn);
+        });
+
+        sword_Btn.onClick.AddListener(() => {
+            SetCurrentBtn(sword_Btn);
+        });
+
+        eating_Btn.onClick.AddListener(() => {
+            SetCurrentBtn(eating_Btn);
+        });
+
         for (int i = 0; i < groupCount * 3; i++) {
             Transform trans;
             if (i >= groupCount * 2) {
@@ -46,12 +59,13 @@ public class Panel_Bag : MonoBehaviour {
         shooter_Btn.image.color = new Color(1, 1, 1, (float)80 / 255);
         sword_Btn.image.color = new Color(1, 1, 1, (float)80 / 255);
         eating_Btn.image.color = new Color(1, 1, 1, (float)80 / 255);
-
+        // 将所有elementGroup隐藏
         shooter_Group.gameObject.SetActive(false);
         sword_Group.gameObject.SetActive(false);
         eating_Group.gameObject.SetActive(false);
         // 将选中的按钮设为不透明
         btn.image.color = new Color(1, 1, 1, 1);
+        // 显示对应的elementGroup
         if (btn.name == "shooter_Btn") {
             shooter_Group.gameObject.SetActive(true);
         }
