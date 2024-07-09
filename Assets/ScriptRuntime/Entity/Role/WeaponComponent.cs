@@ -13,14 +13,12 @@ public class WeaponComponent {
         usableWeapons = new Dictionary<WeaponType, WeaponEntity>();
     }
 
+    public bool TryGet(WeaponType type, out WeaponEntity weapon) {
+        return ready.TryGetValue(type, out weapon);
+    }
+
     public void Add(WeaponEntity weapon) {
-        bool has = ready.TryGetValue(weapon.weaponType, out var weaponIN);
-        if (has) {
-            Remove(weaponIN);
-            GameObject.Destroy(weaponIN.gameObject);
-        }
         ready.Add(weapon.weaponType, weapon);
-        Debug.Log(ready.Count);
     }
 
     public void Remove(WeaponEntity weapon) {

@@ -192,8 +192,20 @@ public static class RoleDomain {
         }
 
         if (stuff.isGetWeapon) {
-            var weapon = Factory.Weapon_Spawn(ctx, typeID, owner.GetWeaponTrans(stuff.weaponType));
-            owner.weaponCom.Add(weapon);
+            bool hasThisType = owner.weaponCom.TryGet(stuff.weaponType, out var weapon);
+            if (hasThisType) {
+                // 从准备区移除
+                owner.weaponCom.Remove(weapon);
+                // 返回背包
+                var backStuff = Factory.Stuff_Create(ctx, weapon.stuffTypeID, 1);
+                owner.stuffCom.Add(backStuff, out var leaveCount);
+                if (leaveCount > 0) {
+                    Debug.Log("背包满了");
+                }
+                GameObject.Destroy(weapon.gameObject);
+            }
+            var newWeapon = Factory.Weapon_Spawn(ctx, typeID, owner.GetWeaponTrans(stuff.weaponType), typeID);
+            owner.weaponCom.Add(newWeapon);
             owner.stuffCom.Remove(typeID);
         }
     }

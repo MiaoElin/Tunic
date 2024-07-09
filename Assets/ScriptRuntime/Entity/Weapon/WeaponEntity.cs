@@ -10,6 +10,8 @@ public class WeaponEntity : MonoBehaviour {
     // public SkillComponent skillCom;
     // public int bulletTypeID;//炸弹和子弹都是bullet
     SkillSubEntity skill;
+    public int stuffTypeID;
+
     public void Ctor(GameObject mod) {
         this.mod = GameObject.Instantiate(mod, transform);
     }

@@ -27,7 +27,12 @@ public static class Factory {
         role.moveSpeed = tm.moveSpeed;
         if (tm.weaponTMs != null) {
             foreach (var weaponTM in tm.weaponTMs) {
-                WeaponEntity weapon = Weapon_Spawn(ctx, weaponTM.typeID, role.GetWeaponTrans(weaponTM.weaponType));
+                // bool hasThisType = role.weaponCom.TryGet(weaponTM.weaponType, out var weapon);
+                // if (hasThisType) {
+                //     role.weaponCom.Remove(weapon);
+                //     GameObject.Destroy(weapon);
+                // }
+                WeaponEntity weapon = Weapon_Spawn(ctx, weaponTM.typeID, role.GetWeaponTrans(weaponTM.weaponType), -1);
                 role.weaponCom.Add(weapon);
             }
         }
@@ -44,7 +49,7 @@ public static class Factory {
         return weapon;
     }
 
-    public static WeaponEntity Weapon_Spawn(GameContext ctx, int typeID, Transform weaponTrans) {
+    public static WeaponEntity Weapon_Spawn(GameContext ctx, int typeID, Transform weaponTrans, int stufftypeID) {
         ctx.asset.TryGet_WeaponTM(typeID, out var tm);
         if (!tm) {
             Debug.LogError($"Factory.Weapon_Spawn {typeID} was not Found");
@@ -52,9 +57,12 @@ public static class Factory {
 
         WeaponEntity weapon = ctx.poolService.Get_Weapon();
         weapon.transform.SetParent(weaponTrans);
+        weapon.stuffTypeID = stufftypeID;
+        weapon.weaponType = tm.weaponType;
         weapon.Ctor(tm.mod);
         weapon.typeID = tm.typeID;
         weapon.id = ctx.iDService.weaponRecord++;
+
         {
             SkillSubEntity skill = new SkillSubEntity();
             var skilltm = tm.skillTM;
