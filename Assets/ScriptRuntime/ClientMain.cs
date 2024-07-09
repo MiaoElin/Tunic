@@ -65,6 +65,8 @@ public class ClienMain : MonoBehaviour {
 
         } else if (status == GameStatus.Normal) {
             GameBusiness_Normal.Tick(ctx, dt);
+        } else if (status == GameStatus.OpenBag) {
+            GameBusiness_OpenBag.Tick(ctx, dt);
         }
     }
 }

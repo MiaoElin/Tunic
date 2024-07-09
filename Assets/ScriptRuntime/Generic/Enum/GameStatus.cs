@@ -1,6 +1,7 @@
-public enum GameStatus{
+public enum GameStatus {
     None,
     Login,
     Normal,
     Pause,
+    OpenBag,
 }

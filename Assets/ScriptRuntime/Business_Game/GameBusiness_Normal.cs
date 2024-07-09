@@ -70,17 +70,11 @@ public static class GameBusiness_Normal {
     private static void LateTick(GameContext ctx, float dt) {
         if (ctx.input.isBagKeyDown) {
             ctx.input.isBagKeyDown = false;
-            if (ctx.player.isBagOpen) {
-                UIDomain.Panel_Bag_Hide(ctx);
-                ctx.player.isBagOpen = false;
-                Cursor.lockState = CursorLockMode.Locked;
-            } else {
-                UIDomain.Panel_Bag_Open(ctx);
+            if (!ctx.player.isBagOpen) {
                 ctx.player.isBagOpen = true;
-                Cursor.lockState = CursorLockMode.None;
+                ctx.game.fsm.EnterOpenBag();
             }
         }
-        UIDomain.Panel_Bag_UpdateTick(ctx);
     }
 }
 

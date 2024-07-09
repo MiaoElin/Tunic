@@ -5,6 +5,8 @@ public class GameFSMComponent {
 
     public bool isEnterNormal;
 
+    public bool isEnterOpenBag;
+
     public GameFSMComponent() {
         status = new GameStatus();
     }
@@ -12,6 +14,11 @@ public class GameFSMComponent {
     public void EnterNormal() {
         status = GameStatus.Normal;
         isEnterNormal = true;
+    }
+
+    public void EnterOpenBag() {
+        status = GameStatus.OpenBag;
+        isEnterOpenBag = true;
     }
 
 }
