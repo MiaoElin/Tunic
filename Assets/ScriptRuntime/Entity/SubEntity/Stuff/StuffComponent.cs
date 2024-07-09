@@ -14,7 +14,6 @@ public class StuffComponent {
         leaveCount = 0;
         foreach (var old in stuffs) {
             if (old == null) {
-                Debug.Log("Null");
                 continue;
             }
             if (old.typeID == stuff.typeID) {
@@ -29,10 +28,23 @@ public class StuffComponent {
                 }
             }
         }
-        Debug.Log(stuff.count);
         // 有剩余
+        int start = 0;
+        int end = 0;
+        int gridCount = CommonConst.BAG_GRIDCOUNT_PERGROUP;
+        if (stuff.stuffType == StuffType.Shooter) {
+            start = 0;
+            end = gridCount;
+        } else if (stuff.stuffType == StuffType.Sword || stuff.stuffType == StuffType.Shield) {
+            start = gridCount;
+            end = gridCount * 2;
+        } else if (stuff.stuffType == StuffType.Eating) {
+            start = gridCount * 2;
+            end = gridCount * 3;
+        }
+
         if (stuff.count > 0) {
-            for (int i = 0; i < stuffs.Length; i++) {
+            for (int i = start; i < end; i++) {
                 ref var newStuff = ref stuffs[i];
                 if (newStuff == null || newStuff.index == -1) {
                     newStuff = stuff;
