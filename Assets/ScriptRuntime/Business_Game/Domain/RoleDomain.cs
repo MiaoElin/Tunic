@@ -181,7 +181,21 @@ public static class RoleDomain {
             }
         }
     }
+    #endregion
 
+    #region Stuff
+    public static void Owner_UseStuff(GameContext ctx, int typeID) {
+        var owner = ctx.GetOwner();
+        bool has = owner.stuffCom.TryGet(typeID, out var stuff);
+        if (!has) {
+            Debug.LogError($"{typeID} was not found");
+        }
 
+        if (stuff.isGetWeapon) {
+            var weapon = Factory.Weapon_Spawn(ctx, typeID, owner.GetWeaponTrans(stuff.weaponType));
+            owner.weaponCom.Add(weapon);
+            owner.stuffCom.Remove(typeID);
+        }
+    }
     #endregion
 }

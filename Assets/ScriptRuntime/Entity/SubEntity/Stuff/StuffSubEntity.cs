@@ -7,4 +7,11 @@ public class StuffSubEntity {
     public Sprite sprite;
     public int count;
     public int countMax;
+
+    public bool isGetWeapon;
+    public WeaponType weaponType;
+    public int weaponTypeID;
+
+    public bool isEating;
+    public int eatingTypeID;
 }

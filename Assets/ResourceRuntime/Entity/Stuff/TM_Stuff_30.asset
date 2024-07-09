@@ -16,3 +16,8 @@ MonoBehaviour:
   stuffType: 4
   sprite: {fileID: 21300000, guid: 384c0c9911cbd2243a23246ea83f7b87, type: 3}
   countMax: 0
+  isGetWeapon: 1
+  weaponType: 2
+  weaponTypeID: 30
+  isEating: 0
+  eatingTypeID: 0

@@ -8,6 +8,7 @@
 - 攻击
 在SkillCastStage.Casting阶段内，如果再按下这个技能，会砍两次(不同挥剑方向)
 
+- 添加Defend 状态，defend状态不可移动；
 === Weapon ===
 
 

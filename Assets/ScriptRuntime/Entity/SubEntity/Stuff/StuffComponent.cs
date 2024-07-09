@@ -46,7 +46,7 @@ public class StuffComponent {
         if (stuff.count > 0) {
             for (int i = start; i < end; i++) {
                 ref var newStuff = ref stuffs[i];
-                if (newStuff == null || newStuff.index == -1) {
+                if (newStuff == null || newStuff.typeID == -1) {
                     newStuff = stuff;
                     newStuff.index = i;
                     leaveCount = 0;
@@ -56,9 +56,37 @@ public class StuffComponent {
         }
     }
 
+    public bool TryGet(int typeID, out StuffSubEntity stuff) {
+        stuff = null;
+        foreach (var stu in stuffs) {
+            if (stu == null) {
+                continue;
+            }
+            if (stu.typeID == typeID) {
+                stuff = stu;
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void Remove(int typeID) {
+        foreach (var stu in stuffs) {
+            if (stu == null) {
+                continue;
+            }
+            if (stu.typeID == typeID) {
+                stu.count -= 1;
+                if (stu.count <= 0) {
+                    Reuse(stu.index);
+                }
+            }
+        }
+    }
+
     public void Reuse(int index) {
         var stuff = stuffs[index];
-        stuff.index = -1;
+        stuff.typeID = -1;
         stuff.sprite = null;
         stuff.count = 0;
     }

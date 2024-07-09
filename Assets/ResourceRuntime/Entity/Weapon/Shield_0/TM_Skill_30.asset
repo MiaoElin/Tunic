@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeID: 0
   inputKeyEnum: 3
-  anim_Name: T_Defend
+  anim_Name: 
   cdMax: 0
   precastCDMax: 0.2
   castingMaintainSec: 0.5

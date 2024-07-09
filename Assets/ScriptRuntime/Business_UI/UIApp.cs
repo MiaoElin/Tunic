@@ -8,8 +8,8 @@ public class UIApp {
         ctx = new UIContext();
     }
 
-    public void Inject(Canvas hudCanvas, Canvas screenCanvas, Asset_Core asset) {
-        ctx.Inject(hudCanvas, screenCanvas, asset);
+    public void Inject(Canvas hudCanvas, Canvas screenCanvas, Asset_Core asset, EventCenter eventCenter) {
+        ctx.Inject(hudCanvas, screenCanvas, asset, eventCenter);
     }
 
     public void HUD_Hints_Open(int id, Vector3 pos, Vector3 target) {

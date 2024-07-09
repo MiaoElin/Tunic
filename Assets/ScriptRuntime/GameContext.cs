@@ -23,6 +23,9 @@ public class GameContext {
     public Asset_Core asset;
     public UIApp uIApp;
 
+    // === EventCenter ===
+    public EventCenter eventCenter;
+
     public GameContext() {
         // Service
         iDService = new IDService();
@@ -38,11 +41,13 @@ public class GameContext {
         // Core
         asset = new Asset_Core();
         uIApp = new UIApp();
+        // eventCenter
+        eventCenter = new EventCenter();
     }
 
     public void Inject(CinemachineFreeLook mainCamera, Canvas hudCanvas, Canvas screenCanvas) {
         camera.Inject(mainCamera);
-        uIApp.Inject(hudCanvas, screenCanvas, asset);
+        uIApp.Inject(hudCanvas, screenCanvas, asset, eventCenter);
     }
 
     public RoleEntity GetOwner() {

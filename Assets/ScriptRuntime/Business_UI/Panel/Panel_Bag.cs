@@ -21,6 +21,9 @@ public class Panel_Bag : MonoBehaviour {
     [SerializeField] Panel_BagElement prefab;
 
 
+    public Action<int> OnclickGridHandle;
+
+
     public void Ctor() {
         elements = new Panel_BagElement[60];
         gridCountPerGroup = CommonConst.BAG_GRIDCOUNT_PERGROUP;
@@ -47,10 +50,14 @@ public class Panel_Bag : MonoBehaviour {
                 trans = shooter_Group;
             }
             Panel_BagElement ele = GameObject.Instantiate(prefab, trans);
-            ele.Ctor(0, null);
+            ele.Ctor(OnclickGridHandle, -1, 0, null);
             elements[i] = ele;
         }
 
+    }
+
+    public void ClickGrid(int typeID) {
+        OnclickGridHandle.Invoke(typeID);
     }
 
     public Button GetSword_Btn() {
@@ -83,17 +90,19 @@ public class Panel_Bag : MonoBehaviour {
 
     public void ElementsCtor() {
         foreach (var ele in elements) {
-            if (ele.count == 0) {
+            Debug.Log(ele.typeID);
+            if (ele.typeID == -1) {
                 return;
             }
-            ele.Ctor(0, null);
+            ele.Init(-1, 0, null);
         }
     }
 
-    public void Init(int index, int count, Sprite sprite) {
-        if (index == -1) {
+    public void Init(int index, int typeID, int count, Sprite sprite) {
+        if (typeID == -1) {
+            elements[index].Init(-1, 0, null);
             return;
         }
-        elements[index].Ctor(count, sprite);
+        elements[index].Init(typeID, count, sprite);
     }
 }

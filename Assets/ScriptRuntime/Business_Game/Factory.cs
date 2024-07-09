@@ -28,9 +28,6 @@ public static class Factory {
         if (tm.weaponTMs != null) {
             foreach (var weaponTM in tm.weaponTMs) {
                 WeaponEntity weapon = Weapon_Spawn(ctx, weaponTM.typeID, role.GetWeaponTrans(weaponTM.weaponType));
-                weapon.transform.localPosition = Vector3.zero;
-                weapon.transform.localEulerAngles = Vector3.zero;
-                weapon.transform.localScale = Vector3.one;
                 role.weaponCom.Add(weapon);
             }
         }
@@ -72,6 +69,11 @@ public static class Factory {
             skill.endCastSec = skilltm.endCastSec;
             weapon.SetSkill(skill);
         }
+
+        weapon.transform.localPosition = Vector3.zero;
+        weapon.transform.localEulerAngles = Vector3.zero;
+        weapon.transform.localScale = Vector3.one;
+
         weapon.gameObject.SetActive(true);
         return weapon;
     }
@@ -139,6 +141,13 @@ public static class Factory {
         stuff.count = stuffCount;
         stuff.stuffType = tm.stuffType;
         stuff.sprite = tm.sprite;
+        stuff.countMax = tm.countMax;
+        stuff.isGetWeapon = tm.isGetWeapon;
+        stuff.weaponType = tm.weaponType;
+        stuff.weaponTypeID = tm.weaponTypeID;
+
+        stuff.isEating = tm.isEating;
+        stuff.eatingTypeID = tm.eatingTypeID;
         return stuff;
     }
     #endregion

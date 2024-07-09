@@ -22,7 +22,17 @@ public class ClienMain : MonoBehaviour {
         // PoolService
         ctx.poolService.Init(() => Factory.Role_Create(ctx), () => Factory.Weapon_Create(ctx), () => Factory.Loot_Create(ctx));
 
+        // Bind
+        Bind();
         GameBusiness_Normal.EnterStage(ctx, 0);
+    }
+
+    private void Bind() {
+        var eventCenter = ctx.eventCenter;
+        eventCenter.OnClickBagGridHandle = (int typeID) => {
+            // 使用stuff
+            RoleDomain.Owner_UseStuff(ctx, typeID);
+        };
     }
 
     public void Load() {

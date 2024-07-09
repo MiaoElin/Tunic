@@ -124,6 +124,9 @@ public class RoleEntity : MonoBehaviour {
     }
 
     public void Anim_Attack(string anim_Name) {
+        if (anim_Name == "") {
+            return;
+        }
         anim.CrossFade(anim_Name, 0);
     }
 

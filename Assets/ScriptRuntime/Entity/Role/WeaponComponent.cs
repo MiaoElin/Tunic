@@ -20,6 +20,7 @@ public class WeaponComponent {
             GameObject.Destroy(weaponIN.gameObject);
         }
         ready.Add(weapon.weaponType, weapon);
+        Debug.Log(ready.Count);
     }
 
     public void Remove(WeaponEntity weapon) {
