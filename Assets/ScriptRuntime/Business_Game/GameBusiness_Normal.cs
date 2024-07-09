@@ -73,9 +73,11 @@ public static class GameBusiness_Normal {
             if (ctx.player.isBagOpen) {
                 UIDomain.Panel_Bag_Hide(ctx);
                 ctx.player.isBagOpen = false;
+                Cursor.lockState = CursorLockMode.Locked;
             } else {
                 UIDomain.Panel_Bag_Open(ctx);
                 ctx.player.isBagOpen = true;
+                Cursor.lockState = CursorLockMode.None;
             }
         }
         UIDomain.Panel_Bag_UpdateTick(ctx);

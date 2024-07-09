@@ -13,6 +13,8 @@ public class ClienMain : MonoBehaviour {
     GameContext ctx = new GameContext();
     void Start() {
 
+        Cursor.lockState = CursorLockMode.Locked;
+
         // Load
         Load();
 
