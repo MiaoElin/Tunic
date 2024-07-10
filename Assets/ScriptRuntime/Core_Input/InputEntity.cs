@@ -52,7 +52,9 @@ public class InputEnitty {
         if (Input.GetMouseButton(1)) {
             // 可以长按 
             isShieldKeyPress = true;
-        } else {
+        }
+
+        if (Input.GetMouseButtonUp(1)) {
             isShieldKeyPress = false;
         }
 

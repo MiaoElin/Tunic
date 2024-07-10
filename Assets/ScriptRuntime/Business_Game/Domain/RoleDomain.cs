@@ -23,9 +23,9 @@ public static class RoleDomain {
 
     public static void Defend(RoleEntity role) {
         if (role.isShieldKeyPress) {
-            role.Anim_Defend();
+            role.Anim_Defend(true);
         } else {
-            role.anim.ResetTrigger("T_Defend");
+            role.Anim_Defend(false);
         }
     }
 

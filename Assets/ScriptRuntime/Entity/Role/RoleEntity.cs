@@ -130,8 +130,8 @@ public class RoleEntity : MonoBehaviour {
         anim.CrossFade(anim_Name, 0);
     }
 
-    internal void Anim_Defend() {
-        anim.SetTrigger("T_Defend");
+    internal void Anim_Defend(bool b) {
+        anim.SetBool("B_Defend", b);
     }
 
     internal void Anim_Idle() {

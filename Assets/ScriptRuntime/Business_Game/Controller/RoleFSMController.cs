@@ -7,11 +7,12 @@ public static class RoleFSMController {
         var status = role.fsm.status;
 
         ApplyAny(role, dt);
-
         if (status == RoleStatus.Normal) {
             ApllyNormal(ctx, role, dt);
         } else if (status == RoleStatus.Casting) {
             ApllyCasting(ctx, role, dt);
+        } else if (status == RoleStatus.Defend) {
+            ApllyDefend(ctx, role, dt);
         }
     }
 
@@ -33,7 +34,11 @@ public static class RoleFSMController {
         // Exit
         bool has = RoleDomain.HasOwnerCastSkill(role);
         if (has) {
-            fsm.EnterCasting();
+            if (role.weaponCom.GetCurrentWeapon().weaponType == WeaponType.Shield) {
+
+            } else {
+                fsm.EnterCasting();
+            }
         }
 
     }
@@ -49,5 +54,9 @@ public static class RoleFSMController {
         if (role.weaponCom.GetCurrentWeapon() == null) {
             fsm.EnterNormal();
         }
+    }
+
+    private static void ApllyDefend(GameContext ctx, RoleEntity role, float dt) {
+
     }
 }
