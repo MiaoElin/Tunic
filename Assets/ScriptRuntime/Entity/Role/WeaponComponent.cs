@@ -7,6 +7,7 @@ public class WeaponComponent {
     Dictionary<WeaponType, WeaponEntity> ready;
     public Dictionary<WeaponType, WeaponEntity> usableWeapons;
     WeaponEntity castingWeapon;
+    WeaponEntity currentWeapon;
 
     public WeaponComponent() {
         ready = new Dictionary<WeaponType, WeaponEntity>();
@@ -31,15 +32,24 @@ public class WeaponComponent {
         }
     }
 
-    public void SetCurrentWeapon(WeaponEntity weapon) {
+    public void SetCatingWeapon(WeaponEntity weapon) {
         castingWeapon = weapon;
     }
 
-    public WeaponEntity GetCurrentWeapon() {
+    public WeaponEntity GetCatingWeapon() {
         // all.TryGetValue(currentWeaponID, out var weapon);
         // return weapon;
         return castingWeapon;
     }
 
+    public void SetCurrentWeapon(WeaponEntity weapon) {
+        if (weapon != null) {
+            currentWeapon = weapon;
+        }
+    }
+
+    public WeaponEntity GetCurrentWeapon() {
+        return currentWeapon;
+    }
 
 }

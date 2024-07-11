@@ -34,7 +34,7 @@ public static class RoleFSMController {
         // Exit
         bool has = RoleDomain.HasOwnerCastSkill(role);
         if (has) {
-            if (role.weaponCom.GetCurrentWeapon().weaponType == WeaponType.Shield) {
+            if (role.weaponCom.GetCatingWeapon().weaponType == WeaponType.Shield) {
 
             } else {
                 fsm.EnterCasting();
@@ -51,7 +51,7 @@ public static class RoleFSMController {
         }
         RoleDomain.Casting(role, dt);
         // Exit
-        if (role.weaponCom.GetCurrentWeapon() == null) {
+        if (role.weaponCom.GetCatingWeapon() == null) {
             fsm.EnterNormal();
         }
     }

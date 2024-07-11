@@ -17,6 +17,11 @@ public static class RoleDomain {
     public static void Owner_Move(GameContext ctx, RoleEntity role, float dt) {
         role.Move(ctx.input.moveAxis, dt);
         role.Anim_SetSpeed();
+        var weapon = role.weaponCom.GetCurrentWeapon();
+        // if (weapon != null) {
+        //     Debug.Log("Change");
+        //     weapon.transform.localPosition = Vector3.zero;
+        // }
     }
 
     #endregion
@@ -74,21 +79,21 @@ public static class RoleDomain {
         if (role.isMeleeKeyDown) {
             bool hasThis = usableWeapons.TryGetValue(WeaponType.Melee, out var weapon);
             if (hasThis) {
-                weaponCom.SetCurrentWeapon(weapon);
+                weaponCom.SetCatingWeapon(weapon);
                 return true;
             }
         }
         if (role.isRangedKeyDown) {
             bool hasThis = usableWeapons.TryGetValue(WeaponType.Shooter, out var weapon);
             if (hasThis) {
-                weaponCom.SetCurrentWeapon(weapon);
+                weaponCom.SetCatingWeapon(weapon);
                 return true;
             }
         }
         if (role.isShieldKeyPress) {
             bool hasThis = usableWeapons.TryGetValue(WeaponType.Shield, out var weapon);
             if (hasThis) {
-                weaponCom.SetCurrentWeapon(weapon);
+                weaponCom.SetCatingWeapon(weapon);
                 return true;
             }
         }
@@ -96,7 +101,7 @@ public static class RoleDomain {
     }
 
     public static void Casting(RoleEntity role, float dt) {
-        var weapon = role.weaponCom.GetCurrentWeapon();
+        var weapon = role.weaponCom.GetCatingWeapon();
         var skill = weapon.GetSKill();
         var fsm = role.fsm;
         ref var skillCastStage = ref fsm.skillCastStage;
@@ -117,10 +122,13 @@ public static class RoleDomain {
         } else if (skillCastStage == SkillCastStage.Casting) {
             fsm.castingMaintainTimer -= dt;
             fsm.castingIntervalTimer -= dt;
+            // 近战武器获得伤害力
+            if (weapon.weaponType == WeaponType.Melee) {
+                weapon.hasDamage = true;
+            }
             if (fsm.castingIntervalTimer <= 0) {
                 fsm.castingIntervalTimer = skill.castingIntervalSec;
                 // 远程武器发射子弹
-
             }
 
             if (fsm.castingMaintainTimer <= 0) {
@@ -128,10 +136,13 @@ public static class RoleDomain {
             }
         } else if (skillCastStage == SkillCastStage.endCast) {
             fsm.endCastTimer -= dt;
+            if (weapon.weaponType == WeaponType.Melee) {
+                weapon.hasDamage = false;
+            }
             if (fsm.endCastTimer <= 0) {
                 fsm.isResetCastSkill = true;
                 if (role.isOwner) {
-                    role.weaponCom.SetCurrentWeapon(null);
+                    role.weaponCom.SetCatingWeapon(null);
                 }
             }
         }
@@ -204,7 +215,7 @@ public static class RoleDomain {
                 }
                 GameObject.Destroy(weapon.gameObject);
             }
-            var newWeapon = Factory.Weapon_Spawn(ctx, typeID, owner.GetWeaponTrans(stuff.weaponType), typeID);
+            var newWeapon = WeaponDomain.Spawn(ctx, typeID, owner.GetWeaponTrans(stuff.weaponType), typeID, owner.ally);
             owner.weaponCom.Add(newWeapon);
             owner.stuffCom.Remove(typeID);
         }

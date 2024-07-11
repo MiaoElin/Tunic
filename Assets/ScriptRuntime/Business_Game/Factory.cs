@@ -32,7 +32,8 @@ public static class Factory {
                 //     role.weaponCom.Remove(weapon);
                 //     GameObject.Destroy(weapon);
                 // }
-                WeaponEntity weapon = Weapon_Spawn(ctx, weaponTM.typeID, role.GetWeaponTrans(weaponTM.weaponType), -1);
+                WeaponEntity weapon = WeaponDomain.Spawn(ctx, weaponTM.typeID, role.GetWeaponTrans(weaponTM.weaponType), -1, ally);
+
                 role.weaponCom.Add(weapon);
             }
         }
@@ -49,7 +50,7 @@ public static class Factory {
         return weapon;
     }
 
-    public static WeaponEntity Weapon_Spawn(GameContext ctx, int typeID, Transform weaponTrans, int stufftypeID) {
+    public static WeaponEntity Weapon_Spawn(GameContext ctx, int typeID, Transform weaponTrans, int stufftypeID, Ally ally) {
         ctx.asset.TryGet_WeaponTM(typeID, out var tm);
         if (!tm) {
             Debug.LogError($"Factory.Weapon_Spawn {typeID} was not Found");
@@ -62,6 +63,7 @@ public static class Factory {
         weapon.Ctor(tm.mod);
         weapon.typeID = tm.typeID;
         weapon.id = ctx.iDService.weaponRecord++;
+        weapon.ally = ally;
 
         {
             SkillSubEntity skill = new SkillSubEntity();

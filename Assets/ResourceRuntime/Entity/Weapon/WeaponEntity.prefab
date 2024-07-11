@@ -46,5 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   typeID: 0
+  ally: 0
   weaponType: 1
   mod: {fileID: 0}
+  hasDamage: 0
+  stuffTypeID: 0
