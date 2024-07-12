@@ -47,12 +47,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeID: 100
   id: 0
+  isOwner: 0
   moveSpeed: 6
   rotationSpeed: 0
   ally: 0
   body: {fileID: 0}
   rb: {fileID: 517941710072811590}
   anim: {fileID: 0}
+  searchRange: 0
+  isMeleeKeyDown: 0
+  isShieldKeyPress: 0
+  isRangedKeyDown: 0
+  isJumpKeyDown: 0
+  isInteractKeyDown: 0
 --- !u!54 &517941710072811590
 Rigidbody:
   m_ObjectHideFlags: 0

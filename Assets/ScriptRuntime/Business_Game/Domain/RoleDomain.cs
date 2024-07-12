@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public static class RoleDomain {
@@ -125,6 +126,7 @@ public static class RoleDomain {
             // 近战武器获得伤害力
             if (weapon.weaponType == WeaponType.Melee) {
                 weapon.hasDamage = true;
+                Weapon_Attack_Check(role);
             }
             if (fsm.castingIntervalTimer <= 0) {
                 fsm.castingIntervalTimer = skill.castingIntervalSec;
@@ -147,6 +149,22 @@ public static class RoleDomain {
             }
         }
 
+    }
+
+    private static void Weapon_Attack_Check(RoleEntity role) {
+        LayerMask layer = 1 << 6;
+        var center = role.GetBody_Center() + role.GetForward() * 1;
+        var halfSize = new Vector3(0.5f, 1, 1);
+        var quat = Quaternion.LookRotation(role.GetForward(), Vector3.up);
+        var colliders = Physics.OverlapBox(center, halfSize, quat, layer);
+        if (colliders.Length > 0) {
+            foreach (var other in colliders) {
+                if (other.tag == "Grass") {
+                    BaseSlotEntity grass = other.GetComponentInParent<BaseSlotEntity>();
+                    GameObject.Destroy(grass.gameObject);
+                }
+            }
+        }
     }
     #endregion
 

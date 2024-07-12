@@ -75,6 +75,10 @@ public class RoleEntity : MonoBehaviour {
         return null;
     }
 
+    public Vector3 GetBody_Center() {
+        return body.transform.Find("Body_Center").position;
+    }
+
     public Transform GetTransform(String name, Transform trans) {
 
         var target = trans.Find(name);
@@ -115,6 +119,10 @@ public class RoleEntity : MonoBehaviour {
     #region ForWard
     public void SetForward(Vector3 dir, float dt) {
         body.transform.forward = Vector3.Lerp(body.transform.forward, dir, dt * rotationSpeed);
+    }
+
+    public Vector3 GetForward() {
+        return body.transform.forward;
     }
     #endregion
 
