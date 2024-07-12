@@ -30,7 +30,7 @@ public static class RoleDomain {
     public static void Owner_Move(GameContext ctx, RoleEntity role, float dt) {
         role.Move(ctx.input.moveAxis, dt);
         role.Anim_SetSpeed();
-        var weapon = role.weaponCom.GetCurrentWeapon();
+        // var weapon = role.weaponCom.GetCurrentWeapon();
         // if (weapon != null) {
         //     Debug.Log("Change");
         //     weapon.transform.localPosition = Vector3.zero;
@@ -108,21 +108,21 @@ public static class RoleDomain {
         if (role.isMeleeKeyDown) {
             bool hasThis = usableWeapons.TryGetValue(WeaponType.Melee, out var weapon);
             if (hasThis) {
-                weaponCom.SetCatingWeapon(weapon);
+                role.SetCatingWeapon(weapon);
                 return true;
             }
         }
         if (role.isRangedKeyDown) {
             bool hasThis = usableWeapons.TryGetValue(WeaponType.Shooter, out var weapon);
             if (hasThis) {
-                weaponCom.SetCatingWeapon(weapon);
+                role.SetCatingWeapon(weapon);
                 return true;
             }
         }
         if (role.isShieldKeyPress) {
             bool hasThis = usableWeapons.TryGetValue(WeaponType.Shield, out var weapon);
             if (hasThis) {
-                weaponCom.SetCatingWeapon(weapon);
+                role.SetCatingWeapon(weapon);
                 return true;
             }
         }
@@ -170,7 +170,7 @@ public static class RoleDomain {
             if (fsm.endCastTimer <= 0) {
                 fsm.isResetCastSkill = true;
                 if (role.isOwner) {
-                    role.weaponCom.SetCatingWeapon(null);
+                    role.SetCatingWeapon(null);
                 }
             }
         }
@@ -260,7 +260,7 @@ public static class RoleDomain {
                 GameObject.Destroy(weapon.gameObject);
             }
             var newWeapon = WeaponDomain.Spawn(ctx, typeID, owner.GetWeaponTrans(stuff.weaponType), typeID, owner.ally);
-            owner.weaponCom.Add(newWeapon);
+            owner.AddWeapon(newWeapon);
             owner.stuffCom.Remove(typeID);
         }
     }

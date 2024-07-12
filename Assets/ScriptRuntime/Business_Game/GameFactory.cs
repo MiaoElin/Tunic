@@ -38,7 +38,7 @@ public static class GameFactory {
                 // }
                 WeaponEntity weapon = WeaponDomain.Spawn(ctx, weaponTM.typeID, role.GetWeaponTrans(weaponTM.weaponType), -1, ally);
 
-                role.weaponCom.Add(weapon);
+                role.AddWeapon(weapon);
             }
         }
         role.gameObject.SetActive(true);

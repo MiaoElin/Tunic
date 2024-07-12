@@ -16,6 +16,7 @@ public class RoleEntity : MonoBehaviour {
     public GameObject body;
     [SerializeField] Rigidbody rb;
     public Animator anim;
+    public RoleAnimState animState;
 
     // Com
     public WeaponComponent weaponCom;
@@ -42,6 +43,7 @@ public class RoleEntity : MonoBehaviour {
         // Body 生成
         body = GameObject.Instantiate(mod, transform);
         this.anim = body.GetComponentInChildren<Animator>();
+        animState = RoleAnimState.NoWeapon;
     }
 
 
@@ -147,7 +149,7 @@ public class RoleEntity : MonoBehaviour {
             jumpTimes = jumpTimesMax;
         }
     }
-    
+
     public void Falling(float dt) {
         var velocity = rb.velocity;
         velocity.y -= gravity * dt;
@@ -178,8 +180,11 @@ public class RoleEntity : MonoBehaviour {
     }
 
     internal void Anim_Idle() {
-        anim.ResetTrigger("T_Defend");
-        anim.CrossFade("Idle", 0);
+        if (animState == RoleAnimState.NoWeapon) {
+            anim.CrossFade("Idle_noWeapon", 0);
+        } else if (animState == RoleAnimState.SwordAndShield) {
+            anim.CrossFade("Idle_SwordShield", 0);
+        }
     }
 
     public void Anim_JumpStart() {
@@ -200,5 +205,18 @@ public class RoleEntity : MonoBehaviour {
         this.isJumpKeyDown = isJumpKeyDown;
         this.isInteractKeyDown = isInteractKeyDown;
     }
+    #endregion
+
+    #region WeaponCom
+    public void AddWeapon(WeaponEntity weapon) {
+        weaponCom.Add(weapon);
+        animState = RoleAnimState.SwordAndShield;
+        Anim_Idle();
+    }
+
+    public void SetCatingWeapon(WeaponEntity weapon) {
+        weaponCom.SetCatingWeapon(weapon);
+    }
+
     #endregion
 }
