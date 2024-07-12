@@ -17,31 +17,39 @@ MonoBehaviour:
   - {fileID: 3802794967628822130, guid: 17a0efa62f500b041ac5270b4d0f44a3, type: 3}
   lootSpawnerTMs:
   - lootTypeID: 20
-    pos: {x: 60.56253, y: 0, z: 8.918484}
+    pos: {x: 62.309, y: 0, z: 8.92}
     rotation: {x: 90, y: 90, z: 0}
     localScale: {x: 1, y: 1, z: 1}
   - lootTypeID: 10
-    pos: {x: 59.003532, y: 0, z: 7.7284837}
+    pos: {x: 60.75, y: 0, z: 7.73}
     rotation: {x: 82.439995, y: 0, z: 90}
     localScale: {x: 1, y: 1, z: 1}
   - lootTypeID: 30
-    pos: {x: 60.67853, y: 0.1, z: 7.678484}
+    pos: {x: 62.425, y: 0.1, z: 7.6800003}
     rotation: {x: 282.08997, y: 90, z: 270}
+    localScale: {x: 1, y: 1, z: 1}
+  - lootTypeID: 1
+    pos: {x: 63.2, y: 0, z: 7.6800003}
+    rotation: {x: 270, y: -0, z: 0}
     localScale: {x: 1, y: 1, z: 1}
   bassSlotSpawners:
   - bassSlotTypeID: 10
-    pos: {x: 58.253532, y: 0, z: 10.998484}
+    pos: {x: 58.01, y: 0, z: 11.89}
     rotation: {x: -0, y: 0, z: 0}
     localScale: {x: 1, y: 1, z: 1}
   - bassSlotTypeID: 10
-    pos: {x: 59.253532, y: 0, z: 10.998484}
+    pos: {x: 59.01, y: 0, z: 11.89}
     rotation: {x: -0, y: 0, z: 0}
     localScale: {x: 1, y: 1, z: 1}
   - bassSlotTypeID: 10
-    pos: {x: 58.253532, y: 0, z: 11.998484}
+    pos: {x: 58.01, y: 0, z: 10.89}
     rotation: {x: -0, y: 0, z: 0}
     localScale: {x: 1, y: 1, z: 1}
   - bassSlotTypeID: 10
-    pos: {x: 59.253532, y: 0, z: 11.998484}
+    pos: {x: 59.01, y: 0, z: 10.89}
+    rotation: {x: -0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
+  - bassSlotTypeID: 22
+    pos: {x: 59.01, y: 0, z: 10.89}
     rotation: {x: -0, y: 0, z: 0}
     localScale: {x: 1, y: 1, z: 1}

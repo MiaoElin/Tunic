@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 81484a9b8488bbe48ae9924da7f37e5e, type: 3}
-  m_Name: TM_Weapon_10
+  m_Name: TM_Weapon_01
   m_EditorClassIdentifier: 
-  typeID: 10
+  typeID: 1
   weaponType: 1
-  mod: {fileID: 1673041863318348607, guid: a017ab4ad1be8c54b964ae0e4b77f906, type: 3}
-  skillTM: {fileID: 11400000, guid: 5d070835e10c498448c58af897a1ec60, type: 2}
+  mod: {fileID: 5438552195651310971, guid: 98215cd52ce8d3249bda5b8bf0b69206, type: 3}
+  skillTM: {fileID: 11400000, guid: 00e2b0e9a351820428dca5eaf66e1b4d, type: 2}
   localPosInRole: {x: 0, y: 0, z: 0}
-  isSword: 1
+  isSword: 0

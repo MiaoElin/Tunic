@@ -64,7 +64,8 @@ public static class GameFactory {
         weapon.typeID = tm.typeID;
         weapon.id = ctx.iDService.weaponRecord++;
         weapon.ally = ally;
-        weapon.SetLocalPos(tm.localPos);
+        weapon.isSword = tm.isSword;
+        weapon.SetLocalPos(tm.localPosInRole);
         weapon.transform.localEulerAngles = Vector3.zero;
         weapon.transform.localScale = Vector3.one;
         {

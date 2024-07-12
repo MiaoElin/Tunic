@@ -125,8 +125,9 @@ public static class RoleDomain {
             fsm.castingIntervalTimer -= dt;
             // 近战武器获得伤害力
             if (weapon.weaponType == WeaponType.Melee) {
-                weapon.hasDamage = true;
-                Weapon_Attack_Check(role);
+                if (weapon.isSword) {
+                    Weapon_Attack_Check(role);
+                }
             }
             if (fsm.castingIntervalTimer <= 0) {
                 fsm.castingIntervalTimer = skill.castingIntervalSec;
@@ -138,9 +139,6 @@ public static class RoleDomain {
             }
         } else if (skillCastStage == SkillCastStage.endCast) {
             fsm.endCastTimer -= dt;
-            if (weapon.weaponType == WeaponType.Melee) {
-                weapon.hasDamage = false;
-            }
             if (fsm.endCastTimer <= 0) {
                 fsm.isResetCastSkill = true;
                 if (role.isOwner) {
@@ -200,7 +198,7 @@ public static class RoleDomain {
                 for (int i = 0; i < typeCount; i++) {
                     var typeID = stufftypeIDs[i];
                     var count = stuffCounts[i];
-                    var stuff =GameFactory.Stuff_Create(ctx, typeID, count);
+                    var stuff = GameFactory.Stuff_Create(ctx, typeID, count);
                     owner.stuffCom.Add(stuff, out var leaveCount);
                 }
 

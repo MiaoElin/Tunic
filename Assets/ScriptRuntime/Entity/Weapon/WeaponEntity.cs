@@ -11,7 +11,7 @@ public class WeaponEntity : MonoBehaviour {
     // public SkillComponent skillCom;
     // public int bulletTypeID;//炸弹和子弹都是bullet
     SkillSubEntity skill;
-    public bool hasDamage;
+    public bool isSword;
     public int stuffTypeID;
 
     public Action<Collider> OnTriggerEnterHandle;
@@ -30,19 +30,6 @@ public class WeaponEntity : MonoBehaviour {
 
     public void SetSkill(SkillSubEntity skill) {
         this.skill = skill;
-    }
-
-    void OnTriggerEnter(Collider other) {
-        Debug.Log("In");
-        Debug.Log(hasDamage);
-        if (!hasDamage) {
-            return;
-        }
-        OnTriggerEnterHandle.Invoke(other);
-    }
-
-    void OnTriggerStay(Collider other) {
-        Debug.Log("In");
     }
 
     internal void SetLocalPos(Vector3 localPos) {

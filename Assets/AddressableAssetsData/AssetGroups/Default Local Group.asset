@@ -173,6 +173,30 @@ MonoBehaviour:
     m_SerializedLabels:
     - Entity
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 00e2b0e9a351820428dca5eaf66e1b4d
+    m_Address: Assets/ResourceRuntime/Entity/Weapon/Branch_01/TM_Skill_01.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Skill
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 740fc27cd01e9eb499c68a81fc0f19d9
+    m_Address: Assets/ResourceRuntime/Entity/Weapon/Branch_01/TM_Weapon_01.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Weapon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9667986200b5cab48841e570823b006c
+    m_Address: Assets/ResourceRuntime/Entity/Loot/Loot_Weapon_Branch_01/TM_Loot_Shield_30.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Loot
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ca4993753d4bebb4d94ed4cb6bdac190
+    m_Address: Assets/ResourceRuntime/Entity/Stuff/TM_Stuff_01.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Stuff
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2247f8f2b334ebd45bcef15756791be7, type: 2}
   m_SchemaSet:
