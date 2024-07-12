@@ -32,7 +32,8 @@ MonoBehaviour:
   - m_GUID: 8163217cfb1f70f4496dfbdfc23d57b4
     m_Address: TM_BaseSlot_10
     m_ReadOnly: 0
-    m_SerializedLabels: []
+    m_SerializedLabels:
+    - TM_BaseSlot
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 63b486fe3ae054d41a67b32981bb3ad1
     m_Address: TM_BaseSlot_Grass_11
@@ -165,6 +166,12 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c76d305e3e35d744e8247f2b33768291
+    m_Address: Assets/ResourceRuntime/Entity/BaseSlot/BaseSlotEntity.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - Entity
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2247f8f2b334ebd45bcef15756791be7, type: 2}

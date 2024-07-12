@@ -20,6 +20,21 @@ public class MapEM : MonoBehaviour {
                 tm.lootSpawnerTMs[i] = lootSpawnerTM;
             }
         }
+        {
+            var baseSlotEMs = gameObject.GetComponentsInChildren<BaseSlotEM>();
+            tm.bassSlotSpawners = new BaseSlotSpawner[baseSlotEMs.Length];
+            for (int i = 0; i < baseSlotEMs.Length; i++) {
+                var em = baseSlotEMs[i];
+                BaseSlotSpawner spawner = new BaseSlotSpawner() {
+                    bassSlotTypeID = em.tm.typeID,
+                    pos = em.transform.position,
+                    rotation = em.transform.eulerAngles,
+                    localScale = em.transform.localScale
+                };
+                tm.bassSlotSpawners[i] = spawner;
+            }
+        }
+
 
         EditorUtility.SetDirty(tm);
     }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public static class Factory {
+public static class GameFactory {
     #region Role
     public static RoleEntity Role_Create(GameContext ctx) {
         ctx.asset.TryGet_Entity_Prefab(typeof(RoleEntity).Name, out var prefab);
@@ -159,6 +159,34 @@ public static class Factory {
         stuff.isEating = tm.isEating;
         stuff.eatingTypeID = tm.eatingTypeID;
         return stuff;
+    }
+    #endregion
+
+    #region BaseSlot
+    public static BaseSlotEntity BaseSlot_Create(GameContext ctx) {
+        ctx.asset.TryGet_Entity_Prefab(typeof(BaseSlotEntity).Name, out var prefab);
+        BaseSlotEntity baseSlot = GameObject.Instantiate(prefab, ctx.poolService.baseSlotGroup).GetComponent<BaseSlotEntity>();
+        baseSlot.gameObject.SetActive(false);
+        return baseSlot;
+    }
+
+    public static BaseSlotEntity BaseSlot_Spawn(GameContext ctx, int typeID, Vector3 pos, Vector3 rotation, Vector3 localScale) {
+        bool has = ctx.asset.TryGet_BaseSlot(typeID, out var tm);
+        if (!has) {
+            Debug.LogError($"GameFactory.BaseSlot_Spawn {typeID} was not found");
+        }
+
+        BaseSlotEntity baseSlot = ctx.poolService.Get_BaseSlot();
+        baseSlot.Ctor(tm.mod);
+        baseSlot.SetPos(pos);
+        baseSlot.transform.eulerAngles = rotation;
+        baseSlot.transform.localScale = localScale;
+        baseSlot.typeID = typeID;
+        baseSlot.baseSlotType = tm.baseSlotType;
+        baseSlot.id = ctx.iDService.baseSlotRecord++;
+
+        baseSlot.gameObject.SetActive(true);
+        return baseSlot;
     }
     #endregion
 }

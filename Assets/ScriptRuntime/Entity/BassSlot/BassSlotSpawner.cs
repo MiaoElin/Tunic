@@ -1,6 +1,8 @@
 using UnityEngine;
+using System;
 
-public class BassSlotSpawner {
+[Serializable]
+public class BaseSlotSpawner {
 
     public int bassSlotTypeID;
     public Vector3 pos;

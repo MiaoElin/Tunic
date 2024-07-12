@@ -4,13 +4,23 @@ using UnityEngine;
 public static class GameBusiness_Normal {
 
     public static void EnterStage(GameContext ctx, int stageID) {
+
         // 生成地图
         var map = MapDomain.Spawn(ctx, stageID);
+
         // 生成loot
         {
             var lootSpawnerTMs = map.lootSpawnerTMs;
             foreach (var tm in lootSpawnerTMs) {
                 LootDomain.Spawn(ctx, tm.lootTypeID, tm.pos, tm.rotation, tm.localScale);
+            }
+        }
+
+        // 生成baseSlot
+        {
+            var bassSlotSpawners = map.bassSlotSpawners;
+            foreach (var tm in bassSlotSpawners) {
+                BaseSlotDomain.Spawn(ctx, tm.bassSlotTypeID, tm.pos, tm.rotation, tm.localScale);
             }
         }
 

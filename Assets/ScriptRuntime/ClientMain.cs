@@ -22,7 +22,11 @@ public class ClienMain : MonoBehaviour {
         ctx.Inject(mainCamera, hudCanvas, screenCanvas);
 
         // PoolService
-        ctx.poolService.Init(() => Factory.Role_Create(ctx), () => Factory.Weapon_Create(ctx), () => Factory.Loot_Create(ctx));
+        ctx.poolService.Init(
+            () => GameFactory.Role_Create(ctx),
+            () => GameFactory.Weapon_Create(ctx),
+            () => GameFactory.Loot_Create(ctx),
+            () => GameFactory.BaseSlot_Create(ctx));
 
         // Bind
         Bind();

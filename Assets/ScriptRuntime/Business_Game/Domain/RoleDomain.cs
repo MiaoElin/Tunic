@@ -4,7 +4,7 @@ using UnityEngine;
 public static class RoleDomain {
 
     public static RoleEntity Spawn(GameContext ctx, int typeID, Vector3 pos, Vector3 rotation, Vector3 localScale, Ally ally) {
-        var role = Factory.Role_Spawn(ctx, typeID, pos, rotation, localScale, ally);
+        var role = GameFactory.Role_Spawn(ctx, typeID, pos, rotation, localScale, ally);
         ctx.roleRepo.Add(role);
         role.fsm.EnterNormal();
         return role;
@@ -200,7 +200,7 @@ public static class RoleDomain {
                 for (int i = 0; i < typeCount; i++) {
                     var typeID = stufftypeIDs[i];
                     var count = stuffCounts[i];
-                    var stuff = Factory.Stuff_Create(ctx, typeID, count);
+                    var stuff =GameFactory.Stuff_Create(ctx, typeID, count);
                     owner.stuffCom.Add(stuff, out var leaveCount);
                 }
 
@@ -226,7 +226,7 @@ public static class RoleDomain {
                 // 从准备区移除
                 owner.weaponCom.Remove(weapon);
                 // 返回背包
-                var backStuff = Factory.Stuff_Create(ctx, weapon.stuffTypeID, 1);
+                var backStuff = GameFactory.Stuff_Create(ctx, weapon.stuffTypeID, 1);
                 owner.stuffCom.Add(backStuff, out var leaveCount);
                 if (leaveCount > 0) {
                     Debug.Log("背包满了");

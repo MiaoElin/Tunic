@@ -12,6 +12,7 @@ public class GameContext {
     // === Repo ===
     public RoleRepo roleRepo;
     public LootRepo lootRepo;
+    public BaseSlotRepo baseSlotRepo;
 
     // === Entity ===
     public PlayerEntity player;
@@ -33,6 +34,7 @@ public class GameContext {
         // Repo
         roleRepo = new RoleRepo();
         lootRepo = new LootRepo();
+        baseSlotRepo = new BaseSlotRepo();
         // Entity
         player = new PlayerEntity();
         game = new GameEntity();

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class BaseSlotEntity : MonoBehaviour {
@@ -5,14 +6,18 @@ public class BaseSlotEntity : MonoBehaviour {
     public int typeID;
     public int id;
     public BaseSlotType baseSlotType;
-    public Vector3Int pos;
+    public GameObject mod;
 
-    public void Ctor() {
-
+    public void Ctor(GameObject mod) {
+        this.mod = GameObject.Instantiate(mod, transform);
     }
 
-    public void SetPosInt(Vector3Int pos) {
+    public void SetPos(Vector3 pos) {
         transform.position = pos;
+    }
+
+    internal void Reuse() {
+        Destroy(mod.gameObject); 
     }
 
 }

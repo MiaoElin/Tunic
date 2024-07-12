@@ -28,3 +28,20 @@ MonoBehaviour:
     pos: {x: 60.67853, y: 0.1, z: 7.678484}
     rotation: {x: 282.08997, y: 90, z: 270}
     localScale: {x: 1, y: 1, z: 1}
+  bassSlotSpawners:
+  - bassSlotTypeID: 10
+    pos: {x: 58.253532, y: 0, z: 10.998484}
+    rotation: {x: -0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
+  - bassSlotTypeID: 10
+    pos: {x: 59.253532, y: 0, z: 10.998484}
+    rotation: {x: -0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
+  - bassSlotTypeID: 10
+    pos: {x: 58.253532, y: 0, z: 11.998484}
+    rotation: {x: -0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}
+  - bassSlotTypeID: 10
+    pos: {x: 59.253532, y: 0, z: 11.998484}
+    rotation: {x: -0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}

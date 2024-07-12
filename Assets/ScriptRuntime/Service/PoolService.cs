@@ -13,8 +13,11 @@ public class PoolService {
     public Transform LootGroup;
     Pool<LootEntity> lootPool;
 
+    public Transform baseSlotGroup;
+    Pool<BaseSlotEntity> baseSlotPool;
 
-    public void Init(Func<RoleEntity> role_Create, Func<WeaponEntity> weapon_Create, Func<LootEntity> loot_Create) {
+
+    public void Init(Func<RoleEntity> role_Create, Func<WeaponEntity> weapon_Create, Func<LootEntity> loot_Create, Func<BaseSlotEntity> baseSlot_Create) {
         roleGroup = new GameObject("RoleGroup").transform;
         rolePool = new Pool<RoleEntity>(5, role_Create);
 
@@ -25,6 +28,9 @@ public class PoolService {
 
         LootGroup = new GameObject("LootGroup").transform;
         lootPool = new Pool<LootEntity>(5, loot_Create);
+
+        baseSlotGroup = new GameObject("BaseSlotGroup").transform;
+        baseSlotPool = new Pool<BaseSlotEntity>(20, baseSlot_Create);
     }
 
     public RoleEntity Get_Role() {
@@ -51,4 +57,11 @@ public class PoolService {
         lootPool.Return(loot);
     }
 
+    internal BaseSlotEntity Get_BaseSlot() {
+        return baseSlotPool.Get();
+    }
+
+    public void Return_BaseSlot(BaseSlotEntity slot) {
+        baseSlotPool.Return(slot);
+    }
 }

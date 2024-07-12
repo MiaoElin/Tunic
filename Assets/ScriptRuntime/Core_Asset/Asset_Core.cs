@@ -27,6 +27,9 @@ public class Asset_Core {
     Dictionary<int, StuffTM> stuffTMs;
     AsyncOperationHandle stuffPtr;
 
+    Dictionary<int, BaseSlotTM> baseSlotTMs;
+    AsyncOperationHandle baseSlotPtr;
+
     public Asset_Core() {
         entity_Prefab = new Dictionary<string, GameObject>();
         ui_Prefab = new Dictionary<string, GameObject>();
@@ -35,6 +38,7 @@ public class Asset_Core {
         weaponTMs = new Dictionary<int, WeaponTM>();
         lootTMs = new Dictionary<int, LootTM>();
         stuffTMs = new Dictionary<int, StuffTM>();
+        baseSlotTMs = new Dictionary<int, BaseSlotTM>();
     }
 
     public void LoadAll() {
@@ -94,6 +98,14 @@ public class Asset_Core {
                 stuffTMs.Add(tm.typeID, tm);
             }
         }
+        {
+            var ptr = Addressables.LoadAssetsAsync<BaseSlotTM>("TM_BaseSlot", null);
+            baseSlotPtr = ptr;
+            var list = ptr.WaitForCompletion();
+            foreach (var tm in list) {
+                baseSlotTMs.Add(tm.typeID, tm);
+            }
+        }
     }
 
     public void Unload() {
@@ -104,6 +116,7 @@ public class Asset_Core {
         Release(weaponPtr);
         Release(lootPtr);
         Release(stuffPtr);
+        Release(baseSlotPtr);
     }
 
     public void Release(AsyncOperationHandle ptr) {
@@ -135,7 +148,12 @@ public class Asset_Core {
     public bool TryGet_LootTM(int typeID, out LootTM tm) {
         return lootTMs.TryGetValue(typeID, out tm);
     }
+
     public bool TryGet_StuffTM(int typeID, out StuffTM tm) {
         return stuffTMs.TryGetValue(typeID, out tm);
+    }
+
+    public bool TryGet_BaseSlot(int typeID, out BaseSlotTM tm) {
+        return baseSlotTMs.TryGetValue(typeID, out tm);
     }
 }
