@@ -7,6 +7,10 @@ public class RoleEntity : MonoBehaviour {
     public int id;
     public bool isOwner;
     public float moveSpeed;
+    public float jumpForce;
+    public int jumpTimes;
+    public int jumpTimesMax;
+    public float gravity;
     public float rotationSpeed;
     public Ally ally;
     public GameObject body;
@@ -126,6 +130,31 @@ public class RoleEntity : MonoBehaviour {
     }
     #endregion
 
+    #region Jump
+    public void Jump() {
+        if (isJumpKeyDown && jumpTimes > 0) {
+            jumpTimes -= 1;
+            var velocity = rb.velocity;
+            velocity.y = jumpForce;
+            rb.velocity = velocity;
+        }
+    }
+
+    public void ResetJumpTimes() {
+        jumpTimes = jumpTimesMax;
+    }
+
+    public float GetVelocityY() {
+        return rb.velocity.y;
+    }
+
+    public void Falling(float dt) {
+        var velocity = rb.velocity;
+        velocity.y -= gravity * dt;
+        rb.velocity = velocity;
+    }
+    #endregion 
+
     #region Anim
     public void Anim_SetSpeed() {
         anim.SetFloat("F_MoveSpeed", rb.velocity.magnitude);
@@ -146,6 +175,11 @@ public class RoleEntity : MonoBehaviour {
         anim.ResetTrigger("T_Defend");
         anim.CrossFade("Idle", 0);
     }
+
+    public void Anim_JumpStart() {
+        anim.CrossFade("JumpStart_SwordShield", 0);
+    }
+
     #endregion
 
     #region Input

@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeID: 100
   moveSpeed: 3.5
+  jumpForce: 8
+  gravity: 20
+  jumpTimesMax: 1
   mod: {fileID: 6382181650639032207, guid: d63e536315aedf34ebfbdb3ab8f5af85, type: 3}
   weaponTMs: []

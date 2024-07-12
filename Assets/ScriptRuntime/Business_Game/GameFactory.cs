@@ -25,6 +25,10 @@ public static class GameFactory {
         role.Ctor(tm.mod);
         role.id = ctx.iDService.roleIDRecord++;
         role.moveSpeed = tm.moveSpeed;
+        role.jumpForce = tm.jumpForce;
+        role.gravity = tm.gravity;
+        role.jumpTimesMax = tm.jumpTimesMax;
+        role.jumpTimes = tm.jumpTimesMax;
         if (tm.weaponTMs != null) {
             foreach (var weaponTM in tm.weaponTMs) {
                 // bool hasThisType = role.weaponCom.TryGet(weaponTM.weaponType, out var weapon);

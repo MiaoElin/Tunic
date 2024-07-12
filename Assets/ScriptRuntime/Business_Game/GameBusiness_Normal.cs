@@ -75,6 +75,8 @@ public static class GameBusiness_Normal {
             LootDomain.HUD_Hints_SHow_Tick(ctx, loot);
         });
         Physics.Simulate(dt);
+
+        RoleDomain.Check_Ground(owner);
     }
 
     private static void LateTick(GameContext ctx, float dt) {

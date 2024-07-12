@@ -14,6 +14,18 @@ public static class RoleDomain {
 
     }
 
+    #region Jump
+    public static void Jump(RoleEntity role) {
+        role.Jump();
+    }
+
+    public static void Falling(RoleEntity role, float dt) {
+        role.Falling(dt);
+    }
+    #endregion
+
+
+
     #region Move
     public static void Owner_Move(GameContext ctx, RoleEntity role, float dt) {
         role.Move(ctx.input.moveAxis, dt);
@@ -24,7 +36,22 @@ public static class RoleDomain {
         //     weapon.transform.localPosition = Vector3.zero;
         // }
     }
+    #endregion
 
+    #region Check_Ground
+    public static void Check_Ground(RoleEntity role) {
+        if (role.GetVelocityY() > 0) {
+            return;
+        }
+
+        LayerMask layer = 1 << LayerMaskConst.GROUND;
+        var size = new Vector3(0.5f, 0.1f, 0.5f);
+        var quat = Quaternion.LookRotation(role.GetForward(), Vector3.up);
+        Collider[] collider = Physics.OverlapBox(role.Pos(), size, quat, layer);
+        if (collider.Length > 0) {
+            role.ResetJumpTimes();
+        }
+    }
     #endregion
 
     public static void Defend(RoleEntity role) {

@@ -29,6 +29,8 @@ public static class RoleFSMController {
         }
         // Logic
         RoleDomain.Owner_Move(ctx, role, dt);
+        RoleDomain.Jump(role);
+        RoleDomain.Falling(role, dt);
         RoleDomain.Defend(role);
         RoleDomain.PickLoot(ctx, role);
         // Exit
@@ -50,6 +52,8 @@ public static class RoleFSMController {
             role.Move_Stop();
         }
         RoleDomain.Casting(role, dt);
+        RoleDomain.Jump(role);
+        RoleDomain.Falling(role, dt);
         // Exit
         if (role.weaponCom.GetCatingWeapon() == null) {
             fsm.EnterNormal();

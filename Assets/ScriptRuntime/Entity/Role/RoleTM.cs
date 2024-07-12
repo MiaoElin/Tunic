@@ -5,6 +5,9 @@ using System.Collections.Generic;
 public class RoleTM : ScriptableObject {
     public int typeID;
     public float moveSpeed;
+    public float jumpForce;
+    public float gravity;
+    public int jumpTimesMax;
     public GameObject mod;
     public List<WeaponTM> weaponTMs;
 
