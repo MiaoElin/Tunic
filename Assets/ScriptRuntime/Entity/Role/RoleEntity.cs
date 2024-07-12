@@ -137,23 +137,29 @@ public class RoleEntity : MonoBehaviour {
             var velocity = rb.velocity;
             velocity.y = jumpForce;
             rb.velocity = velocity;
+            Anim_JumpStart();
         }
     }
 
     public void ResetJumpTimes() {
-        jumpTimes = jumpTimesMax;
+        if (jumpTimes != jumpTimesMax) {
+            Anim_JumpEnd();
+            jumpTimes = jumpTimesMax;
+        }
     }
-
-    public float GetVelocityY() {
-        return rb.velocity.y;
-    }
-
+    
     public void Falling(float dt) {
         var velocity = rb.velocity;
         velocity.y -= gravity * dt;
         rb.velocity = velocity;
     }
-    #endregion 
+    #endregion
+
+    #region Velocity
+    public float GetVelocityY() {
+        return rb.velocity.y;
+    }
+    #endregion
 
     #region Anim
     public void Anim_SetSpeed() {
@@ -178,6 +184,10 @@ public class RoleEntity : MonoBehaviour {
 
     public void Anim_JumpStart() {
         anim.CrossFade("JumpStart_SwordShield", 0);
+    }
+
+    public void Anim_JumpEnd() {
+        anim.CrossFade("JumpEnd_SwordShield", 0);
     }
 
     #endregion
