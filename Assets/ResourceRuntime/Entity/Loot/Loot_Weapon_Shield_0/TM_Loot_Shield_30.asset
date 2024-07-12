@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: TM_Loot_Shield_30
   m_EditorClassIdentifier: 
   typeID: 30
-  mod: {fileID: 6984963989440461214, guid: 1d6ef9944bcb4df4cb229c722ae125a2, type: 3}
+  mod: {fileID: 6984963989440461214, guid: 801ef2615391f7e4cba1f9a0b2091ade, type: 3}
   stufftypeIDs: 1e000000
   stuffCount: 01000000

@@ -6,4 +6,5 @@ public class WeaponTM : ScriptableObject {
     public WeaponType weaponType;
     public GameObject mod;
     public SkillTM skillTM;
+    public Vector3 localPos;
 }

@@ -67,10 +67,10 @@ public class RoleEntity : MonoBehaviour {
 
     public Transform GetWeaponTrans(WeaponType weaponType) {
         if (weaponType == WeaponType.Melee || weaponType == WeaponType.Shooter) {
-            return GetTransform("Weapon", body.transform);
+            return GetTransform("weaponShield_r", body.transform);
         }
         if (weaponType == WeaponType.Shield) {
-            return GetTransform("Shield", body.transform);
+            return GetTransform("weaponShield_l", body.transform);
         }
         return null;
     }

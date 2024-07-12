@@ -44,4 +44,8 @@ public class WeaponEntity : MonoBehaviour {
     void OnTriggerStay(Collider other) {
         Debug.Log("In");
     }
+
+    internal void SetLocalPos(Vector3 localPos) {
+        transform.localPosition = localPos;
+    }
 }

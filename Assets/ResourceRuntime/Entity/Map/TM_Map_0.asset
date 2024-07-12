@@ -18,13 +18,13 @@ MonoBehaviour:
   lootSpawnerTMs:
   - lootTypeID: 20
     pos: {x: 60.56253, y: 0, z: 8.918484}
-    rotation: {x: 90, y: 270, z: 0}
+    rotation: {x: 90, y: 90, z: 0}
     localScale: {x: 1, y: 1, z: 1}
   - lootTypeID: 10
     pos: {x: 59.003532, y: 0, z: 7.7284837}
     rotation: {x: 82.439995, y: 0, z: 90}
     localScale: {x: 1, y: 1, z: 1}
   - lootTypeID: 30
-    pos: {x: 60.67853, y: 0, z: 7.678484}
-    rotation: {x: -0, y: 90, z: 270}
+    pos: {x: 60.67853, y: 0.1, z: 7.678484}
+    rotation: {x: 282.08997, y: 90, z: 270}
     localScale: {x: 1, y: 1, z: 1}

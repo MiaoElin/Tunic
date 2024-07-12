@@ -64,7 +64,9 @@ public static class Factory {
         weapon.typeID = tm.typeID;
         weapon.id = ctx.iDService.weaponRecord++;
         weapon.ally = ally;
-
+        weapon.SetLocalPos(tm.localPos);
+        weapon.transform.localEulerAngles = Vector3.zero;
+        weapon.transform.localScale = Vector3.one;
         {
             SkillSubEntity skill = new SkillSubEntity();
             var skilltm = tm.skillTM;
@@ -80,9 +82,7 @@ public static class Factory {
             weapon.SetSkill(skill);
         }
 
-        weapon.transform.localPosition = Vector3.zero;
-        weapon.transform.localEulerAngles = Vector3.zero;
-        weapon.transform.localScale = Vector3.one;
+
 
         weapon.gameObject.SetActive(true);
         return weapon;
