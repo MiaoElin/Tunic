@@ -19,6 +19,7 @@ public static class GameFactory {
         RoleEntity role = ctx.poolService.Get_Role();
         role.typeID = typeID;
         role.ally = ally;
+        role.aiType = tm.aiType;
         role.SetPos(pos);
         role.SetRotation(rotation);
         role.SetLocalScale(localScale);

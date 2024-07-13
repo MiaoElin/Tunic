@@ -53,3 +53,8 @@ MonoBehaviour:
     pos: {x: 59.01, y: 0, z: 10.89}
     rotation: {x: -0, y: 0, z: 0}
     localScale: {x: 1, y: 1, z: 1}
+  roleSpawnerTMs:
+  - roleTypeID: 100
+    pos: {x: 68.42, y: 0, z: 15.58}
+    rotation: {x: -0, y: 0, z: 0}
+    localScale: {x: 1, y: 1, z: 1}

@@ -13,6 +13,7 @@ public class RoleEntity : MonoBehaviour {
     public float gravity;
     public float rotationSpeed;
     public Ally ally;
+    public AiType aiType;
     public GameObject body;
     [SerializeField] Rigidbody rb;
     public Animator anim;
@@ -45,7 +46,6 @@ public class RoleEntity : MonoBehaviour {
         this.anim = body.GetComponentInChildren<Animator>();
         animState = RoleAnimState.NoWeapon;
     }
-
 
     public void Reuse() {
         weaponCom.Foreach(weapon => {
@@ -118,8 +118,21 @@ public class RoleEntity : MonoBehaviour {
         velocity = Vector3.zero;
         velocity.y = rb.velocity.y;
         rb.velocity = velocity;
-        Anim_SetSpeed();
+        Anim_SetSpeedZero();
     }
+
+    internal void MoveTo_Target(Vector3 target, float dt) {
+        var dir = target - Pos();
+        if (Vector3.SqrMagnitude(dir) <= moveSpeed * dt) {
+            rb.velocity = Vector3.zero;
+            return;
+        }
+        var velocity = rb.velocity;
+        velocity = dir.normalized * moveSpeed;
+        rb.velocity = velocity;
+        SetForward(dir, dt);
+    }
+
     #endregion
 
     #region ForWard
@@ -166,6 +179,10 @@ public class RoleEntity : MonoBehaviour {
     #region Anim
     public void Anim_SetSpeed() {
         anim.SetFloat("F_MoveSpeed", rb.velocity.magnitude);
+    }
+
+    public void Anim_SetSpeedZero() {
+        anim.SetFloat("F_MoveSpeed", 0);
     }
 
     public void Anim_Attack(string anim_Name) {

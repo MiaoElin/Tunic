@@ -36,6 +36,13 @@ public static class RoleDomain {
         //     weapon.transform.localPosition = Vector3.zero;
         // }
     }
+
+    public static void AI_Move(GameContext ctx, RoleEntity role, float dt) {
+        var owner = ctx.GetOwner();
+        if (role.aiType == AiType.Flyer) {
+            role.MoveTo_Target(owner.Pos(), dt);
+        }
+    }
     #endregion
 
     #region Check_Ground

@@ -3,16 +3,16 @@ using UnityEngine;
 
 public static class RoleFSMController {
 
-    public static void ApllyFSM(GameContext ctx, RoleEntity role, float dt) {
+    public static void ApplyFSM(GameContext ctx, RoleEntity role, float dt) {
         var status = role.fsm.status;
 
         ApplyAny(role, dt);
         if (status == RoleStatus.Normal) {
-            ApllyNormal(ctx, role, dt);
+            ApplyNormal(ctx, role, dt);
         } else if (status == RoleStatus.Casting) {
-            ApllyCasting(ctx, role, dt);
+            ApplyCasting(ctx, role, dt);
         } else if (status == RoleStatus.Defend) {
-            ApllyDefend(ctx, role, dt);
+            ApplyDefend(ctx, role, dt);
         }
     }
 
@@ -20,7 +20,7 @@ public static class RoleFSMController {
         RoleDomain.SkillCD_Tick(role, dt);
     }
 
-    private static void ApllyNormal(GameContext ctx, RoleEntity role, float dt) {
+    private static void ApplyNormal(GameContext ctx, RoleEntity role, float dt) {
         var fsm = role.fsm;
         if (fsm.isEnterNormal) {
             fsm.isEnterNormal = false;
@@ -45,7 +45,7 @@ public static class RoleFSMController {
 
     }
 
-    private static void ApllyCasting(GameContext ctx, RoleEntity role, float dt) {
+    private static void ApplyCasting(GameContext ctx, RoleEntity role, float dt) {
         var fsm = role.fsm;
         if (fsm.isEnterCasting) {
             fsm.isEnterCasting = false;
@@ -60,7 +60,7 @@ public static class RoleFSMController {
         }
     }
 
-    private static void ApllyDefend(GameContext ctx, RoleEntity role, float dt) {
+    private static void ApplyDefend(GameContext ctx, RoleEntity role, float dt) {
 
     }
 }

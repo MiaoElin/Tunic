@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: TM_Role_100
   m_EditorClassIdentifier: 
   typeID: 100
-  moveSpeed: 0
+  aiType: 2
+  moveSpeed: 3
   jumpForce: 0
   gravity: 0
   jumpTimesMax: 0

@@ -77,7 +77,14 @@ public static class GameBusiness_Normal {
     public static void FixedTick(GameContext ctx, float dt) {
 
         var owner = ctx.GetOwner();
-        RoleFSMController.ApllyFSM(ctx, owner, dt);
+
+        ctx.roleRepo.Foreach(role => {
+            if (role.isOwner) {
+                RoleFSMController.ApplyFSM(ctx, owner, dt);
+            } else {
+                RoleAIFSMController.ApplyFSM(ctx, role, dt);
+            }
+        });
 
         ctx.lootRepo.Foreach(loot => {
             LootDomain.HUD_Hints_SHow_Tick(ctx, loot);

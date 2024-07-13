@@ -7,6 +7,7 @@
 - 学习animator layer
 - 添加save按键 用tri inspector
 
+-添加Collider 忽略碰撞
 === Onwer === 
 - 攻击
 在SkillCastStage.Casting阶段内，如果再按下这个技能，会砍两次(不同挥剑方向)
