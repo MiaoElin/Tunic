@@ -31,6 +31,9 @@ public class ClienMain : MonoBehaviour {
         // Bind
         Bind();
         GameBusiness_Normal.EnterStage(ctx, 0);
+
+        // Physics
+        Physics.IgnoreLayerCollision(LayerMaskConst.ROLE, LayerMaskConst.ROLE); // 必须是碰撞盒在的那个Gameobject，父对象设了Layer.ROlE无效
     }
 
     private void Bind() {

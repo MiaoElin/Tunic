@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4176563854691926695}
   - component: {fileID: 1534026135713307094}
   - component: {fileID: 517941710072811590}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: RoleEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50,12 +50,16 @@ MonoBehaviour:
   isOwner: 0
   moveSpeed: 6
   jumpForce: 0
+  jumpTimes: 0
+  jumpTimesMax: 0
   gravity: 0
   rotationSpeed: 0
   ally: 0
+  aiType: 0
   body: {fileID: 0}
   rb: {fileID: 517941710072811590}
   anim: {fileID: 0}
+  animState: 0
   searchRange: 0
   isMeleeKeyDown: 0
   isShieldKeyPress: 0
