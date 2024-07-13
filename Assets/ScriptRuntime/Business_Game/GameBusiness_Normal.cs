@@ -24,7 +24,15 @@ public static class GameBusiness_Normal {
             }
         }
 
-        var owner = RoleDomain.Spawn(ctx, 100, new Vector3(60, 0, 10), Vector3.zero, Vector3.one, Ally.Player);
+        // 生成Monster
+        {
+            var roleSpawnerTMs = map.roleSpawnerTMs;
+            foreach (var tm in roleSpawnerTMs) {
+                RoleDomain.Spawn(ctx, tm.roleTypeID, tm.pos, tm.rotation, tm.localScale, Ally.Monster);
+            }
+        }
+
+        var owner = RoleDomain.Spawn(ctx, 10, new Vector3(60, 0, 10), Vector3.zero, Vector3.one, Ally.Player);
         ctx.game.ownerID = owner.id;
         owner.isOwner = true;
 

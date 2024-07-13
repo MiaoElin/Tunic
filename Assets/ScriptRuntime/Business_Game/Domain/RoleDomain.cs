@@ -49,7 +49,6 @@ public static class RoleDomain {
         var quat = Quaternion.LookRotation(role.GetForward(), Vector3.up);
         Collider[] collider = Physics.OverlapBox(role.Pos(), size, quat, layer);
         if (collider.Length > 0) {
-            Debug.Log("IN");
             role.ResetJumpTimes();
         }
     }

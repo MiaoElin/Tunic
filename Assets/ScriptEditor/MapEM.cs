@@ -34,8 +34,20 @@ public class MapEM : MonoBehaviour {
                 tm.bassSlotSpawners[i] = spawner;
             }
         }
-
-
+        {
+            var roleEMs = gameObject.GetComponentsInChildren<RoleEM>();
+            tm.roleSpawnerTMs = new RoleSpawnerTM[roleEMs.Length];
+            for (int i = 0; i < roleEMs.Length; i++) {
+                var em = roleEMs[i];
+                RoleSpawnerTM spawner = new RoleSpawnerTM() {
+                    roleTypeID = em.tm.typeID,
+                    pos = em.transform.position,
+                    rotation = em.transform.eulerAngles,
+                    localScale = em.transform.localScale
+                };
+                tm.roleSpawnerTMs[i] = spawner;
+            }
+        }
         EditorUtility.SetDirty(tm);
     }
 

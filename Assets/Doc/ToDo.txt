@@ -5,6 +5,7 @@
 - 盾的动画过渡问题
 
 - 学习animator layer
+- 添加save按键 用tri inspector
 
 === Onwer === 
 - 攻击
@@ -12,7 +13,9 @@
 
 ?- 添加Defend 状态，defend状态不可移动；
 
-=== Weapon ===
 
+=== Weapon ===
+- 武器加背部的Transform信息
+- 武器在手里和背部父对象切换
 
 === Monster ===

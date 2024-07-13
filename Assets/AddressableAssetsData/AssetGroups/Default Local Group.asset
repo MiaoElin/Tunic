@@ -197,6 +197,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - TM_Stuff
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e51e13b70f8271d438d5215ef78c0bae
+    m_Address: Assets/ResourceRuntime/Entity/Role/Monster_1000/TM_Role_1000.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Role
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2247f8f2b334ebd45bcef15756791be7, type: 2}
   m_SchemaSet:
