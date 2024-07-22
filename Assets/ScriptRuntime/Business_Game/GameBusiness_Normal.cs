@@ -40,6 +40,7 @@ public static class GameBusiness_Normal {
         ctx.camera.SetLookAt(owner.transform);
 
         ctx.game.fsm.EnterNormal();
+
     }
 
     public static void Tick(GameContext ctx, float dt) {

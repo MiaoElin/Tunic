@@ -198,9 +198,9 @@ public class RoleEntity : MonoBehaviour {
 
     internal void Anim_Idle() {
         if (animState == RoleAnimState.NoWeapon) {
-            anim.CrossFade("Idle_noWeapon", 0);
+            anim.SetFloat("F_AnimState", 0);
         } else if (animState == RoleAnimState.SwordAndShield) {
-            anim.CrossFade("Idle_SwordShield", 0);
+            anim.SetFloat("F_AnimState", 1);
         }
     }
 
