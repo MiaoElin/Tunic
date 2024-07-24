@@ -203,6 +203,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - TM_Role
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2e2adf849865df44f9323c9683845a99
+    m_Address: Assets/ResourceRuntime/Terrain/TM_Terrain.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Terrain
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2247f8f2b334ebd45bcef15756791be7, type: 2}
   m_SchemaSet:

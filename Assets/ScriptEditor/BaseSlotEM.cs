@@ -4,7 +4,7 @@ using UnityEditor;
 [ExecuteInEditMode]
 public class BaseSlotEM : MonoBehaviour {
     public BaseSlotTM tm;
-    GameObject mod;
+    public GameObject mod;
 
     void Awake() {
         if (mod == null) {
