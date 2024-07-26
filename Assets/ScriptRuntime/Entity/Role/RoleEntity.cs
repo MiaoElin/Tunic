@@ -123,7 +123,7 @@ public class RoleEntity : MonoBehaviour {
 
     internal void MoveTo_Target(Vector3 target, float dt) {
         var dir = target - Pos();
-        if (Vector3.SqrMagnitude(dir) <= moveSpeed * dt) {
+        if (Vector3.SqrMagnitude(dir) < Math.Pow(moveSpeed * dt, 2)) {
             rb.velocity = Vector3.zero;
             return;
         }
@@ -141,8 +141,8 @@ public class RoleEntity : MonoBehaviour {
         // 是否到达终点
         if (pathIndex >= path.Count) {
             velocity = Vector3.zero;
-            velocity.y = rb.velocity.y;
             rb.velocity = velocity;
+            pathIndex = 0;
             return;
         }
         // 移动
@@ -150,13 +150,13 @@ public class RoleEntity : MonoBehaviour {
         velocity = moveSpeed * dir.normalized;
         velocity.y = rb.velocity.y;
         rb.velocity = velocity;
-        SetForward(dir, dt);
         // 到达当前Index 的目标位置
         if (Vector3.SqrMagnitude(dir) < Mathf.Pow(moveSpeed * dt, 2)) {
             pathIndex++;
             return;
         }
-
+        dir.y = 0;
+        SetForward(dir, dt);
     }
 
     #endregion

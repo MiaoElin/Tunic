@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeID: 110
   aiType: 1
-  moveSpeed: 3
+  moveSpeed: 1
   jumpForce: 0
   gravity: 0
   jumpTimesMax: 0

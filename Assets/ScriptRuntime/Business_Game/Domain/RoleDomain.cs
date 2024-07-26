@@ -43,13 +43,18 @@ public static class RoleDomain {
             role.MoveTo_Target(owner.Pos(), dt);
         } else if (role.aiType == AiType.Common) {
             var map = ctx.GetCurrentMap();
-            bool has = GFpathFinding3D_Rect.Astar(
-              role.Pos(),
-              ctx.GetOwner().Pos(),
-              (pos) => { return !map.blockSet.Contains(pos); },
-              (index) => { return map.rectCells[index]; },
-              out role.path);
-            role.MoveBy_Path(dt);
+            if (Vector3.SqrMagnitude(role.Pos() - ctx.GetOwner().Pos()) > 4) {
+                bool has = GFpathFinding3D_Rect.Astar(
+                    ctx.GetOwner().Pos(),
+                  role.Pos(),
+                  (pos) => { return !map.blockSet.Contains(pos); },
+                  (index) => { return map.rectCells[index]; },
+                  out role.path);
+                role.MoveBy_Path(dt);
+                role.Anim_SetSpeed();
+            } else {
+                role.Move_Stop();
+            }
         }
     }
     #endregion
@@ -261,6 +266,7 @@ public static class RoleDomain {
 
         if (stuff.isGetWeapon) {
             bool hasThisType = owner.weaponCom.TryGet(stuff.weaponType, out var weapon);
+            Debug.Log(hasThisType);
             if (hasThisType) {
                 // 从准备区移除
                 owner.weaponCom.Remove(weapon);
@@ -272,7 +278,8 @@ public static class RoleDomain {
                 }
                 GameObject.Destroy(weapon.gameObject);
             }
-            var newWeapon = WeaponDomain.Spawn(ctx, typeID, owner.GetWeaponTrans(stuff.weaponType, weapon.transName), typeID, owner.ally);
+            ctx.asset.TryGet_WeaponTM(stuff.weaponTypeID, out var tm);
+            var newWeapon = WeaponDomain.Spawn(ctx, typeID, owner.GetWeaponTrans(stuff.weaponType, tm.transName), typeID, owner.ally);
             owner.AddWeapon(newWeapon);
             owner.stuffCom.Remove(typeID);
         }
