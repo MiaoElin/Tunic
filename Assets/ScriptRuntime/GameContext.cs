@@ -10,6 +10,7 @@ public class GameContext {
     public PoolService poolService;
 
     // === Repo ===
+    public MapRepo mapRepo;
     public RoleRepo roleRepo;
     public LootRepo lootRepo;
     public BaseSlotRepo baseSlotRepo;
@@ -32,6 +33,7 @@ public class GameContext {
         iDService = new IDService();
         poolService = new PoolService();
         // Repo
+        mapRepo = new MapRepo();
         roleRepo = new RoleRepo();
         lootRepo = new LootRepo();
         baseSlotRepo = new BaseSlotRepo();
@@ -55,6 +57,11 @@ public class GameContext {
     public RoleEntity GetOwner() {
         roleRepo.TryGet(game.ownerID, out var owner);
         return owner;
+    }
+
+    public MapEntity GetCurrentMap() {
+        mapRepo.TryGet(game.mapID, out var map);
+        return map;
     }
 
 }

@@ -139,9 +139,15 @@ public static class GameFactory {
         //     // terrain.transform.position= girdpos*terrainSize;
         //     map.terrains[i]=terrain;
         // }
+        map.terrainTMs=tm.terrainTMs;
         map.lootSpawnerTMs = tm.lootSpawnerTMs;
         map.bassSlotSpawners = tm.bassSlotSpawners;
         map.roleSpawnerTMs = tm.roleSpawnerTMs;
+        // Grid
+        map.blockSet = tm.blockSet;
+        map.gridWidth = tm.gridWidth;
+        map.gridHeight = tm.gridHeight;
+        map.gridSideLength = tm.gridSideLength;
         return map;
     }
     #endregion

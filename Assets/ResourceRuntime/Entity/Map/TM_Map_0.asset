@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TM_Map_0
   m_EditorClassIdentifier: 
   stageID: 0
-  terrains:
-  - {fileID: 0}
+  terrainTMs:
+  - {fileID: 11400000, guid: 2e2adf849865df44f9323c9683845a99, type: 2}
   lootSpawnerTMs:
   - lootTypeID: 20
     pos: {x: 62.309, y: 0, z: 8.92}
@@ -169,3 +169,11 @@ MonoBehaviour:
   - {x: 76, y: 16}
   - {x: 76, y: 16}
   - {x: 61, y: 10}
+  - {x: 57, y: 11}
+  - {x: 58, y: 11}
+  - {x: 57, y: 10}
+  - {x: 58, y: 10}
+  - {x: 61, y: 10}
+  gridWidth: 128
+  gridHeight: 128
+  gridSideLength: 1

@@ -10,11 +10,12 @@ public class MapEM : MonoBehaviour {
     [SerializeField] int gridWidth;
     [SerializeField] int gridHeight;
     [SerializeField] float gridSideLength;
+    public RectCell3D[] rectCells;
 
     [ContextMenu("Init")]
     void InitRect() {
         GFpathFinding3D_Rect.Ctor(gridWidth, gridHeight, gridSideLength);
-        ref var rectCells = ref tm.rectCells;
+
         {
             // 生成格子
             rectCells = new RectCell3D[gridWidth * gridHeight];
@@ -31,6 +32,13 @@ public class MapEM : MonoBehaviour {
 
     [ContextMenu("Save")]
     public void Save() {
+        tm.gridWidth = gridWidth;
+        tm.gridHeight = gridHeight;
+        tm.gridSideLength = gridSideLength;
+        {
+            var terrainGroupEM = gameObject.GetComponentInChildren<TerrainGroupEM>();
+            tm.terrainTMs = terrainGroupEM.terrainTMs;
+        }
         {
             var lootEMs = gameObject.GetComponentsInChildren<LootEM>();
             tm.lootSpawnerTMs = new LootSpawnerTM[lootEMs.Length];
@@ -80,7 +88,6 @@ public class MapEM : MonoBehaviour {
     void Update() {
         LayerMask Ground = 1 << 3;
         ref List<Vector2Int> blockSet = ref tm.blockSet;
-        ref var rectCells = ref tm.rectCells;
 
         if (Input.GetKey(KeyCode.C) && Input.GetKeyDown(KeyCode.Return)) {
             Debug.Log("Clear");
@@ -140,7 +147,6 @@ public class MapEM : MonoBehaviour {
 
 
     void OnDrawGizmos() {
-        var rectCells = tm.rectCells;
         if (rectCells == null) {
             return;
         }

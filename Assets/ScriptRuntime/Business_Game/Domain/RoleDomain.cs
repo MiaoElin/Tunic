@@ -41,6 +41,15 @@ public static class RoleDomain {
         var owner = ctx.GetOwner();
         if (role.aiType == AiType.Flyer) {
             role.MoveTo_Target(owner.Pos(), dt);
+        } else if (role.aiType == AiType.Common) {
+            var map = ctx.GetCurrentMap();
+            bool has = GFpathFinding3D_Rect.Astar(
+              role.Pos(),
+              ctx.GetOwner().Pos(),
+              (pos) => { return !map.blockSet.Contains(pos); },
+              (index) => { return map.rectCells[index]; },
+              out role.path);
+            role.MoveBy_Path(dt);
         }
     }
     #endregion

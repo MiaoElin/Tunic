@@ -8,6 +8,28 @@ public static class GameBusiness_Normal {
         // 生成地图
         var map = MapDomain.Spawn(ctx, stageID);
 
+        // 生成Terrain
+        foreach (var tm in map.terrainTMs) {
+            var terrain = GameObject.Instantiate(tm.mod);
+            terrain.transform.position = tm.pos;
+        }
+        // 生成格子
+        var gridWidth = map.gridWidth;
+        var gridHeight = map.gridHeight;
+        var gridSideLength = map.gridSideLength;
+        RectCell3D[] rectCells = new RectCell3D[gridWidth * gridHeight];
+        for (int x = 0; x < gridWidth; x++) {
+            for (int y = 0; y < gridHeight; y++) {
+                RectCell3D rect = new RectCell3D();
+                rect.Ctor(x, y, gridSideLength);
+                rect.worldPos.y = Terrain.activeTerrain.SampleHeight(rect.worldPos);
+                rectCells[y * gridWidth + x] = rect;
+            }
+        }
+        map.rectCells = rectCells;
+        // 构造寻路系统
+        GFpathFinding3D_Rect.Ctor(map.gridWidth, map.gridHeight, map.gridSideLength);
+
         // 生成loot
         {
             var lootSpawnerTMs = map.lootSpawnerTMs;

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class RoleEntity : MonoBehaviour {
 
@@ -35,7 +36,12 @@ public class RoleEntity : MonoBehaviour {
     // fsm
     public RoleFSMComponent fsm;
 
+    public List<Vector3> path;
+    public int pathIndex;
+
     public void Ctor(GameObject mod) {
+        path = new List<Vector3>();
+
         fsm = new RoleFSMComponent();
         weaponCom = new WeaponComponent();
         stuffCom = new StuffComponent();
@@ -127,6 +133,32 @@ public class RoleEntity : MonoBehaviour {
         SetForward(dir, dt);
     }
 
+    public void MoveBy_Path(float dt) {
+        var velocity = rb.velocity;
+        if (path == null) {
+            return;
+        }
+        // 是否到达终点
+        if (pathIndex >= path.Count) {
+            velocity = Vector3.zero;
+            velocity.y = rb.velocity.y;
+            rb.velocity = velocity;
+            return;
+        }
+        // 移动
+        var dir = path[pathIndex] - Pos();
+        velocity = moveSpeed * dir.normalized;
+        velocity.y = rb.velocity.y;
+        rb.velocity = velocity;
+        SetForward(dir, dt);
+        // 到达当前Index 的目标位置
+        if (Vector3.SqrMagnitude(dir) < Mathf.Pow(moveSpeed * dt, 2)) {
+            pathIndex++;
+            return;
+        }
+
+    }
+
     #endregion
 
     #region ForWard
@@ -191,10 +223,12 @@ public class RoleEntity : MonoBehaviour {
     }
 
     internal void Anim_Idle() {
-        if (animState == RoleAnimState.NoWeapon) {
-            anim.SetFloat("F_AnimState", 0);
-        } else if (animState == RoleAnimState.SwordAndShield) {
-            anim.SetFloat("F_AnimState", 1);
+        if (isOwner) {
+            if (animState == RoleAnimState.NoWeapon) {
+                anim.SetFloat("F_AnimState", 0);
+            } else if (animState == RoleAnimState.SwordAndShield) {
+                anim.SetFloat("F_AnimState", 1);
+            }
         }
     }
 

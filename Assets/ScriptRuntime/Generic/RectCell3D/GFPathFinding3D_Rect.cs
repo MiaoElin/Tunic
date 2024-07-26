@@ -43,11 +43,13 @@ public static class GFpathFinding3D_Rect {
         int endIndex = GetIndex(endPos);
         if (startIndex == -1 || endIndex == -1) {
             path = null;
+            Debug.Log("Failed:1");
             return false;
         }
 
         if (!isWalkable(startPos) || !isWalkable(endPos)) {
             path = null;
+            Debug.Log("Failed:2");
             return false;
         }
 
@@ -134,6 +136,7 @@ public static class GFpathFinding3D_Rect {
             }
 
         }
+        Debug.Log("Failed:3");
         return false;
     }
 

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class TerrainGroupEM : MonoBehaviour {
 
     // Terrain
-    [SerializeField] TerrainTM[] terrainTMs;
+    [SerializeField] public TerrainTM[] terrainTMs;
     [SerializeField] float terrainSingle_Width;
     [SerializeField] float terrainSingle_Height;
     [SerializeField] int terrainWidth; // Count
