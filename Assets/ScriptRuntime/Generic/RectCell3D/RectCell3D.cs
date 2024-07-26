@@ -13,7 +13,6 @@ public struct RectCell3D : IEquatable<RectCell3D>, IComparable<RectCell3D> {
     // public RectCell3D parent;
 
     public bool isBlock;
-    public bool impassable;
     public bool isClose;
 
     public void Ctor(int x, int y, float sideLength) {
