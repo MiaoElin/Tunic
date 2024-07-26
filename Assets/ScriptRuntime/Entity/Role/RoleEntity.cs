@@ -120,6 +120,12 @@ public class RoleEntity : MonoBehaviour {
         rb.velocity = velocity;
         Anim_SetSpeedZero();
     }
+    public void AI_Move_Stop() {
+        var velocity = rb.velocity;
+        velocity = Vector3.zero;
+        rb.velocity = velocity;
+        Anim_SetSpeedZero();
+    }
 
     internal void MoveTo_Target(Vector3 target, float dt) {
         var dir = target - Pos();
@@ -148,7 +154,6 @@ public class RoleEntity : MonoBehaviour {
         // 移动
         var dir = path[pathIndex] - Pos();
         velocity = moveSpeed * dir.normalized;
-        velocity.y = rb.velocity.y;
         rb.velocity = velocity;
         // 到达当前Index 的目标位置
         if (Vector3.SqrMagnitude(dir) < Mathf.Pow(moveSpeed * dt, 2)) {

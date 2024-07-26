@@ -43,6 +43,7 @@ public static class RoleDomain {
             role.MoveTo_Target(owner.Pos(), dt);
         } else if (role.aiType == AiType.Common) {
             var map = ctx.GetCurrentMap();
+            Debug.Log(role.GetVelocityY());
             if (Vector3.SqrMagnitude(role.Pos() - ctx.GetOwner().Pos()) > 4) {
                 bool has = GFpathFinding3D_Rect.Astar(
                     ctx.GetOwner().Pos(),
@@ -53,7 +54,7 @@ public static class RoleDomain {
                 role.MoveBy_Path(dt);
                 role.Anim_SetSpeed();
             } else {
-                role.Move_Stop();
+                role.AI_Move_Stop();
             }
         }
     }

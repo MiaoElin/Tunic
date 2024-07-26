@@ -15,8 +15,8 @@ MonoBehaviour:
   typeID: 110
   aiType: 1
   moveSpeed: 1
-  jumpForce: 0
-  gravity: 0
+  jumpForce: 8
+  gravity: 20
   jumpTimesMax: 0
   mod: {fileID: 6382181650639032207, guid: f73e0f66f54ab9e47ba49fb41686d2d7, type: 3}
   weaponTMs:
