@@ -71,14 +71,8 @@ public class RoleEntity : MonoBehaviour {
         transform.localScale = localScale;
     }
 
-    public Transform GetWeaponTrans(WeaponType weaponType) {
-        if (weaponType == WeaponType.Melee || weaponType == WeaponType.Shooter) {
-            return GetTransform("weaponShield_r", body.transform);
-        }
-        if (weaponType == WeaponType.Shield) {
-            return GetTransform("weaponShield_l", body.transform);
-        }
-        return null;
+    public Transform GetWeaponTrans(WeaponType weaponType, string tranName) {
+        return GetTransform(tranName, body.transform);
     }
 
     public Vector3 GetBody_Center() {

@@ -17,4 +17,5 @@ MonoBehaviour:
   mod: {fileID: 6984963989440461214, guid: 801ef2615391f7e4cba1f9a0b2091ade, type: 3}
   skillTM: {fileID: 11400000, guid: af7d16ee031d7d44c9dede2e92b62ad0, type: 2}
   localPosInRole: {x: 0.1551616, y: -0.012171362, z: 0.2073416}
-  isSword: 0
+  rotation: {x: 0, y: 0, z: 0}
+  transName: weaponShield_l

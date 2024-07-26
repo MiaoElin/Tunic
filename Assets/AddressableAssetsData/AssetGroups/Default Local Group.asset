@@ -209,6 +209,24 @@ MonoBehaviour:
     m_SerializedLabels:
     - TM_Terrain
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 16ba40fc5b9c4e747aa6d22c80840651
+    m_Address: Assets/ResourceRuntime/Entity/Role/Monster_Common_110/TM_Role_110.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Role
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ff1e40ee839331d438d69d36ad0430aa
+    m_Address: Assets/ResourceRuntime/Entity/Weapon/Maul_1000/TM_Weapon_1000.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Weapon
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c6ffdc6c470b004d926d93a3c8ae461
+    m_Address: Assets/ResourceRuntime/Entity/Weapon/Maul_1000/TM_Skill_1000.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TM_Skill
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 2247f8f2b334ebd45bcef15756791be7, type: 2}
   m_SchemaSet:

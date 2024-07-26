@@ -95,7 +95,6 @@ public class MapEM : MonoBehaviour {
         if (Input.GetMouseButton(0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             bool has = Physics.Raycast(ray, out RaycastHit hit, 200, Ground);
-            Debug.Log(has);
             if (has) {
                 var gridPos = GFpathFinding3D_Rect.WorldToGridPos(hit.point);
                 var index = GFpathFinding3D_Rect.GetIndex(gridPos);

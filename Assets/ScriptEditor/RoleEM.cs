@@ -4,7 +4,7 @@ using UnityEditor;
 [ExecuteInEditMode]
 public class RoleEM : MonoBehaviour {
     public RoleTM tm;
-    GameObject mod;
+    public GameObject mod;
 
     void Awake() {
         if (mod == null) {

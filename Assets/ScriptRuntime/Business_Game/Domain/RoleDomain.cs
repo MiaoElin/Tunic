@@ -159,9 +159,7 @@ public static class RoleDomain {
             fsm.castingIntervalTimer -= dt;
             // 近战武器获得伤害力
             if (weapon.weaponType == WeaponType.Melee) {
-                if (weapon.isSword) {
-                    Weapon_Attack_Check(role);
-                }
+                Weapon_Attack_Check(role);
             }
             if (fsm.castingIntervalTimer <= 0) {
                 fsm.castingIntervalTimer = skill.castingIntervalSec;
@@ -265,7 +263,7 @@ public static class RoleDomain {
                 }
                 GameObject.Destroy(weapon.gameObject);
             }
-            var newWeapon = WeaponDomain.Spawn(ctx, typeID, owner.GetWeaponTrans(stuff.weaponType), typeID, owner.ally);
+            var newWeapon = WeaponDomain.Spawn(ctx, typeID, owner.GetWeaponTrans(stuff.weaponType, weapon.transName), typeID, owner.ally);
             owner.AddWeapon(newWeapon);
             owner.stuffCom.Remove(typeID);
         }

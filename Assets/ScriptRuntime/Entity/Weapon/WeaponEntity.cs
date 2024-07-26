@@ -11,8 +11,8 @@ public class WeaponEntity : MonoBehaviour {
     // public SkillComponent skillCom;
     // public int bulletTypeID;//炸弹和子弹都是bullet
     SkillSubEntity skill;
-    public bool isSword;
     public int stuffTypeID;
+    public string transName;
 
     public Action<Collider> OnTriggerEnterHandle;
 

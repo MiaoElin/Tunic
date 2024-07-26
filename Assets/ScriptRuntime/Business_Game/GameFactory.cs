@@ -37,7 +37,7 @@ public static class GameFactory {
                 //     role.weaponCom.Remove(weapon);
                 //     GameObject.Destroy(weapon);
                 // }
-                WeaponEntity weapon = WeaponDomain.Spawn(ctx, weaponTM.typeID, role.GetWeaponTrans(weaponTM.weaponType), -1, ally);
+                WeaponEntity weapon = WeaponDomain.Spawn(ctx, weaponTM.typeID, role.GetWeaponTrans(weaponTM.weaponType, weaponTM.transName), -1, ally);
 
                 role.AddWeapon(weapon);
             }
@@ -69,10 +69,10 @@ public static class GameFactory {
         weapon.typeID = tm.typeID;
         weapon.id = ctx.iDService.weaponRecord++;
         weapon.ally = ally;
-        weapon.isSword = tm.isSword;
         weapon.SetLocalPos(tm.localPosInRole);
-        weapon.transform.localEulerAngles = Vector3.zero;
+        weapon.transform.localEulerAngles = tm.rotation;
         weapon.transform.localScale = Vector3.one;
+        weapon.transName = tm.transName;
         {
             SkillSubEntity skill = new SkillSubEntity();
             var skilltm = tm.skillTM;
