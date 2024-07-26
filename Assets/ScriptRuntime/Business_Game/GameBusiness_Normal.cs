@@ -105,7 +105,8 @@ public static class GameBusiness_Normal {
             if (role.isOwner) {
                 RoleFSMController.ApplyFSM(ctx, owner, dt);
             } else {
-                RoleAIFSMController.ApplyFSM(ctx, role, dt);
+                // RoleAIFSMController.ApplyFSM(ctx, role, dt);
+                role.aiCom.tree.Execute(dt);
             }
         });
 

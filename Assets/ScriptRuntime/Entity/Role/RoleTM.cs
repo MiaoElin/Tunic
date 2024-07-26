@@ -12,4 +12,7 @@ public class RoleTM : ScriptableObject {
     public GameObject mod;
     public List<WeaponTM> weaponTMs;
 
+    public float searchRange;
+    public float attackRange;
+
 }

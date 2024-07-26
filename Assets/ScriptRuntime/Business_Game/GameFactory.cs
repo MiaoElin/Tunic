@@ -30,15 +30,11 @@ public static class GameFactory {
         role.gravity = tm.gravity;
         role.jumpTimesMax = tm.jumpTimesMax;
         role.jumpTimes = tm.jumpTimesMax;
+        role.searchRange = tm.searchRange;
+        role.attackRange = tm.attackRange;
         if (tm.weaponTMs != null) {
             foreach (var weaponTM in tm.weaponTMs) {
-                // bool hasThisType = role.weaponCom.TryGet(weaponTM.weaponType, out var weapon);
-                // if (hasThisType) {
-                //     role.weaponCom.Remove(weapon);
-                //     GameObject.Destroy(weapon);
-                // }
                 WeaponEntity weapon = WeaponDomain.Spawn(ctx, weaponTM.typeID, role.GetWeaponTrans(weaponTM.weaponType, weaponTM.transName), -1, ally);
-
                 role.AddWeapon(weapon);
             }
         }
@@ -139,7 +135,7 @@ public static class GameFactory {
         //     // terrain.transform.position= girdpos*terrainSize;
         //     map.terrains[i]=terrain;
         // }
-        map.terrainTMs=tm.terrainTMs;
+        map.terrainTMs = tm.terrainTMs;
         map.lootSpawnerTMs = tm.lootSpawnerTMs;
         map.bassSlotSpawners = tm.bassSlotSpawners;
         map.roleSpawnerTMs = tm.roleSpawnerTMs;

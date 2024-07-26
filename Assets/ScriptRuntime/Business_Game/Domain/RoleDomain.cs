@@ -7,6 +7,90 @@ public static class RoleDomain {
         var role = GameFactory.Role_Spawn(ctx, typeID, pos, rotation, localScale, ally);
         ctx.roleRepo.Add(role);
         role.fsm.EnterNormal();
+
+        // BHTree
+        if (role.aiType == AiType.Common) {
+            // SearchAction
+            BHTreeNode searchAction = new BHTreeNode();
+            searchAction.InitAction();
+            searchAction.PreconditionHandle = () => {
+                if (Vector3.SqrMagnitude(role.Pos() - ctx.GetOwner().Pos()) <= role.searchRange * role.searchRange) {
+                    return true;
+                }
+                return false;
+            };
+
+            searchAction.ActEnterHandle = (dt) => {
+                role.hasTarget = true;
+                return BHTreeNodeStatus.Done;
+            };
+
+            searchAction.ActNotEnterHandle = (dt) => {
+                role.hasTarget = false;
+                return BHTreeNodeStatus.Done;
+            };
+
+            // MoveAction
+            BHTreeNode moveAction = new BHTreeNode();
+            moveAction.InitAction();
+            moveAction.PreconditionHandle = () => {
+                if (role.hasTarget) {
+                    Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
+                    if (Vector3.SqrMagnitude(dir) <= role.attackRange * role.attackRange) {
+                        return false;
+                    }
+                    return true;
+                } else {
+                    return false;
+                }
+            };
+
+            moveAction.ActNotEnterHandle = (dt) => {
+                Debug.Log("Stop");
+                Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
+                role.AI_Move_Stop();
+                role.SetForward(dir.normalized, dt);
+                Debug.Log(role.transform.forward);
+                return BHTreeNodeStatus.Done;
+            };
+
+            // moveAction.ActEnterHandle = (dt) => {
+            //     return BHTreeNodeStatus.Running;
+            // };
+
+            moveAction.ActRunningHandle = (dt) => {
+                // 寻路
+                var map = ctx.GetCurrentMap();
+                bool has = GFpathFinding3D_Rect.Astar(
+                   ctx.GetOwner().Pos(),
+                 role.Pos(),
+                 (pos) => { return !map.blockSet.Contains(pos); },
+                 (index) => { return map.rectCells[index]; },
+                 out role.path);
+                // Move
+                role.MoveBy_Path(dt);
+                // Anim
+                role.Anim_SetSpeed();
+                // 判定是否结束
+                Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
+                // if (Vector3.SqrMagnitude(dir) <= role.attackRange * role.attackRange) {
+                //     role.AI_Move_Stop();
+                //     role.SetForward(dir, dt);
+                //     return BHTreeNodeStatus.Done;
+                // } else {
+                return BHTreeNodeStatus.Running;
+                // }
+            };
+
+            BHTreeNode root = new BHTreeNode();
+            root.InitContainer(BHTreeNodeType.ParallelAnd);
+            root.childrens.Add(moveAction);
+            root.childrens.Add(searchAction);
+            BHTree tree = new BHTree();
+            tree.InitRoot(root);
+            role.aiCom.tree = tree;
+        }
+
         return role;
     }
 
@@ -237,7 +321,7 @@ public static class RoleDomain {
         if (has) {
             if (owner.isInteractKeyDown) {
                 owner.isInteractKeyDown = false; // 这里不设false为什么会执行两次
-                // 生成stuff添加进背包里
+                                                 // 生成stuff添加进背包里
 
                 var typeCount = nearlyLoot.stufftypeIDs.Length;
                 var stufftypeIDs = nearlyLoot.stufftypeIDs;

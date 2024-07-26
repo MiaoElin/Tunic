@@ -23,8 +23,10 @@ public class RoleEntity : MonoBehaviour {
     // Com
     public WeaponComponent weaponCom;
     public StuffComponent stuffCom;
-
+    public RoleAIComponent aiCom;
+    public bool hasTarget;
     public float searchRange;
+    public float attackRange;
 
     // Input
     public bool isMeleeKeyDown;
@@ -45,8 +47,9 @@ public class RoleEntity : MonoBehaviour {
         fsm = new RoleFSMComponent();
         weaponCom = new WeaponComponent();
         stuffCom = new StuffComponent();
+        aiCom = new RoleAIComponent();
 
-        rotationSpeed = 10;
+        rotationSpeed = 20;
         // Body 生成
         body = GameObject.Instantiate(mod, transform);
         this.anim = body.GetComponentInChildren<Animator>();
