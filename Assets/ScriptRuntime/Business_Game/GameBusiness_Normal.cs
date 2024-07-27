@@ -106,6 +106,7 @@ public static class GameBusiness_Normal {
                 RoleFSMController.ApplyFSM(ctx, owner, dt);
             } else {
                 // RoleAIFSMController.ApplyFSM(ctx, role, dt);
+                RoleDomain.SkillCD_Tick(role, dt);
                 role.aiCom.tree.Execute(dt);
             }
         });

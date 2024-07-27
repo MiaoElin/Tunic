@@ -223,6 +223,9 @@ public class BHTreeNode {
             if (PreconditionHandle == null || PreconditionHandle.Invoke()) {
                 status = BHTreeNodeStatus.Running;
             } else {
+                if (ActNotEnterHandle != null) {
+                    ActNotEnterHandle.Invoke(dt);
+                }
                 status = BHTreeNodeStatus.Done;
             }
         } else if (status == BHTreeNodeStatus.Running) {

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Linq;
 
 public static class RoleDomain {
 
@@ -10,11 +11,13 @@ public static class RoleDomain {
 
         // BHTree
         if (role.aiType == AiType.Common) {
+
             // SearchAction
             BHTreeNode searchAction = new BHTreeNode();
             searchAction.InitAction();
             searchAction.PreconditionHandle = () => {
                 if (Vector3.SqrMagnitude(role.Pos() - ctx.GetOwner().Pos()) <= role.searchRange * role.searchRange) {
+                    Debug.Log("HasTarget");
                     return true;
                 }
                 return false;
@@ -35,30 +38,24 @@ public static class RoleDomain {
             moveAction.InitAction();
             moveAction.PreconditionHandle = () => {
                 if (role.hasTarget) {
-                    Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
-                    if (Vector3.SqrMagnitude(dir) <= role.attackRange * role.attackRange) {
-                        return false;
-                    }
+                    // Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
+                    // if (Vector3.SqrMagnitude(dir) <= role.attackRange * role.attackRange) {
+                    //     role.inAttackRange = true;
+                    //     return false;
+                    // }
                     return true;
                 } else {
                     return false;
                 }
             };
 
-            moveAction.ActNotEnterHandle = (dt) => {
-                Debug.Log("Stop");
-                Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
-                role.AI_Move_Stop();
-                role.SetForward(dir.normalized, dt);
-                Debug.Log(role.transform.forward);
-                return BHTreeNodeStatus.Done;
-            };
 
             // moveAction.ActEnterHandle = (dt) => {
             //     return BHTreeNodeStatus.Running;
             // };
 
             moveAction.ActRunningHandle = (dt) => {
+                Debug.Log("Move");
                 // 寻路
                 var map = ctx.GetCurrentMap();
                 bool has = GFpathFinding3D_Rect.Astar(
@@ -73,19 +70,64 @@ public static class RoleDomain {
                 role.Anim_SetSpeed();
                 // 判定是否结束
                 Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
-                // if (Vector3.SqrMagnitude(dir) <= role.attackRange * role.attackRange) {
-                //     role.AI_Move_Stop();
-                //     role.SetForward(dir, dt);
-                //     return BHTreeNodeStatus.Done;
-                // } else {
                 return BHTreeNodeStatus.Running;
-                // }
             };
 
+            BHTreeNode moveContainer = new BHTreeNode();
+            moveContainer.InitContainer(BHTreeNodeType.ParallelOr);
+            moveContainer.PreconditionHandle = () => {
+                Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
+                if (Vector3.SqrMagnitude(dir) <= role.attackRange * role.attackRange) {
+                    role.inAttackRange = true;
+                    return false;
+                } else {
+                    return true;
+                }
+            };
+
+            moveContainer.ActNotEnterHandle = (dt) => {
+                Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
+                role.AI_Move_Stop();
+                role.SetForward(dir.normalized, dt);
+                return BHTreeNodeStatus.Done;
+            };
+
+            moveContainer.childrens.Add(moveAction);
+            // moveContainer.childrens.Add(searchAction);
+
+            // Attack
+            BHTreeNode attackAction = new BHTreeNode();
+            attackAction.InitAction();
+            attackAction.PreconditionHandle = () => {
+                if (role.inAttackRange) {
+                    if (HasUsableWeapon(role)) {
+                        if (!role.fsm.isEnterCasting) {
+                            role.fsm.EnterCasting();
+                        }
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            attackAction.ActRunningHandle = (dt) => {
+                AI_SetCastingWeapon(role);
+                Casting(role, dt);
+                // if (role.GetCastingWeapon() == null) {
+                //     role.fsm.EnterNormal();
+                // }
+                return BHTreeNodeStatus.Running;
+            };
+
+            moveContainer.childrens.Add(searchAction);
+            moveContainer.childrens.Add(moveAction);
+
             BHTreeNode root = new BHTreeNode();
-            root.InitContainer(BHTreeNodeType.ParallelAnd);
-            root.childrens.Add(moveAction);
-            root.childrens.Add(searchAction);
+            root.InitContainer(BHTreeNodeType.SelectorSequence);
+            root.childrens.Add(moveContainer);
+            root.childrens.Add(attackAction);
+
+
             BHTree tree = new BHTree();
             tree.InitRoot(root);
             role.aiCom.tree = tree;
@@ -174,6 +216,9 @@ public static class RoleDomain {
         weaponCom.Foreach(weapon => {
             var skill = weapon.GetSKill();
             skill.cd -= dt;
+            // if (role.aiType == AiType.Common) {
+            //     Debug.Log(Time.frameCount + " " + skill.cd);
+            // }
             if (skill.cd <= 0) {
                 skill.cd = 0;
             }
@@ -234,6 +279,11 @@ public static class RoleDomain {
         return false;
     }
 
+    public static void AI_SetCastingWeapon(RoleEntity role) {
+        var usableWeapons = role.weaponCom.usableWeapons;
+        role.SetCatingWeapon(usableWeapons.First().Value);
+    }
+
     public static void Casting(RoleEntity role, float dt) {
         var weapon = role.weaponCom.GetCatingWeapon();
         var skill = weapon.GetSKill();
@@ -272,9 +322,7 @@ public static class RoleDomain {
             fsm.endCastTimer -= dt;
             if (fsm.endCastTimer <= 0) {
                 fsm.isResetCastSkill = true;
-                if (role.isOwner) {
-                    role.SetCatingWeapon(null);
-                }
+                role.SetCatingWeapon(null);
             }
         }
 

@@ -25,6 +25,7 @@ public class RoleEntity : MonoBehaviour {
     public StuffComponent stuffCom;
     public RoleAIComponent aiCom;
     public bool hasTarget;
+    public bool inAttackRange;
     public float searchRange;
     public float attackRange;
 
@@ -223,7 +224,7 @@ public class RoleEntity : MonoBehaviour {
         if (anim_Name == "") {
             return;
         }
-        anim.CrossFade(anim_Name, 0);
+        anim.CrossFade("Attack_Pre", 0);
     }
 
     internal void Anim_Defend(bool b) {
@@ -271,5 +272,8 @@ public class RoleEntity : MonoBehaviour {
         weaponCom.SetCatingWeapon(weapon);
     }
 
+    public WeaponEntity GetCastingWeapon() {
+        return weaponCom.GetCatingWeapon();
+    }
     #endregion
 }
