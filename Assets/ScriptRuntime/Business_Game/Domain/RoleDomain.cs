@@ -30,6 +30,9 @@ public static class RoleDomain {
 
             searchAction.ActNotEnterHandle = (dt) => {
                 role.hasTarget = false;
+                Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
+                role.AI_Move_Stop();
+                role.SetForward(dir.normalized, dt);
                 return BHTreeNodeStatus.Done;
             };
 
@@ -38,11 +41,6 @@ public static class RoleDomain {
             moveAction.InitAction();
             moveAction.PreconditionHandle = () => {
                 if (role.hasTarget) {
-                    // Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
-                    // if (Vector3.SqrMagnitude(dir) <= role.attackRange * role.attackRange) {
-                    //     role.inAttackRange = true;
-                    //     return false;
-                    // }
                     return true;
                 } else {
                     return false;
