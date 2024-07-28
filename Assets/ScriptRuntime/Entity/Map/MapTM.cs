@@ -6,7 +6,7 @@ public class MapTM : ScriptableObject {
     public int stageID;
     public TerrainTM[] terrainTMs;
     public LootSpawnerTM[] lootSpawnerTMs;
-    public BaseSlotSpawner[] bassSlotSpawners;
+    public PlantSpawner[] plantSpawners;
     public RoleSpawnerTM[] roleSpawnerTMs;
 
     // Grid

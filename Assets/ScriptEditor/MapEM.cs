@@ -54,17 +54,17 @@ public class MapEM : MonoBehaviour {
             }
         }
         {
-            var baseSlotEMs = gameObject.GetComponentsInChildren<BaseSlotEM>();
-            tm.bassSlotSpawners = new BaseSlotSpawner[baseSlotEMs.Length];
+            var baseSlotEMs = gameObject.GetComponentsInChildren<PlantEM>();
+            tm.plantSpawners = new PlantSpawner[baseSlotEMs.Length];
             for (int i = 0; i < baseSlotEMs.Length; i++) {
                 var em = baseSlotEMs[i];
-                BaseSlotSpawner spawner = new BaseSlotSpawner() {
-                    bassSlotTypeID = em.tm.typeID,
+                PlantSpawner spawner = new PlantSpawner() {
+                    plantTypeID = em.tm.typeID,
                     pos = em.transform.position,
                     rotation = em.transform.eulerAngles,
                     localScale = em.transform.localScale
                 };
-                tm.bassSlotSpawners[i] = spawner;
+                tm.plantSpawners[i] = spawner;
             }
         }
         {

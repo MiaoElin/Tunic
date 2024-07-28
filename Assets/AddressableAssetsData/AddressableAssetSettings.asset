@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 81438a3adff4521458868edb969a19f4
   m_currentHash:
     serializedVersion: 2
-    Hash: 00e7d87130017dd919ce350d6a3cdb70
+    Hash: 00000000000000000000000000000000
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -90,7 +90,7 @@ MonoBehaviour:
     - Entity
     - UI
     - TM_Role
-    - TM_BaseSlot
+    - TM_Plant
     - TM_Skill
     - TM_Weapon
     - TM_Loot

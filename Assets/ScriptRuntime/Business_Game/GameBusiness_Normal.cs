@@ -42,7 +42,7 @@ public static class GameBusiness_Normal {
         {
             var bassSlotSpawners = map.bassSlotSpawners;
             foreach (var tm in bassSlotSpawners) {
-                BaseSlotDomain.Spawn(ctx, tm.bassSlotTypeID, tm.pos, tm.rotation, tm.localScale);
+                PlantDomain.Spawn(ctx, tm.plantTypeID, tm.pos, tm.rotation, tm.localScale);
             }
         }
 

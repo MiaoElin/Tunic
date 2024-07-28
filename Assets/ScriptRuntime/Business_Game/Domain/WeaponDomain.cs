@@ -10,7 +10,7 @@ public static class WeaponDomain {
 
     public static void OnTriggerEnterEvent(GameContext ctx, Collider other) {
         if (other.tag == "Grass") {
-            BaseSlotEntity grass = other.GetComponentInParent<BaseSlotEntity>();
+            PlantEntity grass = other.GetComponentInParent<PlantEntity>();
             GameObject.Destroy(grass.gameObject);
         }
     }

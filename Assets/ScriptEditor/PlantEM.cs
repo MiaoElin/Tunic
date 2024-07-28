@@ -2,8 +2,8 @@ using UnityEngine;
 using UnityEditor;
 
 [ExecuteInEditMode]
-public class BaseSlotEM : MonoBehaviour {
-    public BaseSlotTM tm;
+public class PlantEM : MonoBehaviour {
+    public PlantTM tm;
     public GameObject mod;
 
     void Awake() {

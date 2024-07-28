@@ -26,7 +26,7 @@ public class ClienMain : MonoBehaviour {
             () => GameFactory.Role_Create(ctx),
             () => GameFactory.Weapon_Create(ctx),
             () => GameFactory.Loot_Create(ctx),
-            () => GameFactory.BaseSlot_Create(ctx));
+            () => GameFactory.Plant_Create(ctx));
 
         // Bind
         Bind();

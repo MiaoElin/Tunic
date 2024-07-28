@@ -5,7 +5,7 @@ public class MapEntity : MonoBehaviour {
     public int stageID;
     public TerrainTM[] terrainTMs;
     public LootSpawnerTM[] lootSpawnerTMs;
-    public BaseSlotSpawner[] bassSlotSpawners;
+    public PlantSpawner[] bassSlotSpawners;
     public RoleSpawnerTM[] roleSpawnerTMs;
 
     // Grid

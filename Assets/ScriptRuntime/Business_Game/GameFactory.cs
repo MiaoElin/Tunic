@@ -137,7 +137,7 @@ public static class GameFactory {
         // }
         map.terrainTMs = tm.terrainTMs;
         map.lootSpawnerTMs = tm.lootSpawnerTMs;
-        map.bassSlotSpawners = tm.bassSlotSpawners;
+        map.bassSlotSpawners = tm.plantSpawners;
         map.roleSpawnerTMs = tm.roleSpawnerTMs;
         // Grid
         map.blockSet = tm.blockSet;
@@ -171,26 +171,26 @@ public static class GameFactory {
     #endregion
 
     #region BaseSlot
-    public static BaseSlotEntity BaseSlot_Create(GameContext ctx) {
-        ctx.asset.TryGet_Entity_Prefab(typeof(BaseSlotEntity).Name, out var prefab);
-        BaseSlotEntity baseSlot = GameObject.Instantiate(prefab, ctx.poolService.baseSlotGroup).GetComponent<BaseSlotEntity>();
-        baseSlot.gameObject.SetActive(false);
-        return baseSlot;
+    public static PlantEntity Plant_Create(GameContext ctx) {
+        ctx.asset.TryGet_Entity_Prefab(typeof(PlantEntity).Name, out var prefab);
+        PlantEntity plant = GameObject.Instantiate(prefab, ctx.poolService.plantGroup).GetComponent<PlantEntity>();
+        plant.gameObject.SetActive(false);
+        return plant;
     }
 
-    public static BaseSlotEntity BaseSlot_Spawn(GameContext ctx, int typeID, Vector3 pos, Vector3 rotation, Vector3 localScale) {
-        bool has = ctx.asset.TryGet_BaseSlot(typeID, out var tm);
+    public static PlantEntity Plant_Spawn(GameContext ctx, int typeID, Vector3 pos, Vector3 rotation, Vector3 localScale) {
+        bool has = ctx.asset.TryGet_Plant(typeID, out var tm);
         if (!has) {
-            Debug.LogError($"GameFactory.BaseSlot_Spawn {typeID} was not found");
+            Debug.LogError($"GameFactory.Plant_Spawn {typeID} was not found");
         }
 
-        BaseSlotEntity baseSlot = ctx.poolService.Get_BaseSlot();
+        PlantEntity baseSlot = ctx.poolService.Get_BaseSlot();
         baseSlot.Ctor(tm.mod);
         baseSlot.SetPos(pos);
         baseSlot.transform.eulerAngles = rotation;
         baseSlot.transform.localScale = localScale;
         baseSlot.typeID = typeID;
-        baseSlot.baseSlotType = tm.baseSlotType;
+        baseSlot.plantType = tm.plantType;
         baseSlot.id = ctx.iDService.baseSlotRecord++;
 
         baseSlot.gameObject.SetActive(true);

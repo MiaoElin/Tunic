@@ -1,4 +1,4 @@
-public enum BaseSlotType {
+public enum PlantType {
     None,
     Tree,
     Stone,

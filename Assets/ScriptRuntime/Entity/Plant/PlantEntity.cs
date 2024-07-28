@@ -1,11 +1,11 @@
 using System;
 using UnityEngine;
 
-public class BaseSlotEntity : MonoBehaviour {
+public class PlantEntity : MonoBehaviour {
 
     public int typeID;
     public int id;
-    public BaseSlotType baseSlotType;
+    public PlantType plantType;
     public GameObject mod;
 
     public void Ctor(GameObject mod) {

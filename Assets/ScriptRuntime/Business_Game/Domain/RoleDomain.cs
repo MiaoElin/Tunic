@@ -17,7 +17,7 @@ public static class RoleDomain {
             searchAction.InitAction();
             searchAction.PreconditionHandle = () => {
                 if (Vector3.SqrMagnitude(role.Pos() - ctx.GetOwner().Pos()) <= role.searchRange * role.searchRange) {
-                    Debug.Log("HasTarget");
+                    // Debug.Log("HasTarget");
                     return true;
                 }
                 return false;
@@ -53,7 +53,7 @@ public static class RoleDomain {
             // };
 
             moveAction.ActRunningHandle = (dt) => {
-                Debug.Log("Move");
+                // Debug.Log("Move");
                 // 寻路
                 var map = ctx.GetCurrentMap();
                 bool has = GFpathFinding3D_Rect.Astar(
@@ -335,7 +335,7 @@ public static class RoleDomain {
         if (colliders.Length > 0) {
             foreach (var other in colliders) {
                 if (other.tag == "Grass") {
-                    BaseSlotEntity grass = other.GetComponentInParent<BaseSlotEntity>();
+                    PlantEntity grass = other.GetComponentInParent<PlantEntity>();
                     GameObject.Destroy(grass.gameObject);
                 }
             }

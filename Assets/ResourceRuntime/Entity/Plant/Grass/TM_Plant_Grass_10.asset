@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: efa7da8259b670840bfa597537174443, type: 3}
-  m_Name: TM_BaseSlot_Grass_11
+  m_Name: TM_Plant_Grass_10
   m_EditorClassIdentifier: 
-  typeID: 11
+  typeID: 10
   baseSlotType: 3
-  mod: {fileID: 5397240082021140410, guid: b7e36a030131c8244b2a0e7f0e707976, type: 3}
+  mod: {fileID: 2271157286676635200, guid: 9ee469976d425d84b93511e0eb77bfeb, type: 3}

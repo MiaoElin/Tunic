@@ -2,9 +2,9 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class BaseSlotSpawner {
+public class PlantSpawner {
 
-    public int bassSlotTypeID;
+    public int plantTypeID;
     public Vector3 pos;
     public Vector3 rotation;
     public Vector3 localScale;
