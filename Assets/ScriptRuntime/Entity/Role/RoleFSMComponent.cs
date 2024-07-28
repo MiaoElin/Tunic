@@ -20,6 +20,9 @@ public class RoleFSMComponent {
     // Ladder
     public bool isEnterLadder;
 
+    // Dead
+    public bool isEnterDead;
+
 
     public void EnterNormal() {
         status = RoleStatus.Normal;

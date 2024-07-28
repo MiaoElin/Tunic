@@ -19,8 +19,8 @@ public class RoleRepo {
         all.Remove(role.id);
     }
 
-    public void TryGet(int id, out RoleEntity role) {
-        all.TryGetValue(id, out role);
+    public bool TryGet(int id, out RoleEntity role) {
+        return all.TryGetValue(id, out role);
     }
 
     public int TakeAll(out RoleEntity[] allRole) {

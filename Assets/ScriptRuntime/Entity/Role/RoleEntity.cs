@@ -25,6 +25,7 @@ public class RoleEntity : MonoBehaviour {
     public StuffComponent stuffCom;
     public RoleAIComponent aiCom;
     public bool hasTarget;
+    public int targetID;
     public bool inAttackRange;
     public float searchRange;
     public float attackRange;

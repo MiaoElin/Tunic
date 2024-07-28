@@ -10,6 +10,7 @@ public class InputEnitty {
     // public bool isRollingKeyDown;
     public bool isInteractKeyDown;
     public bool isBagKeyDown;
+    public bool isFocusKeyDown;
 
     public InputEnitty() {
 
@@ -74,5 +75,8 @@ public class InputEnitty {
 
         // Bag
         isBagKeyDown = Input.GetKeyDown(KeyCode.Tab);
+
+        // Focus
+        isFocusKeyDown = Input.GetMouseButtonDown(2);
     }
 }

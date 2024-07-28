@@ -4,6 +4,7 @@ public enum RoleStatus {
     Casting,
     Suffering,
     Ladder,
-    Defend
+    Defend,
+    Dead
 
 }

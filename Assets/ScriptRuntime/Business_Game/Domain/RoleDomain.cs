@@ -397,7 +397,6 @@ public static class RoleDomain {
 
         if (stuff.isGetWeapon) {
             bool hasThisType = owner.weaponCom.TryGet(stuff.weaponType, out var weapon);
-            Debug.Log(hasThisType);
             if (hasThisType) {
                 // 从准备区移除
                 owner.weaponCom.Remove(weapon);
@@ -415,5 +414,64 @@ public static class RoleDomain {
             owner.stuffCom.Remove(typeID);
         }
     }
+    #endregion
+
+    #region Focus
+    public static void Owner_Focus(GameContext ctx, float dt) {
+        var owner = ctx.GetOwner();
+
+        if (owner.hasTarget) {
+            // 聚焦Target
+            bool hasTarget = ctx.roleRepo.TryGet(owner.targetID, out var monster);
+            if (!hasTarget) {
+                owner.hasTarget = false;
+            } else {
+                if (monster.fsm.status != RoleStatus.Dead) {
+                    Vector3 dir = monster.Pos() - owner.Pos();
+                    if (Vector3.SqrMagnitude(dir) < owner.searchRange * owner.searchRange) {
+                        owner.SetForward(dir, dt);
+                    }
+                } else {
+                    owner.hasTarget = false;
+                }
+            }
+        }
+
+        // 如果按下聚焦键、重新寻找聚焦目标
+        if (ctx.input.isFocusKeyDown) {
+            bool has = FindNearlyMonster(ctx, out var nearlyMonster);
+            if (has) {
+                owner.hasTarget = true;
+                owner.targetID = nearlyMonster.id;
+            }
+        }
+    }
+
+    public static bool FindNearlyMonster(GameContext ctx, out RoleEntity nearlyMonster) {
+        var owner = ctx.GetOwner();
+        float nearlyDistance = owner.searchRange;
+        nearlyMonster = null;
+        int roleLen = ctx.roleRepo.TakeAll(out var allRole);
+        for (int i = 0; i < roleLen; i++) {
+            var role = allRole[i];
+            if (role.ally == Ally.Player) {
+                continue;
+            }
+            Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
+            float distance = Vector3.SqrMagnitude(dir);
+            if (distance < nearlyDistance) {
+                nearlyDistance = distance;
+                nearlyMonster = role;
+            }
+        }
+
+        if (nearlyMonster == null) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     #endregion
 }

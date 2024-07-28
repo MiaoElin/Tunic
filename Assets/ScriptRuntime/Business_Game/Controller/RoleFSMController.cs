@@ -33,6 +33,7 @@ public static class RoleFSMController {
         RoleDomain.Falling(role, dt);
         RoleDomain.Defend(role);
         RoleDomain.PickLoot(ctx, role);
+        RoleDomain.Owner_Focus(ctx, dt);
         // Exit
         bool has = RoleDomain.HasOwnerCastSkill(role);
         if (has) {
