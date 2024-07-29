@@ -213,7 +213,7 @@ public static class RoleDomain {
         var weaponCom = role.weaponCom;
         weaponCom.Foreach(weapon => {
             var skill = weapon.GetSKill();
-            skill.cd -= dt;
+            skill.cd -= dt; 
             // if (role.aiType == AiType.Common) {
             //     Debug.Log(Time.frameCount + " " + skill.cd);
             // }
@@ -254,6 +254,8 @@ public static class RoleDomain {
         var weaponCom = role.weaponCom;
         var usableWeapons = weaponCom.usableWeapons;
         if (role.isMeleeKeyDown) {
+            role.isMeleeKeyDown = false;
+            role.comboCount++;
             bool hasThis = usableWeapons.TryGetValue(WeaponType.Melee, out var weapon);
             if (hasThis) {
                 role.SetCatingWeapon(weapon);
@@ -284,6 +286,7 @@ public static class RoleDomain {
 
     public static void Casting(RoleEntity role, float dt) {
         var weapon = role.weaponCom.GetCatingWeapon();
+        Debug.Assert(weapon != null);
         var skill = weapon.GetSKill();
         var fsm = role.fsm;
         ref var skillCastStage = ref fsm.skillCastStage;
@@ -302,8 +305,14 @@ public static class RoleDomain {
                 skill.cd = skill.cdMax;
             }
         } else if (skillCastStage == SkillCastStage.Casting) {
+            if (role.isMeleeKeyDown) {
+                role.isMeleeKeyDown = false;
+                role.nextWeapon = weapon;
+                role.comboCount++;
+            }
             fsm.castingMaintainTimer -= dt;
             fsm.castingIntervalTimer -= dt;
+
             // 近战武器获得伤害力
             if (weapon.weaponType == WeaponType.Melee) {
                 Weapon_Attack_Check(role);
@@ -315,12 +324,22 @@ public static class RoleDomain {
 
             if (fsm.castingMaintainTimer <= 0) {
                 skillCastStage = SkillCastStage.endCast;
+                // 直接进入重置
+
             }
+
         } else if (skillCastStage == SkillCastStage.endCast) {
             fsm.endCastTimer -= dt;
             if (fsm.endCastTimer <= 0) {
                 fsm.isResetCastSkill = true;
-                role.SetCatingWeapon(null);
+                fsm.comboCount++;
+                Debug.Log(role.comboCount + " " + fsm.comboCount);
+                if (role.comboCount == fsm.comboCount) {
+                    fsm.comboCount = 0;
+                    role.comboCount = 0;
+                    role.nextWeapon = null;
+                }
+                role.SetCatingWeapon(role.nextWeapon);
             }
         }
 
@@ -449,7 +468,7 @@ public static class RoleDomain {
 
     public static bool FindNearlyMonster(GameContext ctx, out RoleEntity nearlyMonster) {
         var owner = ctx.GetOwner();
-        float nearlyDistance = owner.searchRange;
+        float nearlyDistance = Mathf.Pow(owner.searchRange, 2);
         nearlyMonster = null;
         int roleLen = ctx.roleRepo.TakeAll(out var allRole);
         for (int i = 0; i < roleLen; i++) {

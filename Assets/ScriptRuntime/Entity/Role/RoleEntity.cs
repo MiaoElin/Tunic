@@ -29,6 +29,8 @@ public class RoleEntity : MonoBehaviour {
     public bool inAttackRange;
     public float searchRange;
     public float attackRange;
+    public WeaponEntity nextWeapon;
+    public int comboCount;
 
     // Input
     public bool isMeleeKeyDown;
@@ -225,7 +227,13 @@ public class RoleEntity : MonoBehaviour {
         if (anim_Name == "") {
             return;
         }
-        anim.CrossFade("Attack_Pre", 0);
+        if (comboCount % 3 == 1) {
+            anim.CrossFade("Attack_Pre", 0);
+        } else if (comboCount % 3 == 2) {
+            anim.CrossFade("Combo1", 0);
+        } else if (comboCount % 3 == 0) {
+            anim.CrossFade("Combo2", 0);
+        }
     }
 
     internal void Anim_Defend(bool b) {

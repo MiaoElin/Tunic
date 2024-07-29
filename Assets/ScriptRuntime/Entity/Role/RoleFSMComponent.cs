@@ -8,6 +8,7 @@ public class RoleFSMComponent {
     public bool isEnterCasting;
     public SkillCastStage skillCastStage;
     public bool isResetCastSkill;
+    public int comboCount;
 
     public float precastTimer;
     public float castingMaintainTimer;
