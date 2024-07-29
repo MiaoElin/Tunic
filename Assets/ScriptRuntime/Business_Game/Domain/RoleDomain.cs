@@ -212,14 +212,12 @@ public static class RoleDomain {
     public static void SkillCD_Tick(RoleEntity role, float dt) {
         var weaponCom = role.weaponCom;
         weaponCom.Foreach(weapon => {
-            var skill = weapon.GetSKill();
-            skill.cd -= dt; 
-            // if (role.aiType == AiType.Common) {
-            //     Debug.Log(Time.frameCount + " " + skill.cd);
-            // }
-            if (skill.cd <= 0) {
-                skill.cd = 0;
-            }
+            weapon.SkillsForeach(skill => {
+                skill.cd -= dt;
+                if (skill.cd <= 0) {
+                    skill.cd = 0;
+                }
+            });
         });
     }
 
@@ -228,8 +226,14 @@ public static class RoleDomain {
         var usableWeapons = weaponCom.usableWeapons;
         usableWeapons.Clear();
         weaponCom.Foreach(weapon => {
-            var skill = weapon.GetSKill();
-            if (skill.cd <= 0) {
+            bool has = false;
+            weapon.SkillsForeach(skill => {
+                if (skill.cd <= 0) {
+                    has = true;
+                    return;
+                }
+            });
+            if (has) {
                 usableWeapons.Add(weapon.weaponType, weapon);
             }
         });
@@ -254,7 +258,6 @@ public static class RoleDomain {
         var weaponCom = role.weaponCom;
         var usableWeapons = weaponCom.usableWeapons;
         if (role.isMeleeKeyDown) {
-            role.isMeleeKeyDown = false;
             role.comboCount++;
             bool hasThis = usableWeapons.TryGetValue(WeaponType.Melee, out var weapon);
             if (hasThis) {
@@ -286,8 +289,8 @@ public static class RoleDomain {
 
     public static void Casting(RoleEntity role, float dt) {
         var weapon = role.weaponCom.GetCatingWeapon();
-        Debug.Assert(weapon != null);
-        var skill = weapon.GetSKill();
+        var skill = weapon.GetSKill(role.comboCount);
+        Debug.Log(skill.typeID);
         var fsm = role.fsm;
         ref var skillCastStage = ref fsm.skillCastStage;
 

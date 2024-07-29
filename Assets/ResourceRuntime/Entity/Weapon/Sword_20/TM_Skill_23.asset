@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 414981f9e3f5b6b4ebdd7ce071009944, type: 3}
-  m_Name: TM_Skill_20
+  m_Name: TM_Skill_23
   m_EditorClassIdentifier: 
-  typeID: 20
+  typeID: 23
   inputKeyEnum: 1
-  anim_Name: Attack_Pre
+  anim_Name: Combo3
   cdMax: 0
-  precastCDMax: 0.133
-  castingMaintainSec: 0.33
-  castingIntervalSec: 0.33
-  endCastSec: 0.2
+  precastCDMax: 0.333
+  castingMaintainSec: 0.4
+  castingIntervalSec: 0.4
+  endCastSec: 0.1

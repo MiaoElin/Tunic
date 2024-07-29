@@ -15,7 +15,8 @@ MonoBehaviour:
   typeID: 10
   weaponType: 1
   mod: {fileID: 1673041863318348607, guid: a017ab4ad1be8c54b964ae0e4b77f906, type: 3}
-  skillTM: {fileID: 11400000, guid: 5d070835e10c498448c58af897a1ec60, type: 2}
+  skillTMs:
+  - {fileID: 11400000, guid: 5d070835e10c498448c58af897a1ec60, type: 2}
   localPosInRole: {x: 0, y: 0, z: 0}
   rotation: {x: 0, y: 0, z: 0}
   transName: weaponShield_r

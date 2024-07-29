@@ -15,7 +15,8 @@ MonoBehaviour:
   typeID: 110
   weaponType: 1
   mod: {fileID: 2119938309797417062, guid: cdf7b2a4b6773a746a40a902f232c9d0, type: 3}
-  skillTM: {fileID: 11400000, guid: 5c6ffdc6c470b004d926d93a3c8ae461, type: 2}
+  skillTMs:
+  - {fileID: 11400000, guid: 5c6ffdc6c470b004d926d93a3c8ae461, type: 2}
   localPosInRole: {x: -1.453312, y: 0.9312132, z: -2.2370043}
   rotation: {x: 315.16403, y: 312.6026, z: 152.49725}
   transName: Weapon01

@@ -70,18 +70,19 @@ public static class GameFactory {
         weapon.transform.localScale = Vector3.one;
         weapon.transName = tm.transName;
         {
-            SkillSubEntity skill = new SkillSubEntity();
-            var skilltm = tm.skillTM;
-            skill.typeID = skilltm.typeID;
-            skill.keyEnum = skilltm.inputKeyEnum;
-            skill.anim_Name = skilltm.anim_Name;
-            skill.cd = skilltm.cdMax;
-            skill.cdMax = skilltm.cdMax;
-            skill.precastCDMax = skilltm.precastCDMax;
-            skill.castingMaintainSec = skilltm.castingMaintainSec;
-            skill.castingIntervalSec = skilltm.castingIntervalSec;
-            skill.endCastSec = skilltm.endCastSec;
-            weapon.SetSkill(skill);
+            foreach (var skilltm in tm.skillTMs) {
+                SkillSubEntity skill = new SkillSubEntity();
+                skill.typeID = skilltm.typeID;
+                skill.keyEnum = skilltm.inputKeyEnum;
+                skill.anim_Name = skilltm.anim_Name;
+                skill.cd = skilltm.cdMax;
+                skill.cdMax = skilltm.cdMax;
+                skill.precastCDMax = skilltm.precastCDMax;
+                skill.castingMaintainSec = skilltm.castingMaintainSec;
+                skill.castingIntervalSec = skilltm.castingIntervalSec;
+                skill.endCastSec = skilltm.endCastSec;
+                weapon.AddSkill(skill);
+            }
         }
 
 
