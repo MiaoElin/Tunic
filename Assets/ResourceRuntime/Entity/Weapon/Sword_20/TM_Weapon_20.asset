@@ -15,6 +15,7 @@ MonoBehaviour:
   typeID: 20
   weaponType: 1
   mod: {fileID: 2119938309797417062, guid: 03dd1adeceb138a4899dd6eb57a15778, type: 3}
+  normalSkillTypeID: 20
   skillTMs:
   - {fileID: 11400000, guid: 52a9c20d7ad168747ba5f7e96ee27f11, type: 2}
   - {fileID: 11400000, guid: b3b94811cc4dbe44b9452a2d07c02eff, type: 2}

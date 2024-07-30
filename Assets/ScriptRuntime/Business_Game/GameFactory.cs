@@ -69,6 +69,8 @@ public static class GameFactory {
         weapon.transform.localEulerAngles = tm.rotation;
         weapon.transform.localScale = Vector3.one;
         weapon.transName = tm.transName;
+        weapon.normalSkillTypeID = tm.normalSkillTypeID;
+        weapon.currentSkillTypeID = weapon.normalSkillTypeID;
         {
             foreach (var skilltm in tm.skillTMs) {
                 SkillSubEntity skill = new SkillSubEntity();
@@ -81,6 +83,7 @@ public static class GameFactory {
                 skill.castingMaintainSec = skilltm.castingMaintainSec;
                 skill.castingIntervalSec = skilltm.castingIntervalSec;
                 skill.endCastSec = skilltm.endCastSec;
+                skill.comboSkillTM = skilltm.comboSkillTM;
                 weapon.AddSkill(skill);
             }
         }

@@ -11,14 +11,16 @@ public class WeaponEntity : MonoBehaviour {
     // Skill
     // public SkillComponent skillCom;
     // public int bulletTypeID;//炸弹和子弹都是bullet
-    List<SkillSubEntity> skills;
+    Dictionary<int, SkillSubEntity> skills;
+    public int normalSkillTypeID;
+    public int currentSkillTypeID;
     public int stuffTypeID;
     public string transName;
 
     public Action<Collider> OnTriggerEnterHandle;
 
     public void Ctor(GameObject mod) {
-        skills = new List<SkillSubEntity>();
+        skills = new Dictionary<int, SkillSubEntity>();
         this.mod = GameObject.Instantiate(mod, transform);
     }
 
@@ -26,12 +28,17 @@ public class WeaponEntity : MonoBehaviour {
         Destroy(mod.gameObject);
     }
 
-    internal SkillSubEntity GetSKill(int index) {
-        return skills[index - 1];
+    internal SkillSubEntity GetCurrentSKill() {
+        skills.TryGetValue(currentSkillTypeID, out var skill);
+        return skill;
+    }
+
+    public void SetCurrentSkillTypeID(int typeID) {
+        currentSkillTypeID = typeID;
     }
 
     public void AddSkill(SkillSubEntity skill) {
-        skills.Add(skill);
+        skills.Add(skill.typeID, skill);
     }
 
     internal void SetLocalPos(Vector3 localPos) {
@@ -39,6 +46,8 @@ public class WeaponEntity : MonoBehaviour {
     }
 
     public void SkillsForeach(Action<SkillSubEntity> action) {
-        skills.ForEach(action);
+        foreach (var skill in skills) {
+            action(skill.Value);
+        }
     }
 }

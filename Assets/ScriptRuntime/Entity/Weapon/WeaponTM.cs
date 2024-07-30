@@ -5,6 +5,7 @@ public class WeaponTM : ScriptableObject {
     public int typeID;
     public WeaponType weaponType;
     public GameObject mod;
+    public int normalSkillTypeID;
     public SkillTM[] skillTMs;
     // public SkillTM[] cancelTMs;
     public Vector3 localPosInRole;

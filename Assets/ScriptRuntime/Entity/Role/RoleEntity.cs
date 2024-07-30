@@ -34,6 +34,8 @@ public class RoleEntity : MonoBehaviour {
 
     // Input
     public bool isMeleeKeyDown;
+    public bool isCombo;
+    public float skillComboMatainSec;
     public bool isShieldKeyPress;
     public bool isRangedKeyDown;
     public bool isJumpKeyDown;
@@ -227,7 +229,6 @@ public class RoleEntity : MonoBehaviour {
         if (anim_Name == "") {
             return;
         }
-        Debug.Log(anim_Name);
         anim.CrossFade(anim_Name, 0);
     }
 

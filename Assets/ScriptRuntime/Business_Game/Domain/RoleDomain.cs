@@ -259,6 +259,7 @@ public static class RoleDomain {
         var usableWeapons = weaponCom.usableWeapons;
         if (role.isMeleeKeyDown) {
             role.comboCount++;
+            role.isMeleeKeyDown = false;
             bool hasThis = usableWeapons.TryGetValue(WeaponType.Melee, out var weapon);
             if (hasThis) {
                 role.SetCatingWeapon(weapon);
@@ -289,14 +290,26 @@ public static class RoleDomain {
 
     public static void Casting(RoleEntity role, float dt) {
         var weapon = role.weaponCom.GetCatingWeapon();
-        var skill = weapon.GetSKill(role.comboCount);
-        Debug.Log(skill.typeID);
+        var skill = weapon.GetCurrentSKill();
         var fsm = role.fsm;
         ref var skillCastStage = ref fsm.skillCastStage;
 
         if (fsm.isResetCastSkill) {
             fsm.isResetCastSkill = false;
             fsm.ResetCastSkill(skill);
+        }
+
+        if (skillCastStage != SkillCastStage.endCast) {
+            if (role.isMeleeKeyDown) {
+                role.isCombo = true;
+                role.skillComboMatainSec = 0.5f;
+            } else {
+                role.skillComboMatainSec -= dt;
+                if (role.skillComboMatainSec <= 0) {
+                    role.skillComboMatainSec = 0;
+                    role.isCombo = false;
+                }
+            }
         }
 
         if (skillCastStage == SkillCastStage.PreCast) {
@@ -308,11 +321,6 @@ public static class RoleDomain {
                 skill.cd = skill.cdMax;
             }
         } else if (skillCastStage == SkillCastStage.Casting) {
-            if (role.isMeleeKeyDown) {
-                role.isMeleeKeyDown = false;
-                role.nextWeapon = weapon;
-                role.comboCount++;
-            }
             fsm.castingMaintainTimer -= dt;
             fsm.castingIntervalTimer -= dt;
 
@@ -327,21 +335,22 @@ public static class RoleDomain {
 
             if (fsm.castingMaintainTimer <= 0) {
                 skillCastStage = SkillCastStage.endCast;
-                // 直接进入重置
-
             }
 
         } else if (skillCastStage == SkillCastStage.endCast) {
             fsm.endCastTimer -= dt;
+
+            if (role.isCombo) {
+                role.nextWeapon = weapon;
+                weapon.SetCurrentSkillTypeID(skill.comboSkillTM.typeID);
+                fsm.endCastTimer = 0;
+            } else {
+                role.nextWeapon = null;
+                weapon.SetCurrentSkillTypeID(weapon.normalSkillTypeID);
+            }
+
             if (fsm.endCastTimer <= 0) {
                 fsm.isResetCastSkill = true;
-                fsm.comboCount++;
-                Debug.Log(role.comboCount + " " + fsm.comboCount);
-                if (role.comboCount == fsm.comboCount) {
-                    fsm.comboCount = 0;
-                    role.comboCount = 0;
-                    role.nextWeapon = null;
-                }
                 role.SetCatingWeapon(role.nextWeapon);
             }
         }
