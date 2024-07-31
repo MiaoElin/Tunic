@@ -3,10 +3,12 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class RoleEntity : MonoBehaviour {
-
+    public readonly EntityType entityType = EntityType.Role;
     public int typeID;
     public int id;
     public bool isOwner;
+    public int hpMax;
+    public int hp;
     public float moveSpeed;
     public float jumpForce;
     public int jumpTimes;
@@ -29,6 +31,7 @@ public class RoleEntity : MonoBehaviour {
     public bool inAttackRange;
     public float searchRange;
     public float attackRange;
+    public float defense;
     public WeaponEntity nextWeapon;
     public int comboCount;
 

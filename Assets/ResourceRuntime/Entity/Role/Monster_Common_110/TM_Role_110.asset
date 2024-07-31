@@ -14,10 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   typeID: 110
   aiType: 1
+  hpMax: 100
   moveSpeed: 2
   jumpForce: 8
   gravity: 20
   jumpTimesMax: 0
+  defense: 0
   mod: {fileID: 6382181650639032207, guid: f73e0f66f54ab9e47ba49fb41686d2d7, type: 3}
   weaponTMs:
   - {fileID: 11400000, guid: ff1e40ee839331d438d69d36ad0430aa, type: 2}

@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 9021568574760571788}
   m_Layer: 7
   m_Name: Mod_Monster_Common_110
-  m_TagString: Untagged
+  m_TagString: Role
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

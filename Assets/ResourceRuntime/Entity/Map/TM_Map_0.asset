@@ -55,7 +55,7 @@ MonoBehaviour:
     localScale: {x: 1, y: 1, z: 1}
   roleSpawnerTMs:
   - roleTypeID: 110
-    pos: {x: 54.6, y: 0, z: 24.3}
+    pos: {x: 54.6, y: 0, z: 14.04}
     rotation: {x: -0, y: 178.6, z: -0}
     localScale: {x: 1, y: 1, z: 1}
   blockSet:

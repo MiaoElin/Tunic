@@ -110,7 +110,7 @@ public static class RoleDomain {
 
             attackAction.ActRunningHandle = (dt) => {
                 AI_SetCastingWeapon(role);
-                Casting(role, dt);
+                Casting(ctx, role, dt);
                 // if (role.GetCastingWeapon() == null) {
                 //     role.fsm.EnterNormal();
                 // }
@@ -199,8 +199,11 @@ public static class RoleDomain {
         }
     }
 
-    private static void Weapon_Attack_Check(RoleEntity role, SkillHitBoxModel hitBoxModel) {
-        LayerMask layer = 1 << 6;
+    private static void Weapon_Attack_Check(GameContext ctx, RoleEntity role, SkillSubEntity skill) {
+        var hitBoxModel = skill.actionModel.hitBoxModel;
+        LayerMask layer =
+        1 << LayerMaskConst.GRASS |
+        1 << LayerMaskConst.ROLE;
         var bodyCenter = role.GetBody_Center();
         var size = hitBoxModel.size;
         var center = bodyCenter + role.GetForward() * size.z / 2;
@@ -213,13 +216,39 @@ public static class RoleDomain {
                     PlantEntity grass = other.GetComponentInParent<PlantEntity>();
                     GameObject.Destroy(grass.gameObject);
                 }
+                if (other.tag == "Role") {
+                    RoleEntity hitRole = other.GetComponentInParent<RoleEntity>();
+                    if (role.ally != hitRole.ally) {
+                        // 已经攻击过了
+                        bool hasAtk = ctx.arbitService.Has(EntityType.Skill, skill.id, EntityType.Role, hitRole.id);
+
+                        if (hasAtk) {
+                            return;
+                        }
+                        // 未攻击过
+                        ctx.arbitService.Add(EntityType.Skill, skill.id, EntityType.Role, hitRole.id);
+                        SkillActHitRole(role, hitRole, skill);
+                    }
+                }
             }
         }
 #if UNITY_EDITOR
-        Debug.Log(center);
         Debug.DrawLine(center, center + role.GetForward() * size.z / 2, Color.red);
         Debug.DrawLine(role.GetBody_Center() + role.body.transform.right * (-size.x / 2), role.GetBody_Center() + role.body.transform.right * size.x / 2, Color.red);
 #endif
+    }
+
+    private static void SkillActHitRole(RoleEntity role, RoleEntity hitRole, SkillSubEntity skill) {
+        var atk = skill.actionModel.hitBoxModel.baseDamage;
+        hitRole.hp -= Mathf.CeilToInt(atk - hitRole.defense);
+        if (hitRole.hp <= 0) {
+            hitRole.hp = 0;
+            hitRole.fsm.EnterDead();
+        } else {
+            hitRole.fsm.EnterSuffering();
+        }
+
+
     }
     #endregion
 
@@ -311,15 +340,20 @@ public static class RoleDomain {
         role.SetCatingWeapon(usableWeapons.First().Value);
     }
 
-    public static void Casting(RoleEntity role, float dt) {
+    public static void Casting(GameContext ctx, RoleEntity role, float dt) {
+        // 当前武器
         var weapon = role.weaponCom.GetCatingWeapon();
+        // 获取当前技能
         var skill = weapon.GetCurrentSKill();
+
         var fsm = role.fsm;
         ref var skillCastStage = ref fsm.skillCastStage;
-
+        // 重置技能
         if (fsm.isResetCastSkill) {
             fsm.isResetCastSkill = false;
             fsm.ResetCastSkill(skill);
+            // 清空当前技能的历史攻击
+            ctx.arbitService.RemoveAll(EntityType.Skill, skill.id);
         }
 
         if (skill.canCombo && skillCastStage != SkillCastStage.endCast) {
@@ -349,7 +383,7 @@ public static class RoleDomain {
 
             // 近战武器获得伤害力
             if (weapon.weaponType == WeaponType.Melee) {
-                Weapon_Attack_Check(role, skill.actionModel.hitBoxModel);
+                Weapon_Attack_Check(ctx, role, skill);
             }
             if (fsm.castingIntervalTimer <= 0) {
                 fsm.castingIntervalTimer = skill.castingIntervalSec;

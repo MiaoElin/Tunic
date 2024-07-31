@@ -25,11 +25,14 @@ public static class GameFactory {
         role.SetLocalScale(localScale);
         role.Ctor(tm.mod);
         role.id = ctx.iDService.roleIDRecord++;
+        role.hpMax = tm.hpMax;
+        role.hp = tm.hpMax;
         role.moveSpeed = tm.moveSpeed;
         role.jumpForce = tm.jumpForce;
         role.gravity = tm.gravity;
         role.jumpTimesMax = tm.jumpTimesMax;
         role.jumpTimes = tm.jumpTimesMax;
+        role.defense = tm.defense;
         role.searchRange = tm.searchRange;
         role.attackRange = tm.attackRange;
         if (tm.weaponTMs != null) {
@@ -75,6 +78,7 @@ public static class GameFactory {
             foreach (var skilltm in tm.skillTMs) {
                 SkillSubEntity skill = new SkillSubEntity();
                 skill.typeID = skilltm.typeID;
+                skill.id = ctx.iDService.skillIDRecord++;
                 skill.keyEnum = skilltm.inputKeyEnum;
                 skill.anim_Name = skilltm.anim_Name;
                 skill.cd = skilltm.cdMax;
@@ -90,6 +94,7 @@ public static class GameFactory {
                     hitBoxType = skilltm.hitBoxType,
                     size = skilltm.boxSize,
                     // rot = skilltm.boxRot,
+                    baseDamage = skilltm.baseDamage,
                     hitLockSec = skilltm.hitLockSec,
                     stiffSec = skilltm.stiffSec,
                     hitBackSec = skilltm.hitBackSec,

@@ -13,6 +13,8 @@ public static class RoleFSMController {
             ApplyCasting(ctx, role, dt);
         } else if (status == RoleStatus.Defend) {
             ApplyDefend(ctx, role, dt);
+        } else if (status == RoleStatus.Suffering) {
+            ApplySuffering(ctx, role, dt);
         }
     }
 
@@ -52,7 +54,7 @@ public static class RoleFSMController {
             fsm.isEnterCasting = false;
             role.Move_Stop();
         }
-        RoleDomain.Casting(role, dt);
+        RoleDomain.Casting(ctx, role, dt);
         RoleDomain.Jump(role);
         RoleDomain.Falling(role, dt);
         // Exit
@@ -62,6 +64,14 @@ public static class RoleFSMController {
     }
 
     private static void ApplyDefend(GameContext ctx, RoleEntity role, float dt) {
+
+    }
+
+    private static void ApplySuffering(GameContext ctx, RoleEntity role, float dt) {
+        var fsm = role.fsm;
+        if (fsm.isEnterSuffering) {
+            fsm.isEnterSuffering = false;
+        }
 
     }
 }

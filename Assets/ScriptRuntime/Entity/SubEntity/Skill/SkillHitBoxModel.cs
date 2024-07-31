@@ -5,6 +5,8 @@ public class SkillHitBoxModel {
     public Vector3 size;
     // public Quaternion rot;
 
+    public float baseDamage;
+
     // 静止帧
     public float hitLockSec;
     // 僵直时间

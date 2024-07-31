@@ -24,7 +24,11 @@ MonoBehaviour:
   comboSkillTM: {fileID: 11400000, guid: b3b94811cc4dbe44b9452a2d07c02eff, type: 2}
   hitBoxType: 0
   boxSize: {x: 1, y: 2, z: 2}
+  baseDamage: 15
+  defense: 0
   hitLockSec: 0.1
   stiffSec: 0.2
   hitBackSec: 0
   hitBackForce: 0
+  hitUpSec: 0
+  hitUpForce: 0

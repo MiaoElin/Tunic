@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class RoleFSMComponent {
@@ -52,5 +53,10 @@ public class RoleFSMComponent {
     public void EnterLadder() {
         status = RoleStatus.Ladder;
         isEnterLadder = true;
+    }
+
+    internal void EnterDead() {
+        status = RoleStatus.Dead;
+        isEnterDead = true;
     }
 }

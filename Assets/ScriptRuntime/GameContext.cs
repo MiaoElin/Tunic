@@ -8,6 +8,7 @@ public class GameContext {
     // === Service ===
     public IDService iDService;
     public PoolService poolService;
+    public ArbitService arbitService;
 
     // === Repo ===
     public MapRepo mapRepo;
@@ -32,6 +33,7 @@ public class GameContext {
         // Service
         iDService = new IDService();
         poolService = new PoolService();
+        arbitService = new ArbitService();
         // Repo
         mapRepo = new MapRepo();
         roleRepo = new RoleRepo();

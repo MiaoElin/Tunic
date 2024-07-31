@@ -23,6 +23,8 @@ public class SkillTM : ScriptableObject {
     public HitBoxType hitBoxType;
     public Vector3 boxSize;
     // public Quaternion boxRot;
+    public float baseDamage;
+    public float defense;
 
     // 静止帧
     public float hitLockSec;
