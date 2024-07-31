@@ -20,5 +20,13 @@ MonoBehaviour:
   castingMaintainSec: 0.2
   castingIntervalSec: 0.2
   endCastSec: 0.1
-  isCombo: 0
+  canCombo: 0
   comboSkillTM: {fileID: 0}
+  hitBoxType: 0
+  boxSize: {x: 1, y: 2, z: 2}
+  hitLockSec: 0.1
+  stiffSec: 0.2
+  hitBackSec: 0
+  hitBackForce: 0
+  hitUpSec: 0
+  hitUpForce: 0

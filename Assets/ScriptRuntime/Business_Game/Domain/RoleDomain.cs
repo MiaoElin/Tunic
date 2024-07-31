@@ -184,7 +184,7 @@ public static class RoleDomain {
     }
     #endregion
 
-    #region Check_Ground
+    #region Physics
     public static void Check_Ground(RoleEntity role) {
         if (role.GetVelocityY() > 0) {
             return;
@@ -197,6 +197,29 @@ public static class RoleDomain {
         if (collider.Length > 0) {
             role.ResetJumpTimes();
         }
+    }
+
+    private static void Weapon_Attack_Check(RoleEntity role, SkillHitBoxModel hitBoxModel) {
+        LayerMask layer = 1 << 6;
+        var bodyCenter = role.GetBody_Center();
+        var size = hitBoxModel.size;
+        var center = bodyCenter + role.GetForward() * size.z / 2;
+        var halfSize = size / 2;
+        var quat = Quaternion.LookRotation(role.GetForward(), Vector3.up);
+        var colliders = Physics.OverlapBox(center, halfSize, quat, layer);
+        if (colliders.Length > 0) {
+            foreach (var other in colliders) {
+                if (other.tag == "Grass") {
+                    PlantEntity grass = other.GetComponentInParent<PlantEntity>();
+                    GameObject.Destroy(grass.gameObject);
+                }
+            }
+        }
+#if UNITY_EDITOR
+        Debug.Log(center);
+        Debug.DrawLine(center, center + role.GetForward() * size.z / 2, Color.red);
+        Debug.DrawLine(role.GetBody_Center() + role.body.transform.right * (-size.x / 2), role.GetBody_Center() + role.body.transform.right * size.x / 2, Color.red);
+#endif
     }
     #endregion
 
@@ -326,7 +349,7 @@ public static class RoleDomain {
 
             // 近战武器获得伤害力
             if (weapon.weaponType == WeaponType.Melee) {
-                Weapon_Attack_Check(role);
+                Weapon_Attack_Check(role, skill.actionModel.hitBoxModel);
             }
             if (fsm.castingIntervalTimer <= 0) {
                 fsm.castingIntervalTimer = skill.castingIntervalSec;
@@ -355,22 +378,6 @@ public static class RoleDomain {
             }
         }
 
-    }
-
-    private static void Weapon_Attack_Check(RoleEntity role) {
-        LayerMask layer = 1 << 6;
-        var center = role.GetBody_Center() + role.GetForward() * 1;
-        var halfSize = new Vector3(0.5f, 1, 1);
-        var quat = Quaternion.LookRotation(role.GetForward(), Vector3.up);
-        var colliders = Physics.OverlapBox(center, halfSize, quat, layer);
-        if (colliders.Length > 0) {
-            foreach (var other in colliders) {
-                if (other.tag == "Grass") {
-                    PlantEntity grass = other.GetComponentInParent<PlantEntity>();
-                    GameObject.Destroy(grass.gameObject);
-                }
-            }
-        }
     }
     #endregion
 

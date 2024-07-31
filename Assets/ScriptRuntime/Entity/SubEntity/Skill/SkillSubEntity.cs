@@ -17,7 +17,13 @@ public class SkillSubEntity {
 
     public float endCastSec;
 
+    // ActionModel
     public bool canCombo;
     public SkillTM comboSkillTM;
+
+    public SkillActionModel actionModel;
+    public SkillSubEntity() {
+        actionModel = new SkillActionModel();
+    }
 
 }

@@ -85,6 +85,16 @@ public static class GameFactory {
                 skill.endCastSec = skilltm.endCastSec;
                 skill.canCombo = skilltm.canCombo;
                 skill.comboSkillTM = skilltm.comboSkillTM;
+                // actinModel
+                skill.actionModel.hitBoxModel = new SkillHitBoxModel() {
+                    hitBoxType = skilltm.hitBoxType,
+                    size = skilltm.boxSize,
+                    // rot = skilltm.boxRot,
+                    hitLockSec = skilltm.hitLockSec,
+                    stiffSec = skilltm.stiffSec,
+                    hitBackSec = skilltm.hitBackSec,
+                    hitBackForce = skilltm.hitBackForce
+                };
                 weapon.AddSkill(skill);
             }
         }
