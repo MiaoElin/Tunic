@@ -299,7 +299,7 @@ public static class RoleDomain {
             fsm.ResetCastSkill(skill);
         }
 
-        if (skillCastStage != SkillCastStage.endCast) {
+        if (skill.canCombo && skillCastStage != SkillCastStage.endCast) {
             if (role.isMeleeKeyDown) {
                 role.isCombo = true;
                 role.skillComboMatainSec = 0.5f;

@@ -20,4 +20,5 @@ MonoBehaviour:
   castingMaintainSec: 0.3
   castingIntervalSec: 0.3
   endCastSec: 0.13
+  isCombo: 1
   comboSkillTM: {fileID: 11400000, guid: b58a4c046f63c8d468cb3c48dbcc8d43, type: 2}

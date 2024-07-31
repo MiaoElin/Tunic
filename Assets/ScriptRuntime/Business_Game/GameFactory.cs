@@ -83,6 +83,7 @@ public static class GameFactory {
                 skill.castingMaintainSec = skilltm.castingMaintainSec;
                 skill.castingIntervalSec = skilltm.castingIntervalSec;
                 skill.endCastSec = skilltm.endCastSec;
+                skill.canCombo = skilltm.canCombo;
                 skill.comboSkillTM = skilltm.comboSkillTM;
                 weapon.AddSkill(skill);
             }

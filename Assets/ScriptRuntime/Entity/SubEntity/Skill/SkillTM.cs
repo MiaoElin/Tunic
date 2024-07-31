@@ -15,6 +15,7 @@ public class SkillTM : ScriptableObject {
 
     public float endCastSec;
 
+    public bool canCombo;
     public SkillTM comboSkillTM;
 
 }

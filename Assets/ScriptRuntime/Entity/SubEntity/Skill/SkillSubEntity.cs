@@ -17,6 +17,7 @@ public class SkillSubEntity {
 
     public float endCastSec;
 
+    public bool canCombo;
     public SkillTM comboSkillTM;
 
 }
