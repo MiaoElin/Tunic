@@ -98,7 +98,10 @@ public static class GameFactory {
                     hitLockSec = skilltm.hitLockSec,
                     stiffSec = skilltm.stiffSec,
                     hitBackSec = skilltm.hitBackSec,
-                    hitBackForce = skilltm.hitBackForce
+                    hitBackForce = skilltm.hitBackForce,
+                    hitUpSec = skilltm.hitUpSec,
+                    hitUpForce = skilltm.hitUpForce
+
                 };
                 weapon.AddSkill(skill);
             }

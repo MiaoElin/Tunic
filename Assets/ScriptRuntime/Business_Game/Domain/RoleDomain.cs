@@ -239,16 +239,37 @@ public static class RoleDomain {
     }
 
     private static void SkillActHitRole(RoleEntity role, RoleEntity hitRole, SkillSubEntity skill) {
-        var atk = skill.actionModel.hitBoxModel.baseDamage;
+        var hitBoxModel = skill.actionModel.hitBoxModel;
+        var atk = hitBoxModel.baseDamage;
         hitRole.hp -= Mathf.CeilToInt(atk - hitRole.defense);
         if (hitRole.hp <= 0) {
             hitRole.hp = 0;
             hitRole.fsm.EnterDead();
         } else {
-            hitRole.fsm.EnterSuffering();
+            Enter_Suffering(hitRole, role.GetForward(), hitBoxModel.stiffSec, hitBoxModel.hitBackForce, hitBoxModel.hitBackSec, hitBoxModel.hitUpForce, hitBoxModel.hitUpSec);
         }
 
 
+    }
+    #endregion
+
+    #region Enter_Suffering
+    private static void Enter_Suffering(RoleEntity role, Vector3 hitDir, float stiffSec, float hitBackForce, float hitBackSec, float hitUpForce, float hitUpSec) {
+        role.fsm.EnterSuffering(stiffSec, hitBackForce, hitBackSec, hitUpForce, hitUpSec);
+
+        var velocity = role.rb.velocity;
+        velocity = Vector3.zero;
+        velocity = hitDir * hitBackForce + Vector3.up * hitUpForce;
+        role.rb.velocity = velocity;
+
+        if (stiffSec > 0) {
+            role.Anim_Stiff();
+            return;
+        }
+        if (hitBackSec > 0) {
+            role.Anim_HitBack();
+            return;
+        }
     }
     #endregion
 

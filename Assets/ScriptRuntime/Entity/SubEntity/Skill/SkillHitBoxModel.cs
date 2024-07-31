@@ -16,6 +16,10 @@ public class SkillHitBoxModel {
     // 击退力度
     public float hitBackForce;
 
+    // 击飞
+    public float hitUpSec;
+    public float hitUpForce;
+
     public SkillHitBoxModel() {
 
     }

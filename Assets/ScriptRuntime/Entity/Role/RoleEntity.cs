@@ -18,7 +18,7 @@ public class RoleEntity : MonoBehaviour {
     public Ally ally;
     public AiType aiType;
     public GameObject body;
-    [SerializeField] Rigidbody rb;
+    [SerializeField] public Rigidbody rb;
     public Animator anim;
     public RoleAnimState animState;
 
@@ -124,6 +124,10 @@ public class RoleEntity : MonoBehaviour {
             SetForward(moveAxis, dt);
         }
     }
+
+    // public void HitBackMove(float hitBackForce){
+    //     var speed=
+    // }
 
     public void Move_Stop() {
         var velocity = rb.velocity;
@@ -257,6 +261,15 @@ public class RoleEntity : MonoBehaviour {
         anim.CrossFade("JumpEnd_SwordShield", 0);
     }
 
+    internal void Anim_Stiff() {
+        anim.CrossFade("Stiff_SwordShield", 0);
+    }
+
+    public void Anim_HitBack() {
+        anim.Play("HitBack_SwordShield", 0, 0);
+        // anim.CrossFade("HitBack_SwordShield", 0);
+    }
+
     #endregion
 
     #region Input
@@ -283,5 +296,6 @@ public class RoleEntity : MonoBehaviour {
     public WeaponEntity GetCastingWeapon() {
         return weaponCom.GetCatingWeapon();
     }
+
     #endregion
 }

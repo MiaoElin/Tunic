@@ -73,5 +73,13 @@ public static class RoleFSMController {
             fsm.isEnterSuffering = false;
         }
 
+        if (fsm.hitBackSec > 0) {
+            // var dir = -role.GetForward();
+            // role.Move(dir.normalized, dt);
+            fsm.hitBackSec -= dt;
+        } else {
+            role.Move_Stop();
+        }
+        role.Falling(dt);
     }
 }

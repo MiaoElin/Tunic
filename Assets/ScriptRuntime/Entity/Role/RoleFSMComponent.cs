@@ -16,13 +16,24 @@ public class RoleFSMComponent {
     public float castingIntervalTimer;
     public float endCastTimer;
 
-    // Suffering
+    // === Suffering ===
     public bool isEnterSuffering;
+    // 静止帧
+    public float hitLockSec;
+    // 僵直时间
+    public float stiffSec;
+    // 击退时间
+    public float hitBackSec;
+    // 击退力度
+    public float hitBackForce;
+    // 击飞
+    public float hitUpSec;
+    public float hitUpForce;
 
-    // Ladder
+    // === Ladder === 
     public bool isEnterLadder;
 
-    // Dead
+    // === Dead ===
     public bool isEnterDead;
 
 
@@ -45,9 +56,14 @@ public class RoleFSMComponent {
         endCastTimer = skill.endCastSec;
     }
 
-    public void EnterSuffering() {
+    public void EnterSuffering(float stiffSec, float hitBackForce, float hitBackSec, float hitUpForce, float hitUpSec) {
         status = RoleStatus.Suffering;
         isEnterSuffering = true;
+        this.stiffSec = stiffSec;
+        this.hitBackForce = hitBackForce;
+        this.hitBackSec = hitBackSec;
+        this.hitUpSec = hitUpSec;
+        this.hitUpForce = hitUpForce;
     }
 
     public void EnterLadder() {
