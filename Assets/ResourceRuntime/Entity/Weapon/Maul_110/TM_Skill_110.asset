@@ -15,8 +15,8 @@ MonoBehaviour:
   typeID: 110
   inputKeyEnum: 1
   anim_Name: Attack_Pre
-  cdMax: 0.3
-  precastCDMax: 0.233
+  cdMax: 0
+  precastCDMax: 0.13
   castingMaintainSec: 0.267
   castingIntervalSec: 0.267
   endCastSec: 0.267

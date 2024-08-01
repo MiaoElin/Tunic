@@ -7,7 +7,11 @@
 - 学习animator layer
 - 添加save按键 用tri inspector
 
--添加Collider 忽略碰撞
+=== Bug ===
+- 攻击动画前摇时间要减少0.1才会准（过渡问题？）
+
+
+
 === Onwer === 
 - 攻击
 在SkillCastStage.Casting阶段内，如果再按下这个技能，会砍两次(不同挥剑方向)
@@ -23,3 +27,9 @@
 
 === Terrain ===
 - 怎么区分斜坡和平台，？斜坡在一定斜度内是可以直接走，平台要跳上去（高度差大于斜坡）
+
+=== Role ===
+- 僵直，击退，击飞
+
+=== Skill ===
+- Cancel

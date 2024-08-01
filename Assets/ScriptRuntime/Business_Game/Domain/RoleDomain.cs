@@ -375,6 +375,8 @@ public static class RoleDomain {
             fsm.ResetCastSkill(skill);
             // 清空当前技能的历史攻击
             ctx.arbitService.RemoveAll(EntityType.Skill, skill.id);
+            // anim
+            role.Anim_Attack(skill.anim_Name);
         }
 
         if (skill.canCombo && skillCastStage != SkillCastStage.endCast) {
@@ -391,7 +393,6 @@ public static class RoleDomain {
         }
 
         if (skillCastStage == SkillCastStage.PreCast) {
-            role.Anim_Attack(skill.anim_Name);
             fsm.precastTimer -= dt;
             if (fsm.precastTimer <= 0) {
                 skillCastStage = SkillCastStage.Casting;
