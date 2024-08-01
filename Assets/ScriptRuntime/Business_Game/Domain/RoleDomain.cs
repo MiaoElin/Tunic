@@ -97,32 +97,10 @@ public static class RoleDomain {
             BHTreeNode attackAction = new BHTreeNode();
             attackAction.InitAction();
             attackAction.PreconditionHandle = () => {
-                // if (role.inAttackRange) {
-                //     if (HasUsableWeapon(role)) {
-                        // hasUsableWeapon 会对可用的武器清零，不要放外面判断
-                //         if (role.fsm.status != RoleStatus.Casting) {
-                //             role.fsm.EnterCasting();
-                //         }
-                //         return true;
-                //     }
-                //     if (role.fsm.status == RoleStatus.Casting) {
-                //         if (role.GetCastingWeapon() != null) {
-                //             return true;
-                //         } else {
-                //             role.fsm.EnterNormal();
-                //             return false;
-                //         }
-                //     }
-                //     role.fsm.EnterNormal();
-                //     return false;
-                // }
-                // role.fsm.EnterNormal();
-                // return false;
-
                 if (role.inAttackRange) {
                     if (role.fsm.status != RoleStatus.Casting) {
                         if (HasUsableWeapon(role)) {
-                        // hasUsableWeapon 会对可用的武器清零，不要放最外层判断，只有不在Casting状态或者当前武器为空（技能发射完了）的时候
+                            // hasUsableWeapon 会对可用的武器清零，不要放最外层判断，只有不在Casting状态或者当前武器为空（技能发射完了）的时候
                             role.fsm.EnterCasting();
                             return true;
                         }
@@ -131,22 +109,20 @@ public static class RoleDomain {
                             if (HasUsableWeapon(role)) {
                                 return true;
                             }
-                            role.fsm.EnterNormal();
                             return false;
                         }
                         return true;
                     }
                 }
-                role.fsm.EnterNormal();
                 return false;
             };
 
             attackAction.ActRunningHandle = (dt) => {
                 AI_SetCastingWeapon(role);
                 Casting(ctx, role, dt);
-                // if (role.GetCastingWeapon() == null) {
-                //     role.fsm.EnterNormal();
-                // }
+                if (role.GetCastingWeapon() == null) {
+                    role.fsm.EnterNormal();
+                }
                 return BHTreeNodeStatus.Running;
             };
 
