@@ -78,8 +78,9 @@ public static class RoleFSMController {
             // role.Move(dir.normalized, dt);
             fsm.hitBackSec -= dt;
         } else {
-            role.Move_Stop();
+            fsm.EnterNormal();
         }
+
         role.Falling(dt);
     }
 }

@@ -97,14 +97,47 @@ public static class RoleDomain {
             BHTreeNode attackAction = new BHTreeNode();
             attackAction.InitAction();
             attackAction.PreconditionHandle = () => {
+                // if (role.inAttackRange) {
+                //     if (HasUsableWeapon(role)) {
+                        // hasUsableWeapon 会对可用的武器清零，不要放外面判断
+                //         if (role.fsm.status != RoleStatus.Casting) {
+                //             role.fsm.EnterCasting();
+                //         }
+                //         return true;
+                //     }
+                //     if (role.fsm.status == RoleStatus.Casting) {
+                //         if (role.GetCastingWeapon() != null) {
+                //             return true;
+                //         } else {
+                //             role.fsm.EnterNormal();
+                //             return false;
+                //         }
+                //     }
+                //     role.fsm.EnterNormal();
+                //     return false;
+                // }
+                // role.fsm.EnterNormal();
+                // return false;
+
                 if (role.inAttackRange) {
-                    if (HasUsableWeapon(role)) {
-                        if (!role.fsm.isEnterCasting) {
+                    if (role.fsm.status != RoleStatus.Casting) {
+                        if (HasUsableWeapon(role)) {
+                        // hasUsableWeapon 会对可用的武器清零，不要放最外层判断，只有不在Casting状态或者当前武器为空（技能发射完了）的时候
                             role.fsm.EnterCasting();
+                            return true;
+                        }
+                    } else {
+                        if (role.GetCastingWeapon() == null) {
+                            if (HasUsableWeapon(role)) {
+                                return true;
+                            }
+                            role.fsm.EnterNormal();
+                            return false;
                         }
                         return true;
                     }
                 }
+                role.fsm.EnterNormal();
                 return false;
             };
 
@@ -377,6 +410,8 @@ public static class RoleDomain {
             ctx.arbitService.RemoveAll(EntityType.Skill, skill.id);
             // anim
             role.Anim_Attack(skill.anim_Name);
+            // 重置cd
+            skill.cd = skill.cdMax;
         }
 
         if (skill.canCombo && skillCastStage != SkillCastStage.endCast) {
@@ -396,8 +431,6 @@ public static class RoleDomain {
             fsm.precastTimer -= dt;
             if (fsm.precastTimer <= 0) {
                 skillCastStage = SkillCastStage.Casting;
-                // 重置cd
-                skill.cd = skill.cdMax;
             }
         } else if (skillCastStage == SkillCastStage.Casting) {
             fsm.castingMaintainTimer -= dt;

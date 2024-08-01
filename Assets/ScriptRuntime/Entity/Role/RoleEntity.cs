@@ -262,12 +262,20 @@ public class RoleEntity : MonoBehaviour {
     }
 
     internal void Anim_Stiff() {
-        anim.CrossFade("Stiff_SwordShield", 0);
+        if (isOwner) {
+            anim.CrossFade("Stiff_SwordShield", 0);
+            return;
+        }
+        anim.CrossFade("Stiff", 0);
     }
 
     public void Anim_HitBack() {
-        anim.Play("HitBack_SwordShield", 0, 0);
-        // anim.CrossFade("HitBack_SwordShield", 0);
+        if (isOwner) {
+            anim.Play("HitBack_SwordShield", 0, 0);
+            // anim.CrossFade("HitBack_SwordShield", 0);
+            return;
+        }
+        anim.CrossFade("HitBack", 0);
     }
 
     #endregion
