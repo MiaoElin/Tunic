@@ -31,4 +31,4 @@ MonoBehaviour:
   hitBackSec: 0
   hitBackForce: 0
   hitUpSec: 0.5
-  hitUpForce: 20
+  hitUpForce: 40

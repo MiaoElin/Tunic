@@ -85,9 +85,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.6
-  m_Height: 1
+  m_Height: 1.8
   m_Direction: 1
-  m_Center: {x: 0, y: 1.43, z: 0}
+  m_Center: {x: 0, y: 0.92, z: 0}
 --- !u!1 &7648907328975139872
 GameObject:
   m_ObjectHideFlags: 0
@@ -631,11 +631,7 @@ Animator:
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_AnimatePhysics: 0
-  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
-    are already bound by a Humanoid avatar. These transforms can only be changed
-    by Humanoid clips.\n\tTransform 'Body'\n\tTransform 'Body'\n\tTransform 'Body'\n\tFrom
-    animation clip 'IdleNormal'\n\tFrom animation clip 'Attack01'\n\tFrom animation
-    clip 'Attack02'\n\tFrom animation clip 'GetHit'"
+  m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0

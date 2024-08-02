@@ -136,9 +136,11 @@ public class RoleEntity : MonoBehaviour {
         rb.velocity = velocity;
         Anim_SetSpeedZero();
     }
+
     public void AI_Move_Stop() {
         var velocity = rb.velocity;
         velocity = Vector3.zero;
+        velocity.y = rb.velocity.y;
         rb.velocity = velocity;
         Anim_SetSpeedZero();
     }
@@ -263,10 +265,10 @@ public class RoleEntity : MonoBehaviour {
 
     internal void Anim_Stiff() {
         if (isOwner) {
-            anim.CrossFade("Stiff_SwordShield", 0);
+            anim.Play("Stiff_SwordShield", 0, 0);
             return;
         }
-        anim.CrossFade("Stiff", 0);
+        anim.Play("Stiff", 0, 0);
     }
 
     public void Anim_HitBack() {
@@ -275,7 +277,7 @@ public class RoleEntity : MonoBehaviour {
             // anim.CrossFade("HitBack_SwordShield", 0);
             return;
         }
-        anim.CrossFade("HitBack", 0);
+        anim.Play("HitBack", 0, 0);
     }
 
     #endregion

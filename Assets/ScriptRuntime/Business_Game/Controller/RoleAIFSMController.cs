@@ -7,7 +7,6 @@ public static class RoleAIFSMController {
         var status = role.fsm.status;
 
         ApplyAny(ctx, role, dt);
-
         if (status == RoleStatus.Normal) {
             ApplyNormal(ctx, role, dt);
         } else if (status == RoleStatus.Casting) {
@@ -20,6 +19,8 @@ public static class RoleAIFSMController {
     }
 
     private static void ApplyAny(GameContext ctx, RoleEntity role, float dt) {
+        RoleDomain.SkillCD_Tick(role, dt);
+        role.aiCom.tree.Execute(dt);
     }
 
     private static void ApplyNormal(GameContext ctx, RoleEntity role, float dt) {
@@ -27,14 +28,29 @@ public static class RoleAIFSMController {
         if (fsm.isEnterNormal) {
             fsm.isEnterNormal = false;
         }
-        RoleDomain.AI_Move(ctx, role, dt);
+        RoleDomain.Falling(role, dt);
     }
 
     private static void ApplyCasting(GameContext ctx, RoleEntity role, float dt) {
-        throw new NotImplementedException();
     }
 
     private static void ApplySuffering(GameContext ctx, RoleEntity role, float dt) {
-        throw new NotImplementedException();
+        var fsm = role.fsm;
+        if (fsm.isEnterSuffering) {
+            fsm.isEnterSuffering = false;
+        }
+        if (fsm.hitBackSec > 0) {
+            fsm.hitBackSec -= dt;
+        } else {
+            fsm.EnterNormal();
+        }
+
+        if (fsm.hitUpSec > 0) {
+            fsm.hitUpSec -= dt;
+        } else {
+            fsm.EnterNormal();
+        }
+        role.Falling(dt);
+
     }
 }

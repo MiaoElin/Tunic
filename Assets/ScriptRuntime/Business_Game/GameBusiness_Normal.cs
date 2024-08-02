@@ -105,11 +105,11 @@ public static class GameBusiness_Normal {
             if (role.isOwner) {
                 RoleFSMController.ApplyFSM(ctx, owner, dt);
             } else {
-                // RoleAIFSMController.ApplyFSM(ctx, role, dt);
-                RoleDomain.SkillCD_Tick(role, dt);
-                role.aiCom.tree.Execute(dt);
+                RoleAIFSMController.ApplyFSM(ctx, role, dt);
             }
         });
+
+        
 
         ctx.lootRepo.Foreach(loot => {
             LootDomain.HUD_Hints_SHow_Tick(ctx, loot);

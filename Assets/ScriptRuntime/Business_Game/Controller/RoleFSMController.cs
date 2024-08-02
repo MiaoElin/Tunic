@@ -74,13 +74,16 @@ public static class RoleFSMController {
         }
 
         if (fsm.hitBackSec > 0) {
-            // var dir = -role.GetForward();
-            // role.Move(dir.normalized, dt);
             fsm.hitBackSec -= dt;
         } else {
             fsm.EnterNormal();
         }
 
+        if (fsm.hitUpSec > 0) {
+            fsm.hitUpSec -= dt;
+        } else {
+            fsm.EnterNormal();
+        }
         role.Falling(dt);
     }
 }

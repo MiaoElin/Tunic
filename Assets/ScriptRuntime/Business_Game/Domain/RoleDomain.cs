@@ -12,10 +12,11 @@ public static class RoleDomain {
         // BHTree
         if (role.aiType == AiType.Common) {
 
-            // SearchAction
+            // === SearchAction ===
             BHTreeNode searchAction = new BHTreeNode();
             searchAction.InitAction();
             searchAction.PreconditionHandle = () => {
+
                 if (Vector3.SqrMagnitude(role.Pos() - ctx.GetOwner().Pos()) <= role.searchRange * role.searchRange) {
                     // Debug.Log("HasTarget");
                     return true;
@@ -36,7 +37,7 @@ public static class RoleDomain {
                 return BHTreeNodeStatus.Done;
             };
 
-            // MoveAction
+            // === MoveAction ===
             BHTreeNode moveAction = new BHTreeNode();
             moveAction.InitAction();
             moveAction.PreconditionHandle = () => {
@@ -46,11 +47,6 @@ public static class RoleDomain {
                     return false;
                 }
             };
-
-
-            // moveAction.ActEnterHandle = (dt) => {
-            //     return BHTreeNodeStatus.Running;
-            // };
 
             moveAction.ActRunningHandle = (dt) => {
                 // Debug.Log("Move");
@@ -64,6 +60,7 @@ public static class RoleDomain {
                  out role.path);
                 // Move
                 role.MoveBy_Path(dt);
+
                 // Anim
                 role.Anim_SetSpeed();
                 // 判定是否结束
@@ -74,6 +71,9 @@ public static class RoleDomain {
             BHTreeNode moveContainer = new BHTreeNode();
             moveContainer.InitContainer(BHTreeNodeType.ParallelOr);
             moveContainer.PreconditionHandle = () => {
+                if (role.fsm.status == RoleStatus.Suffering) {
+                    return false;
+                }
                 Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
                 if (Vector3.SqrMagnitude(dir) <= role.attackRange * role.attackRange) {
                     role.inAttackRange = true;
@@ -84,19 +84,25 @@ public static class RoleDomain {
             };
 
             moveContainer.ActNotEnterHandle = (dt) => {
+                if (role.fsm.status == RoleStatus.Suffering) {
+                    return BHTreeNodeStatus.Done;
+                }
                 Vector3 dir = ctx.GetOwner().Pos() - role.Pos();
+                dir.y = 0;
                 role.AI_Move_Stop();
                 role.SetForward(dir.normalized, dt);
                 return BHTreeNodeStatus.Done;
             };
 
             moveContainer.childrens.Add(moveAction);
-            // moveContainer.childrens.Add(searchAction);
 
-            // Attack
+            // === Attack ===
             BHTreeNode attackAction = new BHTreeNode();
             attackAction.InitAction();
             attackAction.PreconditionHandle = () => {
+                if (role.fsm.status == RoleStatus.Suffering) {
+                    return false;
+                }
                 if (role.inAttackRange) {
                     if (role.fsm.status != RoleStatus.Casting) {
                         if (HasUsableWeapon(role)) {
@@ -265,17 +271,15 @@ public static class RoleDomain {
     #region Enter_Suffering
     private static void Enter_Suffering(RoleEntity role, Vector3 hitDir, float stiffSec, float hitBackForce, float hitBackSec, float hitUpForce, float hitUpSec) {
         role.fsm.EnterSuffering(stiffSec, hitBackForce, hitBackSec, hitUpForce, hitUpSec);
-
         var velocity = role.rb.velocity;
         velocity = Vector3.zero;
         velocity = hitDir * hitBackForce + Vector3.up * hitUpForce;
         role.rb.velocity = velocity;
-
         if (stiffSec > 0) {
             role.Anim_Stiff();
             return;
         }
-        if (hitBackSec > 0) {
+        if (hitBackSec > 0 || hitUpSec > 0) {
             role.Anim_HitBack();
             return;
         }

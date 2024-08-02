@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7333112719832414049}
   - component: {fileID: 1242511308826019549}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: WeaponEntity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,5 +49,7 @@ MonoBehaviour:
   ally: 0
   weaponType: 1
   mod: {fileID: 0}
-  hasDamage: 0
+  normalSkillTypeID: 0
+  currentSkillTypeID: 0
   stuffTypeID: 0
+  transName: 

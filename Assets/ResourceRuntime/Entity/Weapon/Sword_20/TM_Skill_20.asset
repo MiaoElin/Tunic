@@ -27,8 +27,8 @@ MonoBehaviour:
   baseDamage: 15
   defense: 0
   hitLockSec: 0.1
-  stiffSec: 0.2
-  hitBackSec: 0
-  hitBackForce: 0
+  stiffSec: 0
+  hitBackSec: 0.2
+  hitBackForce: 5
   hitUpSec: 0
   hitUpForce: 0
