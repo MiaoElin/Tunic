@@ -267,7 +267,6 @@ public class BHTreeNode {
                 Debug.Log("Action Was Not Setted");
             } else {
                 status = ActRunningHandle.Invoke(dt);
-                status = BHTreeNodeStatus.Done;
             }
         } else {
 

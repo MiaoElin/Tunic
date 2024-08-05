@@ -128,6 +128,7 @@ public static class RoleDomain {
                 Casting(ctx, role, dt);
                 if (role.GetCastingWeapon() == null) {
                     role.fsm.EnterNormal();
+                    return BHTreeNodeStatus.Done;
                 }
                 return BHTreeNodeStatus.Running;
             };
@@ -375,11 +376,11 @@ public static class RoleDomain {
     }
 
     public static void Casting(GameContext ctx, RoleEntity role, float dt) {
+
         // 当前武器
         var weapon = role.weaponCom.GetCatingWeapon();
         // 获取当前技能
         var skill = weapon.GetCurrentSKill();
-
         var fsm = role.fsm;
         ref var skillCastStage = ref fsm.skillCastStage;
         // 重置技能
