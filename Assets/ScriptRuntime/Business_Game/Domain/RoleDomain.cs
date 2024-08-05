@@ -71,6 +71,7 @@ public static class RoleDomain {
             BHTreeNode moveContainer = new BHTreeNode();
             moveContainer.InitContainer(BHTreeNodeType.ParallelOr);
             moveContainer.PreconditionHandle = () => {
+                Debug.Log("Move");
                 if (role.fsm.status == RoleStatus.Suffering) {
                     return false;
                 }
@@ -100,38 +101,28 @@ public static class RoleDomain {
             BHTreeNode attackAction = new BHTreeNode();
             attackAction.InitAction();
             attackAction.PreconditionHandle = () => {
-                if (role.fsm.status == RoleStatus.Suffering) {
+                if (role.fsm.status != RoleStatus.Normal) {
                     return false;
                 }
                 if (role.inAttackRange) {
-                    if (role.fsm.status != RoleStatus.Casting) {
-                        if (HasUsableWeapon(role)) {
-                            // hasUsableWeapon 会对可用的武器清零，不要放最外层判断，只有不在Casting状态或者当前武器为空（技能发射完了）的时候
-                            role.fsm.EnterCasting();
-                            return true;
-                        }
-                    } else {
-                        if (role.GetCastingWeapon() == null) {
-                            if (HasUsableWeapon(role)) {
-                                return true;
-                            }
-                            return false;
-                        }
-                        return true;
+                    if (HasUsableWeapon(role)) {
+                        // hasUsableWeapon 会对可用的武器清零，不要放最外层判断，只有不在Casting状态或者当前武器为空（技能发射完了）的时候
+                        AI_SetCastingWeapon(role);
+                        role.fsm.EnterCasting();
                     }
                 }
                 return false;
             };
 
-            attackAction.ActRunningHandle = (dt) => {
-                AI_SetCastingWeapon(role);
-                Casting(ctx, role, dt);
-                if (role.GetCastingWeapon() == null) {
-                    role.fsm.EnterNormal();
-                    return BHTreeNodeStatus.Done;
-                }
-                return BHTreeNodeStatus.Running;
-            };
+            // attackAction.ActRunningHandle = (dt) => {
+            //     // AI_SetCastingWeapon(role);
+            //     // Casting(ctx, role, dt);
+            //     // if (role.GetCastingWeapon() == null) {
+            //     //     role.fsm.EnterNormal();
+            //     //     return BHTreeNodeStatus.Done;
+            //     // }
+            //     return BHTreeNodeStatus.Running;
+            // };
 
             moveContainer.childrens.Add(searchAction);
             moveContainer.childrens.Add(moveAction);
@@ -167,14 +158,22 @@ public static class RoleDomain {
 
 
     #region Move
+    public static void Move(GameContext ctx, RoleEntity role, float dt) {
+        if (role.aiType == AiType.None) {
+            Owner_Move(ctx, role, dt);
+        } else {
+            // AI_Move(ctx, role, dt);
+        }
+
+    }
+
     public static void Owner_Move(GameContext ctx, RoleEntity role, float dt) {
         role.Move(ctx.input.moveAxis, dt);
-        role.Anim_SetSpeed();
-        // var weapon = role.weaponCom.GetCurrentWeapon();
-        // if (weapon != null) {
-        //     Debug.Log("Change");
-        //     weapon.transform.localPosition = Vector3.zero;
-        // }
+        if (ctx.input.moveAxis == Vector3.zero) {
+            role.Anim_SetSpeedZero();
+        } else {
+            role.Anim_SetSpeed();
+        }
     }
 
     public static void AI_Move(GameContext ctx, RoleEntity role, float dt) {
@@ -183,7 +182,6 @@ public static class RoleDomain {
             role.MoveTo_Target(owner.Pos(), dt);
         } else if (role.aiType == AiType.Common) {
             var map = ctx.GetCurrentMap();
-            Debug.Log(role.GetVelocityY());
             if (Vector3.SqrMagnitude(role.Pos() - ctx.GetOwner().Pos()) > 4) {
                 bool has = GFpathFinding3D_Rect.Astar(
                     ctx.GetOwner().Pos(),
@@ -212,6 +210,7 @@ public static class RoleDomain {
         Collider[] collider = Physics.OverlapBox(role.Pos(), size, quat, layer);
         if (collider.Length > 0) {
             role.ResetJumpTimes();
+            role.rb.velocity = Vector3.zero;
         }
     }
 

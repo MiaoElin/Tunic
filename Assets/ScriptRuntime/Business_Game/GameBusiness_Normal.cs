@@ -57,6 +57,7 @@ public static class GameBusiness_Normal {
         var owner = RoleDomain.Spawn(ctx, 10, new Vector3(60, 0, 10), Vector3.zero, Vector3.one, Ally.Player);
         ctx.game.ownerID = owner.id;
         owner.isOwner = true;
+        owner.aiCom.tree.isPause = true;
 
         ctx.camera.SetFollow(owner.transform);
         ctx.camera.SetLookAt(owner.transform);
@@ -102,14 +103,17 @@ public static class GameBusiness_Normal {
         var owner = ctx.GetOwner();
 
         ctx.roleRepo.Foreach(role => {
+            RoleFSMController.ApplyFSM(ctx, role, dt);
             if (role.isOwner) {
-                RoleFSMController.ApplyFSM(ctx, owner, dt);
             } else {
-                RoleAIFSMController.ApplyFSM(ctx, role, dt);
+                // RoleAIFSMController.ApplyFSM(ctx, role, dt);
             }
         });
 
-        
+        ctx.roleRepo.Foreach(role => {
+            role.aiCom.tree.Execute(dt);
+        });
+
 
         ctx.lootRepo.Foreach(loot => {
             LootDomain.HUD_Hints_SHow_Tick(ctx, loot);

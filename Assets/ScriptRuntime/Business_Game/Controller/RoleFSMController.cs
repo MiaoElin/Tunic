@@ -5,7 +5,6 @@ public static class RoleFSMController {
 
     public static void ApplyFSM(GameContext ctx, RoleEntity role, float dt) {
         var status = role.fsm.status;
-
         ApplyAny(role, dt);
         if (status == RoleStatus.Normal) {
             ApplyNormal(ctx, role, dt);
@@ -30,7 +29,7 @@ public static class RoleFSMController {
             return;
         }
         // Logic
-        RoleDomain.Owner_Move(ctx, role, dt);
+        RoleDomain.Move(ctx, role, dt);
         RoleDomain.Jump(role);
         RoleDomain.Falling(role, dt);
         RoleDomain.Defend(role);
