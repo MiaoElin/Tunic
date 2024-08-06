@@ -1,4 +1,4 @@
-public enum BHTreeNodeType {
+public enum RoleAINodeType {
     Action,
     Sequence,
     SelectorSequence,

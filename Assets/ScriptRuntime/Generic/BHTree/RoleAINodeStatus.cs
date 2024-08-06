@@ -1,4 +1,4 @@
-public enum BHTreeNodeStatus {
+public enum RoleAINodeStatus {
     NotEnter,
     Running,
     Done

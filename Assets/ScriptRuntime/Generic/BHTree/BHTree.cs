@@ -1,9 +1,9 @@
 using UnityEngine;
 public class BHTree {
-    public BHTreeNode root;
+    public RoleAINodeModel root;
     public bool isPause;
 
-    public void InitRoot(BHTreeNode root) {
+    public void InitRoot(RoleAINodeModel root) {
         this.root = root;
     }
 
@@ -16,12 +16,14 @@ public class BHTree {
     }
 
     public void Execute(float dt) {
+        if (root == null) {
+            return;
+        }
         if (isPause) {
             return;
         }
-        Debug.Assert(root != null);
-        BHTreeNodeStatus status = root.Execute(dt);
-        if (status == BHTreeNodeStatus.Done) {
+        RoleAINodeStatus status = root.Execute(dt);
+        if (status == RoleAINodeStatus.Done) {
             root.Reset();
         }
     }
