@@ -277,7 +277,7 @@ public static class RoleDomain {
     #endregion
 
     public static void Defend(RoleEntity role) {
-        if (role.isShieldKeyPress) {
+        if (role.inputCom.isShieldKeyPress) {
             role.Anim_Defend(true);
         } else {
             role.Anim_Defend(false);
@@ -333,23 +333,23 @@ public static class RoleDomain {
         // 1.按类型优先级/2.类型一样的看手里的是什么、跟手里有一样的就用手里的、否则替换
         var weaponCom = role.weaponCom;
         var usableWeapons = weaponCom.usableWeapons;
-        if (role.isMeleeKeyDown) {
+        if (role.inputCom.isMeleeKeyDown) {
             role.comboCount++;
-            role.isMeleeKeyDown = false;
+            role.inputCom.isMeleeKeyDown = false;
             bool hasThis = usableWeapons.TryGetValue(WeaponType.Melee, out var weapon);
             if (hasThis) {
                 role.SetCatingWeapon(weapon);
                 return true;
             }
         }
-        if (role.isRangedKeyDown) {
+        if (role.inputCom.isRangedKeyDown) {
             bool hasThis = usableWeapons.TryGetValue(WeaponType.Shooter, out var weapon);
             if (hasThis) {
                 role.SetCatingWeapon(weapon);
                 return true;
             }
         }
-        if (role.isShieldKeyPress) {
+        if (role.inputCom.isShieldKeyPress) {
             bool hasThis = usableWeapons.TryGetValue(WeaponType.Shield, out var weapon);
             if (hasThis) {
                 role.SetCatingWeapon(weapon);
@@ -365,7 +365,7 @@ public static class RoleDomain {
     }
 
     public static void Casting(GameContext ctx, RoleEntity role, float dt) {
-
+        var inputCom = role.inputCom;
         // 当前武器
         var weapon = role.weaponCom.GetCatingWeapon();
         // 获取当前技能
@@ -385,7 +385,7 @@ public static class RoleDomain {
         }
 
         if (skill.canCombo && skillCastStage != SkillCastStage.endCast) {
-            if (role.isMeleeKeyDown) {
+            if (inputCom.isMeleeKeyDown) {
                 role.isCombo = true;
                 role.skillComboMatainSec = 0.5f;
             } else {
@@ -462,9 +462,9 @@ public static class RoleDomain {
     public static void PickLoot(GameContext ctx, RoleEntity owner) {
         bool has = FindNearlyLoot(ctx, owner, out var nearlyLoot);
         if (has) {
-            if (owner.isInteractKeyDown) {
-                owner.isInteractKeyDown = false; // 这里不设false为什么会执行两次
-                                                 // 生成stuff添加进背包里
+            if (owner.inputCom.isInteractKeyDown) {
+                owner.inputCom.isInteractKeyDown = false; // 这里不设false为什么会执行两次
+                                                          // 生成stuff添加进背包里
 
                 var typeCount = nearlyLoot.stufftypeIDs.Length;
                 var stufftypeIDs = nearlyLoot.stufftypeIDs;

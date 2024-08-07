@@ -91,6 +91,7 @@ public static class GameBusiness_Normal {
         var input = ctx.input;
         var owner = ctx.GetOwner();
         owner.UpdateInputKey(
+        input.moveAxis,
         input.isMeleeKeyDown,
         input.isShieldKeyPress,
         input.isRangedKeyDown,

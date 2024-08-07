@@ -36,13 +36,12 @@ public class RoleEntity : MonoBehaviour {
     public int comboCount;
 
     // Input
-    public bool isMeleeKeyDown;
+    public RoleInputComponent inputCom;
+
+    // Combo
     public bool isCombo;
     public float skillComboMatainSec;
-    public bool isShieldKeyPress;
-    public bool isRangedKeyDown;
-    public bool isJumpKeyDown;
-    public bool isInteractKeyDown;
+
 
     // fsm
     public RoleFSMComponent fsm;
@@ -57,6 +56,7 @@ public class RoleEntity : MonoBehaviour {
         weaponCom = new WeaponComponent();
         stuffCom = new StuffComponent();
         aiCom = new RoleAIComponent();
+        inputCom = new RoleInputComponent();
 
         rotationSpeed = 20;
         // Body 生成
@@ -196,7 +196,7 @@ public class RoleEntity : MonoBehaviour {
 
     #region Jump
     public void Jump() {
-        if (isJumpKeyDown && jumpTimes > 0) {
+        if (inputCom.isJumpKeyDown && jumpTimes > 0) {
             jumpTimes -= 1;
             var velocity = rb.velocity;
             velocity.y = jumpForce;
@@ -283,12 +283,13 @@ public class RoleEntity : MonoBehaviour {
     #endregion
 
     #region Input
-    public void UpdateInputKey(bool isMeleeKeyDown, bool isShieldKeyPress, bool isRangedKeyDown, bool isJumpKeyDown, bool isInteractKeyDown) {
-        this.isMeleeKeyDown = isMeleeKeyDown;
-        this.isShieldKeyPress = isShieldKeyPress;
-        this.isRangedKeyDown = isRangedKeyDown;
-        this.isJumpKeyDown = isJumpKeyDown;
-        this.isInteractKeyDown = isInteractKeyDown;
+    public void UpdateInputKey(Vector3 moveAxis, bool isMeleeKeyDown, bool isShieldKeyPress, bool isRangedKeyDown, bool isJumpKeyDown, bool isInteractKeyDown) {
+        inputCom.moveAxis = moveAxis;
+        inputCom.isMeleeKeyDown = isMeleeKeyDown;
+        inputCom.isShieldKeyPress = isShieldKeyPress;
+        inputCom.isRangedKeyDown = isRangedKeyDown;
+        inputCom.isJumpKeyDown = isJumpKeyDown;
+        inputCom.isInteractKeyDown = isInteractKeyDown;
     }
     #endregion
 
