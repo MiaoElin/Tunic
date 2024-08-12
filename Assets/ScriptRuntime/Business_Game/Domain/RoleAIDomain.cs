@@ -6,7 +6,7 @@ public static class RoleAIDomain {
 
     public static void Tick(GameContext ctx, RoleEntity role, float dt) {
         var aiCom = role.aiCom;
-        var root = aiCom.tree.root;
+        var root = aiCom.root;
         RoleAINodeStatus status = Execute(ctx, role, root, dt);
         if (status == RoleAINodeStatus.Done) {
             root.Reset();
@@ -244,7 +244,7 @@ public static class RoleAIDomain {
             return true;
         }
         var aiCom = role.aiCom;
-        bool hasTarget = aiCom.entityType != EntityType.None;
+        bool hasTarget = aiCom.targetEntityType != EntityType.None;
 
         if (preconditionModel.isNeedTarget) {
             if (!hasTarget) {
@@ -262,7 +262,7 @@ public static class RoleAIDomain {
             if (!hasTarget) {
                 return false;
             }
-            if (aiCom.entityType == EntityType.Role) {
+            if (aiCom.targetEntityType == EntityType.Role) {
                 bool has = ctx.roleRepo.TryGet(aiCom.targetID, out var target);
                 if (!has) {
                     return false;
@@ -305,6 +305,11 @@ public static class RoleAIDomain {
         if (actionModel.isSearchTarget) {
             return Action_SearchUpdate(ctx, role, node, dt);
         }
+
+        if (actionModel.isMoveToTarget) {
+            return Action_MoveToTargetUpdate(ctx, role, node, dt);
+        }
+
         if (actionModel.isCastingSkill) {
             return Action_CastingUpdate(ctx, role, node, dt);
         }
@@ -317,16 +322,47 @@ public static class RoleAIDomain {
             var owenr = ctx.GetOwner();
             Vector3 dir = owenr.Pos() - role.Pos();
             if (Vector3.SqrMagnitude(dir) <= Mathf.Pow(role.searchRange, 2)) {
-                role.aiCom.entityType = EntityType.Role;
+                role.aiCom.targetEntityType = EntityType.Role;
                 role.aiCom.targetID = owenr.id;
             } else {
-                role.aiCom.entityType = EntityType.None;
+                role.aiCom.targetEntityType = EntityType.None;
                 role.aiCom.targetID = 0;
             }
         } else {
-
+            // todo
         }
         return RoleAINodeStatus.Done;
+    }
+
+    private static RoleAINodeStatus Action_MoveToTargetUpdate(GameContext ctx, RoleEntity role, RoleAINodeModel node, float dt) {
+        var actionModel = node.actionModel;
+        if (actionModel.isMoveToTarget) {
+            if (role.aiCom.targetEntityType == EntityType.Role) {
+                ctx.roleRepo.TryGet(role.aiCom.targetID, out var target);
+                // 寻路
+                var map = ctx.GetCurrentMap();
+                bool has = GFpathFinding3D_Rect.Astar(
+                 target.Pos(),
+                 role.Pos(),
+                 (pos) => { return !map.blockSet.Contains(pos); },
+                 (index) => { return map.rectCells[index]; },
+                 out role.path);
+
+                Vector3 dir = role.path[role.pathIndex] - role.Pos();
+                Vector3 dirToTarget = target.Pos() - role.Pos();
+
+                // Exist
+                if (Vector3.SqrMagnitude(dirToTarget) < Mathf.Pow(role.attackRange, 2)) {
+                    role.SetForward(dir.normalized, dt);
+                    return Done;
+                } else {
+                    // 设置输入
+                    role.inputCom.moveAxis = dir.normalized;
+                    return Running;
+                }
+            }
+        }
+        return Done;
     }
 
     private static RoleAINodeStatus Action_CastingUpdate(GameContext ctx, RoleEntity role, RoleAINodeModel node, float dt) {

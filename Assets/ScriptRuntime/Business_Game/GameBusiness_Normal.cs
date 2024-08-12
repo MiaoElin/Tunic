@@ -57,7 +57,6 @@ public static class GameBusiness_Normal {
         var owner = RoleDomain.Spawn(ctx, 10, new Vector3(60, 0, 10), Vector3.zero, Vector3.one, Ally.Player);
         ctx.game.ownerID = owner.id;
         owner.isOwner = true;
-        owner.aiCom.tree.isPause = true;
 
         ctx.camera.SetFollow(owner.transform);
         ctx.camera.SetLookAt(owner.transform);
@@ -112,7 +111,7 @@ public static class GameBusiness_Normal {
         });
 
         ctx.roleRepo.Foreach(role => {
-            role.aiCom.tree.Execute(dt);
+            RoleAIDomain.Execute(ctx, role, role.aiCom.root, dt);
         });
 
 
